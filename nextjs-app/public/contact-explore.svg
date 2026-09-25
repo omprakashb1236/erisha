@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Feature / Explore Icon">
+<path id="Vector" d="M31.5 12H8.5C7.67157 12 7 12.6716 7 13.5V30.5C7 31.3284 7.67157 32 8.5 32H31.5C32.3284 32 33 31.3284 33 30.5V13.5C33 12.6716 32.3284 12 31.5 12Z" stroke="#152437" stroke-width="1.5"/>
+<path id="Vector_2" d="M14 12V9C14 7.9 14.9 7 16 7H24C25.1 7 26 7.9 26 9V12" stroke="#152437" stroke-width="1.5"/>
+<g id="Vector_3">
+<path d="M7 19H33Z" fill="black"/>
+<path d="M7 19H33" stroke="#152437" stroke-width="1.5"/>
+</g>
+</g>
+</svg>

@@ -1,0 +1,48 @@
+.mainContainer select{
+    border-radius: 5px;
+    min-width: 167px;
+    min-height: 38px;
+}
+.text-red{
+    color: #ff0000;
+    font-weight: 500;
+}
+.form-control{
+    max-width: 220px;
+}
+.formFields{
+    margin: 20px 0 !important;
+}
+.btn-primary{
+    background-color: #2a4122 !important;
+    border-color: #3B4C36 !important;
+    padding: 5px 23px !important;
+}
+.btn-secondary{
+    padding: 5px 23px !important; 
+}
+.mainContainer .table{
+    border-top: transparent!important;
+}
+.submitBtn button{
+    min-width: 200px;
+}
+.exportToExcel{
+    padding: 17px 23px !important;
+    min-width: 200px;
+}
+.exportCntr{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.exportToExcel span{
+    padding: 0px !important; 
+}
+.headingContainer{
+    min-width: 94% !important;
+    margin: 0 auto !important;
+    max-width: 94%;
+    padding-bottom: 16px !important;
+    position: relative;
+}

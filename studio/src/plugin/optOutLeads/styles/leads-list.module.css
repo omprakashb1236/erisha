@@ -1,0 +1,66 @@
+.mainContainer{
+    width: 94% !important;
+    max-width: 94% !important;
+    margin-bottom: 100px!important;
+    margin-top: 20px !important;
+}
+
+.mainTable{
+    margin-top: 30px;
+    border: transparent;
+}
+.mainTable p{
+    margin-bottom: 5px;
+}
+.mainTable th{
+    background: #3B4C36 !important;
+    color: #fff !important;
+    font-size: 14px;
+    border-radius: 0 !important;
+    border: transparent;
+    min-width: 130px;
+    padding: 14px 11px !important;
+    font-weight: 600;
+}
+.mainTable  thead tr th:nth-child(1), .mainTable  thead tr th:nth-child(1) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.mainTable thead tr th:last-child, .mainTable thead tr th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+/*.mainTable tr td:nth-child(3){
+    font-weight: 600;
+    color: #3B4C36;
+}*/
+.mainTable  thead tr th:nth-child(1){
+    width: 50px;
+    min-width: 50px;
+}
+.mainTable  thead tr th:nth-child(2){
+    width: 200px;
+    min-width: 200px;
+}
+.mainTable  thead tr th:nth-child(3){
+    width: 200px;
+    min-width: 200px;
+}
+
+.mainTable  thead tr th:nth-child(4){
+    width: 200px;
+    min-width: 200px;
+}
+.mainTable  thead tr th:nth-child(5){
+    width: 300px;
+    min-width: 300px;
+}
+.mainTable  thead tr th:nth-child(6){
+    width: 170px;
+    min-width: 170px;
+}
+
+.mainContainer div{
+    padding-left: 0!important;
+}
+

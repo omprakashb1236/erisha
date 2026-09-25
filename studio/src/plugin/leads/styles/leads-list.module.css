@@ -1,0 +1,107 @@
+.mainContainer{
+    width: 94% !important;
+    max-width: 94% !important;
+    margin-bottom: 100px!important;
+    margin-top: 20px !important;
+}
+
+.mainTable{
+    margin-top: 30px;
+    border: transparent;
+}
+.mainTable p{
+    margin-bottom: 5px;
+}
+.mainTable th{
+    background: #3B4C36 !important;
+    color: #fff !important;
+    font-size: 14px;
+    border-radius: 0 !important;
+    border: transparent;
+    min-width: 130px;
+    padding: 14px 11px !important;
+    font-weight: 600;
+}
+.mainTable  thead tr th:nth-child(1), .mainTable  thead tr th:nth-child(1) {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.mainTable thead tr th:last-child, .mainTable thead tr th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+/*.mainTable tr td:nth-child(3){
+    font-weight: 600;
+    color: #3B4C36;
+}*/
+.mainTable  thead tr th:nth-child(2){
+    width: 70px;
+    min-width: 70px;
+}
+.mainTable  thead tr th:nth-child(3){
+    width: 200px;
+    min-width: 200px;
+}
+.mainTable  thead tr th:nth-child(10){
+    width: 200px;
+    min-width: 200px;
+}
+.mainTable  thead tr th:nth-child(13){
+    width: 230px;
+    min-width: 230px;
+}
+.mainTable  thead tr th:nth-child(15){
+    width: 230px;
+    min-width: 230px;
+}
+.mainTable  thead tr th:nth-child(19){
+    width: 250px;
+    min-width: 250px;
+}
+.mainTable  thead tr th:nth-child(20){
+    width: 180px;
+    min-width: 180px;
+}
+.mainTable  thead tr th:nth-child(4){
+    width: 200px;
+    min-width: 200px;
+}
+.mainTable  thead tr th:nth-child(5){
+    width: 200px;
+    min-width: 200px;
+}
+.mainTable  thead tr th:nth-child(6){
+    width: 160px;
+    min-width: 160px;
+}
+.mainTable  thead tr th:nth-child(7){
+    width: 172px;
+    min-width: 172px;
+}
+.mainTable  thead tr th:nth-child(8){
+    width: 120px;
+    min-width: 120px;
+}
+.mainTable  thead tr th:nth-child(9){
+    width: 100px;
+    min-width: 100px;
+}
+.mainTable  thead tr th:nth-child(10){
+    width: 250px;
+    min-width: 250px;
+}
+.mainTable  thead tr th:nth-child(11),.mainTable  thead tr th:nth-child(12),
+.mainTable  thead tr th:nth-child(13),.mainTable  thead tr th:nth-child(14),
+.mainTable  thead tr th:nth-child(15),.mainTable  thead tr th:nth-child(16){
+    width: 140px;
+    min-width: 140px;
+}
+.mainTable  thead tr th:nth-child(17)
+{width: 240px;
+    min-width:240px;
+
+}
+.mainContainer div{
+    padding-left: 0!important;
+}
+
