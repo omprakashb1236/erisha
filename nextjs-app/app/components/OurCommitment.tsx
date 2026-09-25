@@ -9,7 +9,7 @@ export default function OurCommitment() {
       <div className="w-full container flex flex-col pt-12 lg:pt-[40px]">
         
         {/* Top Split Section */}
-        <div className="flex flex-col lg:flex-row px-6 lg:px-[70px] justify-between gap-12 lg:gap-8">
+        <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
           {/* Left Intro */}
           <div className="flex flex-col lg:mt-8 flex-1 max-w-[520px]">
             <p className="text-[#965745] text-[11px] font-medium tracking-[3.4px] leading-[16px] mb-4">OUR COMMITMENT</p>
@@ -26,7 +26,7 @@ export default function OurCommitment() {
           </div>
 
           {/* Right Features */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap gap-8 lg:gap-0 lg:mt-[100px] flex-1 justify-end max-w-[650px]">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap gap-8 lg:gap-0 lg:mt-[100px] flex-1 justify-end md:mr-[150px] max-w-[650px]">
             <div className="flex gap-4 items-start sm:w-[45%] lg:w-auto lg:flex-col lg:items-center lg:flex-1">
               <div className="w-[42px] h-[42px] relative shrink-0"><Image src="/footer-icon0.svg" alt="" fill /></div>
               <div className="lg:text-center lg:mt-4">
@@ -76,9 +76,9 @@ export default function OurCommitment() {
         </div>
 
         {/* Gallery & Lower Section */}
-        <div className="px-6 lg:px-[56px] py-12 lg:pt-[100px] flex flex-col lg:flex-row justify-between lg:items-end gap-12 lg:gap-8 relative z-10">
+        <div className="py-12 lg:pt-[40px] flex flex-col lg:flex-row justify-start lg:items-end gap-12 lg:gap-8 relative z-10">
           
-          <div className="grid grid-cols-2 lg:flex lg:flex-row gap-4 lg:gap-6 flex-1">
+          <div className="grid grid-cols-2 lg:flex lg:flex-row gap-4 lg:gap-6 flex-1 max-w-[885px]">
             <div className="flex flex-col gap-3 lg:gap-6 w-full lg:w-[203px]">
               <div className="relative w-full aspect-[2/3] lg:h-[293px] rounded-sm overflow-hidden"><Image src="/commitment-photo1.png" alt="" fill className="object-cover" /></div>
               <p className="text-[#1b2845] text-[9.5px] font-medium tracking-[2.2px] lg:pl-1">CRAFTED BY EXPERTS</p>
@@ -100,14 +100,14 @@ export default function OurCommitment() {
             </div>
           </div>
 
-          <div className="flex flex-col max-w-[260px] lg:w-[260px] lg:pb-[18px]">
+          <div className="flex flex-col max-w-[260px] lg:w-[260px]">
             <div className="w-[42px] h-px bg-[#b89e8f]/55 mb-6" />
-            <div className="font-playfair leading-none text-[39px] text-[#1b2845] mb-6">
+            <div className="font-playfair leading-none text-[39px] text-[#1b2845] mb-2">
               <p>Responsible</p>
               <p>today. Beautiful</p>
               <p className="font-extrabold italic text-[33px]">tomorrow.</p>
             </div>
-            <div className="text-[#4a505e] text-[13.5px] leading-[20px] mb-10">
+            <div className="text-[#4a505e] text-[13.5px] leading-[20px] mb-4">
               <p>We work towards more responsible sourcing, efficient processes and long-term partnerships — because exceptional products should also make a positive difference.</p>
             </div>
             <Button 
