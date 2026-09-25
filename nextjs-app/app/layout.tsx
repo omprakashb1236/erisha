@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { DM_Sans, Playfair_Display, GFS_Didot } from "next/font/google";
 import { draftMode } from "next/headers";
-import { VisualEditing, toPlainText } from "next-sanity";
+import { VisualEditing } from "next-sanity/visual-editing";
 import DraftModeToast from "@/app/components/DraftModeToast";
 import * as demo from "@/sanity/lib/demo";
 import { sanityFetch, SanityLive } from "@/sanity/lib/live";
@@ -54,7 +54,7 @@ export async function generateMetadata(): Promise<Metadata> {
       template: `%s | ${title}`,
       default: title,
     },
-    description: toPlainText(description),
+    description: (description),
     openGraph: {
       images: ogImage ? [ogImage] : [],
     },
