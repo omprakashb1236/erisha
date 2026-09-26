@@ -343,3 +343,132 @@ export const getHomePageQuery = () => {
 
 
 
+// ==========================================
+// E-COMMERCE CATALOGUE QUERIES
+// ==========================================
+
+// 1. Get Catalogue
+export const catalogueQuery = defineQuery(`
+  *[_type == "catalogue"][0] {
+    ...,
+    "productLines": productLines[]->{
+      title,
+      slug,
+      eyebrow,
+      thumbnailImage,
+      description,
+      "heroImage": heroImage.asset->url
+    },
+    "filterCategory": filterCategory[]->{title, slug},
+    "filterProductType": filterProductType[]->{title, slug},
+    "filterGenderFit": filterGenderFit[]->{title, slug},
+    "filterFabricDescription": filterFabricDescription[]->{title, slug},
+    "filterConstruction": filterConstruction[]->{title, slug}
+  }
+`)
+
+// 2. Get all Product Lines
+export const allProductLinesQuery = defineQuery(`
+  *[_type == "productLine"] | order(title asc) {
+    _id,
+    title,
+    slug,
+    thumbnailImage,
+    eyebrow,
+    "heroImage": heroImage.asset->url
+  }
+`)
+
+// 3. Get Product Line by slug
+export const productLineBySlugQuery = defineQuery(`
+  *[_type == "productLine" && slug.current == $slug][0] {
+    ...,
+    "productFamilies": productFamilies[]->{
+      _id,
+      title,
+      slug,
+      thumbnailImage,
+      eyebrow,
+      "heroImage": heroImage.asset->url
+    },
+    "filterType": filterType[]->{title, slug},
+    "filterWire": filterWire[]->{title, slug},
+    "filterPadding": filterPadding[]->{title, slug},
+    "filterSupport": filterSupport[]->{title, slug},
+    "filterFabric": filterFabric[]->{title, slug}
+  }
+`)
+
+// 4. Get Product Family by slug
+export const productFamilyBySlugQuery = defineQuery(`
+  *[_type == "productFamily" && slug.current == $slug][0] {
+    ...,
+    "productLine": productLine->{
+      title,
+      slug
+    },
+    "products": products[]->{
+      _id,
+      title,
+      slug,
+      productCode,
+      "mainImage": mainImage.asset->url
+    }
+  }
+`)
+
+// 5. Get Products by Product Family
+export const productsByFamilyQuery = defineQuery(`
+  *[_type == "product" && productFamily->slug.current == $familySlug] | order(title asc) {
+    _id,
+    title,
+    slug,
+    productCode,
+    shortDescription,
+    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},
+    category->{title, slug},
+    productType->{title, slug},
+    genderFit->{title, slug},
+    wire->{title, slug},
+    padding->{title, slug},
+    support->{title, slug},
+    cupRange->{title, slug},
+    fabric->{title, slug}
+  }
+`)
+
+// 6. Get Products by Product Line
+export const productsByLineQuery = defineQuery(`
+  *[_type == "product" && productLine->slug.current == $lineSlug] | order(title asc) {
+    _id,
+    title,
+    slug,
+    productCode,
+    shortDescription,
+    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},
+    category->{title, slug},
+    productType->{title, slug},
+    wire->{title, slug},
+    padding->{title, slug},
+    support->{title, slug}
+  }
+`)
+
+// 7. Get products with filter attributes (Dynamic filtering Example)
+export const filteredProductsQuery = defineQuery(`
+  *[_type == "product" 
+    && (!defined($categorySlug) || category->slug.current == $categorySlug)
+    && (!defined($wireSlug) || wire->slug.current == $wireSlug)
+    && (!defined($supportSlug) || support->slug.current == $supportSlug)
+  ] | order(title asc) {
+    _id,
+    title,
+    slug,
+    "thumbnailImage": thumbnailImage.asset->url,
+    productCode,
+    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},
+    category->{title, slug},
+    wire->{title, slug},
+    support->{title, slug}
+  }
+`)

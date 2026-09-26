@@ -49,12 +49,12 @@ export default function ProductBanner({
           </p>
           <div className="w-[44px] h-px bg-[#b86e58]/52 mb-[28px]" />
           
-          <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[67px] leading-[1.1] lg:leading-[70px] mb-[40px] lg:mb-[97px]">
-            <span className="block">{headlineLine1}</span>
-            <span className="block">{headlineLine2}</span>
+          <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[67px] leading-[1.1] lg:leading-[70px] mb-[25px]">
+            {headlineLine1 && <span className="block">{headlineLine1}</span>}
+            {headlineLine2 && <span className="block">{headlineLine2}</span>}
           </h2>
           
-          <p className="font-playfair font-extrabold italic text-[#b86e58] text-[24px] lg:text-[33px] leading-[1.3] lg:leading-[42px] mb-[30px] lg:mb-[56px] lg:max-w-[610px]">
+          <p className="font-playfair font-extrabold italic text-[#b86e58] text-[24px] lg:text-[33px] leading-[1.3] lg:leading-[42px] mb-[14px] lg:max-w-[610px]">
             {subhead}
           </p>
           
