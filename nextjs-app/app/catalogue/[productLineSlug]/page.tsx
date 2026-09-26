@@ -3,6 +3,7 @@ import { productLineBySlugQuery, filteredProductsQuery } from "@/sanity/lib/quer
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ProductCard from "@/app/components/catalogue/ProductCard";
+import ProductFamilyCard from "@/app/components/catalogue/ProductFamilyCard";
 import CatalogueFilters from "@/app/components/catalogue/CatalogueFilters";
 import Header from "@/app/components/Header";
 import ContactFooter from "@/app/components/ContactFooter";
@@ -108,27 +109,29 @@ export default async function ProductLinePage({
         </div>
       </section>
 
-      {/* Products Grid */}
+      {/* Product Families Grid */}
       <section className="w-full bg-[#fefaf6] py-[60px] lg:py-[80px]">
         <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col">
           
-          {filteredProducts && filteredProducts.length > 0 ? (
+          <p className="text-[#b86e58] text-[9px] lg:text-[10px] font-medium tracking-[2px] lg:tracking-[2.5px] leading-[16px] uppercase mb-[20px] lg:mb-[26px]">
+            EXPLORE PRODUCT FAMILIES
+          </p>
+          <div className="w-full h-px bg-[#d2bfaf]/50 mb-[40px] lg:mb-[50px]" />
+
+          {productLine.productFamilies && productLine.productFamilies.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[40px] lg:gap-y-[85px]">
-              {filteredProducts.map((product: any) => (
-                <ProductCard 
-                  key={product._id} 
-                  product={product} 
-                  baseUrl={`/catalogue/${productLineSlug}`} 
+              {productLine.productFamilies.map((family: any) => (
+                <ProductFamilyCard 
+                  key={family._id || family.slug?.current} 
+                  family={family} 
+                  lineSlug={productLineSlug} 
                 />
               ))}
             </div>
           ) : (
             <div className="w-full flex flex-col items-center justify-center py-20 text-center">
-              <h3 className="font-playfair text-[#1b2845] text-2xl mb-4">No products found</h3>
-              <p className="text-[#4a505e] mb-8">Try adjusting your filters to see more results.</p>
-              <Link href={`/catalogue/${productLineSlug}`} className="text-[#b86e58] underline">
-                Clear all filters
-              </Link>
+              <h3 className="font-playfair text-[#1b2845] text-2xl mb-4">No product families found</h3>
+              <p className="text-[#4a505e]">Check back later for new additions.</p>
             </div>
           )}
 

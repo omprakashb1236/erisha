@@ -383,12 +383,13 @@ export const allProductLinesQuery = defineQuery(`
 export const productLineBySlugQuery = defineQuery(`
   *[_type == "productLine" && slug.current == $slug][0] {
     ...,
-    "productFamilies": productFamilies[]->{
+    "productFamilies": *[_type == "productFamily" && references(^._id)] {
       _id,
       title,
       slug,
       thumbnailImage,
       eyebrow,
+      description,
       "heroImage": heroImage.asset->url
     },
     "filterType": filterType[]->{title, slug},
@@ -405,7 +406,12 @@ export const productFamilyBySlugQuery = defineQuery(`
     ...,
     "productLine": productLine->{
       title,
-      slug
+      slug,
+      "filterType": filterType[]->{title, slug},
+      "filterWire": filterWire[]->{title, slug},
+      "filterPadding": filterPadding[]->{title, slug},
+      "filterSupport": filterSupport[]->{title, slug},
+      "filterFabric": filterFabric[]->{title, slug}
     },
     "products": products[]->{
       _id,
@@ -419,21 +425,24 @@ export const productFamilyBySlugQuery = defineQuery(`
 
 // 5. Get Products by Product Family
 export const productsByFamilyQuery = defineQuery(`
-  *[_type == "product" && productFamily->slug.current == $familySlug] | order(title asc) {
+  *[_type == "product" 
+    && productFamily->slug.current == $familySlug
+    && (!defined($categorySlug) || category->slug.current == $categorySlug)
+    && (!defined($wireSlug) || wire->slug.current == $wireSlug)
+    && (!defined($supportSlug) || support->slug.current == $supportSlug)
+  ] | order(title asc) {
     _id,
     title,
     slug,
+    "thumbnailImage": thumbnailImage.asset->url,
     productCode,
     shortDescription,
     "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},
     category->{title, slug},
     productType->{title, slug},
-    genderFit->{title, slug},
     wire->{title, slug},
     padding->{title, slug},
-    support->{title, slug},
-    cupRange->{title, slug},
-    fabric->{title, slug}
+    support->{title, slug}
   }
 `)
 

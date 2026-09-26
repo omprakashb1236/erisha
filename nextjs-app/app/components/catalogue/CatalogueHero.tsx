@@ -12,7 +12,7 @@ const WaveLines = () => (
 );
 
 export default function CatalogueHero({ catalogue }: { catalogue: any }) {
-  const imageUrl = catalogue?.heroImage ? urlForImage(catalogue.heroImage)?.url() : "/catalogue-hero-placeholder.png";
+  const imageUrl = (catalogue?.heroImage ? urlForImage(catalogue.heroImage)?.url() : "/catalogue-hero-placeholder.png") || "/catalogue-hero-placeholder.png";
 
   return (
     <section className="relative pt-[190px] w-full bg-[#fefaf6] flex flex-col items-center overflow-hidden">

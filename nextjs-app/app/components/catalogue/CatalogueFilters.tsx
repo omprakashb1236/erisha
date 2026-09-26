@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter, useSearchParams, usePathname } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useState, Suspense } from "react";
 
 interface FilterOption {
   title: string;
@@ -18,7 +18,7 @@ interface CatalogueFiltersProps {
   filterGroups: FilterGroup[];
 }
 
-export default function CatalogueFilters({ filterGroups }: CatalogueFiltersProps) {
+function CatalogueFiltersInner({ filterGroups }: CatalogueFiltersProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -60,7 +60,7 @@ export default function CatalogueFilters({ filterGroups }: CatalogueFiltersProps
         const isOpen = openDropdown === group.paramName;
 
         return (
-          <div key={idx} className="relative">
+          <div key={idx} className="relative z-20">
             <button 
               onClick={() => setOpenDropdown(isOpen ? null : group.paramName)}
               className={`flex items-center justify-between bg-[#fefaf6] border ${isOpen || activeValueSlug ? 'border-[#1b2845]' : 'border-[#d2bfaf]'} rounded-[21px] h-[42px] min-w-[165px] px-[17px] hover:border-[#1b2845] transition-colors shrink-0`}
@@ -121,5 +121,13 @@ export default function CatalogueFilters({ filterGroups }: CatalogueFiltersProps
         />
       )}
     </div>
+  );
+}
+
+export default function CatalogueFilters({ filterGroups }: CatalogueFiltersProps) {
+  return (
+    <Suspense fallback={<div className="h-[42px] min-w-[165px] flex items-center shrink-0">Loading filters...</div>}>
+      <CatalogueFiltersInner filterGroups={filterGroups} />
+    </Suspense>
   );
 }
