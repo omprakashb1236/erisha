@@ -1,5 +1,6 @@
-import { defineField, defineType } from 'sanity'
+﻿import { defineField, defineType } from 'sanity'
 import { DocumentIcon } from '@sanity/icons'
+
 /**
  * Page schema.  Define and edit the fields for the 'page' content type.
  * Learn more: https://www.sanity.io/docs/schema-types
@@ -53,7 +54,14 @@ export const page = defineType({
       type: 'array',
 
       of: [
-        
+        { type: 'homeHero' },
+        { type: 'manufacturingPartnership' },
+        { type: 'ourProcess' },
+        { type: 'ourImpact' },
+        { type: 'ourCommitment' },
+        { type: 'betterProducts' },
+          { type: 'contactForm' },
+          { type: 'footerBlock' },
       ],
 
       options: {
@@ -89,3 +97,4 @@ export const page = defineType({
     },
   },
 });
+

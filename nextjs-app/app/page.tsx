@@ -5,9 +5,7 @@ import { GetPageQueryResult } from "@/sanity.types";
 import { PageOnboarding } from "@/app/components/Onboarding";
 import { sanityFetchCustom } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
-import App from "next/app";
 import Header from "./components/Header";
-import Hero from "./components/Hero";
 import WhatWeMake from "./components/WhatWeMake";
 import ManufacturingPartnership from "./components/ManufacturingPartnership";
 import OurProcess from "./components/OurProcess";
@@ -15,6 +13,8 @@ import OurImpact from "./components/OurImpact";
 import OurCommitment from "./components/OurCommitment";
 import BetterProducts from "./components/BetterProducts";
 import ContactFooter from "./components/ContactFooter";
+import ContactForm from "./components/ContactForm";
+import Footer from "./components/Footer";
 
 /**
  * Generate metadata for the page.
@@ -32,18 +32,25 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
+  const page = await sanityFetchCustom({
+    query: getHomePageQuery(),
+    tags: ["page"],
+  });
+
   return (
     <div className="main_page relative">
       <Header />
       <main className="w-full">
-        <Hero />
+        <PageBuilderPage page={page as GetPageQueryResult} />
         <WhatWeMake />
         <ManufacturingPartnership />
         <OurProcess />
         <OurImpact />
         <OurCommitment />
         <BetterProducts />
-        <ContactFooter />
+        
+        <ContactForm />
+         <Footer />
       </main>
     </div>
   );

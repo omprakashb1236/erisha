@@ -13,153 +13,22 @@
  */
 
 // Source: schema.json
-export type SanityImagePaletteSwatch = {
-  _type: "sanity.imagePaletteSwatch";
-  background?: string;
-  foreground?: string;
-  population?: number;
-  title?: string;
-};
-
-export type SanityImagePalette = {
-  _type: "sanity.imagePalette";
-  darkMuted?: SanityImagePaletteSwatch;
-  lightVibrant?: SanityImagePaletteSwatch;
-  darkVibrant?: SanityImagePaletteSwatch;
-  vibrant?: SanityImagePaletteSwatch;
-  dominant?: SanityImagePaletteSwatch;
-  lightMuted?: SanityImagePaletteSwatch;
-  muted?: SanityImagePaletteSwatch;
-};
-
-export type SanityImageDimensions = {
-  _type: "sanity.imageDimensions";
-  height?: number;
-  width?: number;
-  aspectRatio?: number;
-};
-
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
-export type Geopoint = {
-  _type: "geopoint";
-  lat?: number;
-  lng?: number;
-  alt?: number;
-};
-
-export type LocaleBlockContent = {
-  _type: "localeBlockContent";
-  en?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      linkType?: "href" | "page" | "car";
-      href?: string;
-      page?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      };
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
+export type Seo = {
+  _type: "seo";
+  metaTitle?: string;
+  metaDescription?: string;
+  ogImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
-    alt?: string;
-    caption?: string;
     _type: "image";
-    _key: string;
-  }>;
-  ar?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      linkType?: "href" | "page" | "car";
-      href?: string;
-      page?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      };
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    caption?: string;
-    _type: "image";
-    _key: string;
-  }>;
-};
-
-export type LocaleText = {
-  _type: "localeText";
-  en?: string;
-  ar?: string;
-};
-
-export type LocaleString = {
-  _type: "localeString";
-  en?: string;
-  ar?: string;
+  };
 };
 
 export type Iframe = {
@@ -183,6 +52,7 @@ export type ImageComponent = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -190,48 +60,33 @@ export type ImageComponent = {
   alt?: string;
 };
 
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
 export type RichText = {
   _type: "richText";
-  content?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      linkType?: "href" | "page" | "car";
-      href?: string;
-      page?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "page";
-      };
-      openInNewTab?: boolean;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    caption?: string;
-    _type: "image";
-    _key: string;
-  }>;
+  content?: BlockContent;
   htmlId?: string;
+};
+
+export type Navigation = {
+  _type: "navigation";
+  navItems?: Array<{
+    _key: string;
+  } & NavItem>;
 };
 
 export type NavItem = {
@@ -243,11 +98,44 @@ export type NavItem = {
   navigation?: Navigation;
 };
 
-export type Navigation = {
-  _type: "navigation";
-  navItems?: Array<{
+export type SideKickSection = {
+  _type: "sideKickSection";
+  logo?: CustomImage;
+};
+
+export type Footer = {
+  _type: "footer";
+  copyrightText?: string;
+  footerLogo?: CustomImage;
+  footerLogo2?: CustomImage;
+  linkList?: LinkList;
+  linkList1?: LinkList;
+  linkList2?: LinkList;
+  linkList3?: LinkList;
+  imageLinkArray?: Array<{
+    image?: CustomImage;
+    title?: string;
+    pageLink?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "page";
+    };
     _key: string;
-  } & NavItem>;
+  }>;
+};
+
+export type Header = {
+  _type: "header";
+  logo?: CustomImage;
+  blackLogo?: CustomImage;
+  navigation?: Navigation;
+  searchIcon?: CustomImage;
+  searchIconBlack?: CustomImage;
+  mapIcon?: CustomImage;
+  mapIconBlack?: CustomImage;
+  toggleMenuIcon?: CustomImage;
+  toggleMenuIconBlack?: CustomImage;
 };
 
 export type BlockContent = Array<{
@@ -282,6 +170,7 @@ export type BlockContent = Array<{
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
   };
+  media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt?: string;
@@ -304,10 +193,22 @@ export type LinkList = {
   } & LinkItem>;
 };
 
-export type CallToAction = {
-  _type: "callToAction";
-  buttonText?: string;
-  link?: Link;
+export type CustomImage = {
+  _type: "customImage";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  altText?: string;
+  isImageFullWidth?: boolean;
 };
 
 export type Link = {
@@ -322,6 +223,744 @@ export type Link = {
   };
   path?: string;
   openInNewTab?: boolean;
+};
+
+export type CallToAction = {
+  _type: "callToAction";
+  buttonText?: string;
+  link?: Link;
+};
+
+export type BetterProducts = {
+  _type: "betterProducts";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  description?: string;
+  features?: Array<{
+    icon?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    title?: string;
+    subtitle?: string;
+    _key: string;
+  }>;
+  ctaButton?: CallToAction;
+  rightMicrocopy?: Array<string>;
+  rightImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  footerBannerTitle?: string;
+  footerBannerSubtitle?: string;
+  footerBannerCenterMicrocopy?: Array<string>;
+  footerBannerRightMicrocopy?: Array<string>;
+};
+
+export type OurCommitment = {
+  _type: "ourCommitment";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  description?: string;
+  features?: Array<{
+    icon?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    title?: string;
+    subtitle?: string;
+    _key: string;
+  }>;
+  rightMicrocopy?: Array<string>;
+  gallery?: Array<{
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    caption?: string;
+    _key: string;
+  }>;
+  rightCTAHeadingLine1?: string;
+  rightCTAHeadingLine2?: string;
+  rightCTADescription?: string;
+  ctaButton?: CallToAction;
+};
+
+export type OurImpact = {
+  _type: "ourImpact";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  description?: string;
+  metrics?: Array<{
+    value?: string;
+    label?: string;
+    _key: string;
+  }>;
+  mapImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  globalPartnerTitle?: string;
+  globalPartnerDescription?: string;
+  ctaButton?: CallToAction;
+  rightImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  brandsStripTitle?: string;
+  brandLogos?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  footerStatementStripLft?: string;
+  footerStatementStripRgt?: string;
+};
+
+export type OurProcess = {
+  _type: "ourProcess";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  headingLine3?: string;
+  description?: string;
+  rightMicrocopy?: Array<string>;
+  processSteps?: Array<{
+    num?: string;
+    title?: string;
+    desc?: Array<string>;
+    img?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _key: string;
+  }>;
+  footerLeftMicrocopy?: Array<string>;
+  footerValues?: Array<{
+    title?: string;
+    icon?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _key: string;
+  }>;
+  footerRightMicrocopy?: Array<string>;
+  ctaButton?: CallToAction;
+};
+
+export type ManufacturingPartnership = {
+  _type: "manufacturingPartnership";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  description?: string;
+  buttonText?: CallToAction;
+  processSteps?: Array<{
+    title?: string;
+    description?: string;
+    _key: string;
+  }>;
+  bottomTags?: Array<string>;
+  blueprintImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  circleMicrocopy?: Array<string>;
+  blueprintMicrocopy?: Array<string>;
+};
+
+export type Product = {
+  _id: string;
+  _type: "product";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  productCode?: string;
+  shortDescription?: string;
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  gallery?: Array<{
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  productLine?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "productLine";
+  };
+  productFamily?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "productFamily";
+  };
+  productType?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  genderFit?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  fabricDescription?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  construction?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  type?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  wire?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  padding?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  support?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  cupRange?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  fabric?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  seo?: Seo;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type ProductFamily = {
+  _id: string;
+  _type: "productFamily";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  mainHeading?: string;
+  subtitle?: string;
+  description?: string;
+  bottomTags?: string;
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  productLine?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "productLine";
+  };
+  products?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "product";
+  }>;
+  attrWire?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrPadding?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrCupRange?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrSupport?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrFabric?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  seo?: Seo;
+};
+
+export type FilterOption = {
+  _id: string;
+  _type: "filterOption";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  filterType?: "category" | "productType" | "genderFit" | "fabricDescription" | "construction" | "type" | "wire" | "padding" | "support" | "cupRange" | "fabric";
+  description?: string;
+  sortOrder?: number;
+  active?: boolean;
+};
+
+export type ProductLine = {
+  _id: string;
+  _type: "productLine";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  mainHeading?: string;
+  subtitle?: string;
+  description?: string;
+  bottomTags?: string;
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  productFamilies?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "productFamily";
+  }>;
+  filterType?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterWire?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterPadding?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterSupport?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterFabric?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  seo?: Seo;
+};
+
+export type Catalogue = {
+  _id: string;
+  _type: "catalogue";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  mainHeading?: string;
+  subtitle?: string;
+  description?: string;
+  bottomTags?: string;
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  productLines?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "productLine";
+  }>;
+  filterCategory?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterProductType?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterGenderFit?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterFabricDescription?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  filterConstruction?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  }>;
+  seo?: Seo;
+};
+
+export type Fragment = {
+  _id: string;
+  _type: "fragment";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  type?: "Header" | "Footer" | "SideKick";
+  header?: Header;
+  footer?: Footer;
+  sideKickSection?: SideKickSection;
+};
+
+export type News = {
+  _id: string;
+  _type: "news";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  isNevNews?: boolean;
+  title?: string;
+  slug?: Slug;
+  thumbnail?: CustomImage;
+  publishDate?: string;
+  pageBuilder?: Array<{
+    _key: string;
+  } & RichText | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+    _key: string;
+  }>;
+  seo?: SeoMetaFields;
+  highlight?: boolean;
+};
+
+export type SeoMetaFields = {
+  _type: "seoMetaFields";
+  metaTitle?: string;
+  metaDescription?: string;
+  focusKeyword?: string;
+  seoKeywords?: Array<string>;
+  nofollowAttributes?: boolean;
+  robotsMeta?: Array<string>;
+  openGraph?: OpenGraph;
+  twitter?: Twitter;
+  hreflang?: Array<{
+    _key: string;
+  } & HreflangEntry>;
+  additionalMetaTags?: Array<{
+    _key: string;
+  } & MetaTag>;
+  schemaOrg?: {
+    schemaType?: "Article" | "Product" | "FAQPage" | "LocalBusiness" | "Event" | "Organization" | "WebPage" | "VideoObject" | "Recipe" | "Person" | "Course" | "JobPosting" | "BreadcrumbList" | "SoftwareApplication";
+    name?: string;
+    description?: string;
+    url?: string;
+    author?: string;
+    datePublished?: string;
+    dateModified?: string;
+    price?: string;
+    priceCurrency?: string;
+    availability?: "InStock" | "OutOfStock" | "PreOrder" | "Discontinued";
+    ratingValue?: string;
+    ratingCount?: string;
+    startDate?: string;
+    endDate?: string;
+    location?: string;
+    faqItems?: Array<{
+      question?: string;
+      answer?: string;
+      _key: string;
+    }>;
+  };
+  seoStatus?: string;
+  seoReviewNotes?: string;
+};
+
+export type Page = {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  blackBackground?: boolean;
+  redirect?: string;
+  pageBuilder?: Array<{
+    _key: string;
+  } & HomeHero | {
+    _key: string;
+  } & ManufacturingPartnership | {
+    _key: string;
+  } & OurProcess | {
+    _key: string;
+  } & OurImpact | {
+    _key: string;
+  } & OurCommitment | {
+    _key: string;
+  } & BetterProducts>;
+  seo?: SeoMetaFields;
+};
+
+export type HomeHero = {
+  _type: "homeHero";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  headingLine3?: string;
+  description?: string;
+  primaryCta?: CallToAction;
+  secondaryCta?: CallToAction;
+  backgroundImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  bottomMicrocopy?: Array<string>;
 };
 
 export type Settings = {
@@ -358,6 +997,7 @@ export type Settings = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -368,6 +1008,39 @@ export type Settings = {
   instagramLink?: string;
   twitterLink?: string;
   youtubeLink?: string;
+};
+
+export type HreflangEntry = {
+  _type: "hreflangEntry";
+  locale?: string;
+  url?: string;
+};
+
+export type Twitter = {
+  _type: "twitter";
+  cardType?: "summary" | "summary_large_image" | "app" | "player";
+  creator?: string;
+  site?: string;
+  handle?: string;
+};
+
+export type OpenGraph = {
+  _type: "openGraph";
+  title?: string;
+  description?: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  siteName?: string;
 };
 
 export type MetaTag = {
@@ -388,38 +1061,12 @@ export type MetaAttribute = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
   };
   attributeValueString?: string;
-};
-
-export type Twitter = {
-  _type: "twitter";
-  cardType?: string;
-  creator?: string;
-  site?: string;
-  handle?: string;
-};
-
-export type OpenGraph = {
-  _type: "openGraph";
-  url?: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  title?: string;
-  description?: string;
-  siteName?: string;
 };
 
 export type MuxVideo = {
@@ -433,7 +1080,11 @@ export type MuxVideo = {
 };
 
 export type MuxVideoAsset = {
+  _id: string;
   _type: "mux.videoAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
   status?: string;
   assetId?: string;
   playbackId?: string;
@@ -452,6 +1103,7 @@ export type MuxAssetData = {
   max_stored_resolution?: string;
   passthrough?: string;
   encoding_tier?: string;
+  video_quality?: string;
   master_access?: string;
   aspect_ratio?: string;
   duration?: number;
@@ -477,12 +1129,18 @@ export type MuxStaticRenditions = {
 
 export type MuxStaticRenditionFile = {
   _type: "mux.staticRenditionFile";
-  ext?: string;
   name?: string;
+  ext?: string;
+  height?: number;
   width?: number;
   bitrate?: number;
-  filesize?: number;
-  height?: number;
+  filesize?: string;
+  type?: string;
+  status?: string;
+  resolution_tier?: string;
+  resolution?: string;
+  id?: string;
+  passthrough?: string;
 };
 
 export type MuxPlaybackId = {
@@ -499,6 +1157,11 @@ export type MuxTrack = {
   max_frame_rate?: number;
   duration?: number;
   max_height?: number;
+  language_code?: string;
+  name?: string;
+  status?: string;
+  text_source?: string;
+  text_type?: string;
 };
 
 export type MediaTag = {
@@ -631,185 +1294,70 @@ export type SanityAssistSchemaTypeField = {
   } & SanityAssistInstruction>;
 };
 
-export type InternationalizedArrayTextValue = {
-  _type: "internationalizedArrayTextValue";
-  value?: string;
-};
-
-export type InternationalizedArrayStringValue = {
-  _type: "internationalizedArrayStringValue";
-  value?: string;
-};
-
-export type InternationalizedArrayText = Array<{
-  _key: string;
-} & InternationalizedArrayTextValue>;
-
-export type InternationalizedArrayString = Array<{
-  _key: string;
-} & InternationalizedArrayStringValue>;
-
-export type TranslationMetadata = {
-  _id: string;
-  _type: "translation.metadata";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  translations?: Array<{
-    _key: string;
-  } & InternationalizedArrayReferenceValue>;
-  schemaTypes?: Array<string>;
-};
-
-export type InternationalizedArrayReferenceValue = {
-  _type: "internationalizedArrayReferenceValue";
-  value?: {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "page";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "fragment";
-  } | {
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    [internalGroqTypeReferenceTo]?: "news";
-  };
-};
-
-export type News = {
-  _id: string;
-  _type: "news";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  isNevNews?: boolean;
+export type SanityImagePaletteSwatch = {
+  _type: "sanity.imagePaletteSwatch";
+  background?: string;
+  foreground?: string;
+  population?: number;
   title?: string;
-  slug?: Slug;
-  thumbnail?: CustomImage;
-  publishDate?: string;
-  pageBuilder?: Array<{
-    _key: string;
-  } & RichText | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-    _key: string;
-  }>;
-  seo?: SeoMetaFields;
-  highlight?: boolean;
-  language?: "en" | "ar";
 };
 
-export type Fragment = {
-  _id: string;
-  _type: "fragment";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  type?: "Header" | "Footer" | "SideKick";
-  header?: Header;
-  footer?: Footer;
-  sideKickSection?: SideKickSection;
-  language?: "en" | "ar";
+export type SanityImagePalette = {
+  _type: "sanity.imagePalette";
+  darkMuted?: SanityImagePaletteSwatch;
+  lightVibrant?: SanityImagePaletteSwatch;
+  darkVibrant?: SanityImagePaletteSwatch;
+  vibrant?: SanityImagePaletteSwatch;
+  dominant?: SanityImagePaletteSwatch;
+  lightMuted?: SanityImagePaletteSwatch;
+  muted?: SanityImagePaletteSwatch;
 };
 
-export type SideKickSection = {
-  _type: "sideKickSection";
-  logo?: CustomImage;
-};
-
-export type CustomImage = {
-  _type: "customImage";
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  altText?: string;
-  isImageFullWidth?: boolean;
-};
-
-export type Footer = {
-  _type: "footer";
-  copyrightText?: string;
-  footerLogo?: CustomImage;
-  footerLogo2?: CustomImage;
-  linkList?: LinkList;
-  linkList1?: LinkList;
-  linkList2?: LinkList;
-  linkList3?: LinkList;
-  imageLinkArray?: Array<{
-    image?: CustomImage;
-    title?: string;
-    pageLink?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "page";
-    };
-    _key: string;
-  }>;
-};
-
-export type Header = {
-  _type: "header";
-  logo?: CustomImage;
-  blackLogo?: CustomImage;
-  navigation?: Navigation;
-  searchIcon?: CustomImage;
-  searchIconBlack?: CustomImage;
-  mapIcon?: CustomImage;
-  mapIconBlack?: CustomImage;
-  toggleMenuIcon?: CustomImage;
-  toggleMenuIconBlack?: CustomImage;
-};
-
-export type Page = {
-  _id: string;
-  _type: "page";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  blackBackground?: boolean;
-  redirect?: string;
-  pageBuilder?: null;
-  seo?: SeoMetaFields;
-  language?: "en" | "ar";
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
+export type SanityImageDimensions = {
+  _type: "sanity.imageDimensions";
   height?: number;
   width?: number;
+  aspectRatio?: number;
+};
+
+export type SanityImageMetadata = {
+  _type: "sanity.imageMetadata";
+  location?: Geopoint;
+  dimensions?: SanityImageDimensions;
+  palette?: SanityImagePalette;
+  lqip?: string;
+  blurHash?: string;
+  hasAlpha?: boolean;
+  isOpaque?: boolean;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
+};
+
+export type SanityAssetSourceData = {
+  _type: "sanity.assetSourceData";
+  name?: string;
+  id?: string;
+  url?: string;
 };
 
 export type SanityImageAsset = {
@@ -835,59 +1383,14 @@ export type SanityImageAsset = {
   source?: SanityAssetSourceData;
 };
 
-export type SanityAssetSourceData = {
-  _type: "sanity.assetSourceData";
-  name?: string;
-  id?: string;
-  url?: string;
+export type Geopoint = {
+  _type: "geopoint";
+  lat?: number;
+  lng?: number;
+  alt?: number;
 };
 
-export type SanityImageMetadata = {
-  _type: "sanity.imageMetadata";
-  location?: Geopoint;
-  dimensions?: SanityImageDimensions;
-  palette?: SanityImagePalette;
-  lqip?: string;
-  blurHash?: string;
-  hasAlpha?: boolean;
-  isOpaque?: boolean;
-};
-
-export type SeoMetaFields = {
-  _type: "seoMetaFields";
-  nofollowAttributes?: boolean;
-  metaTitle?: string;
-  metaDescription?: string;
-  metaImage?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  };
-  seoKeywords?: Array<string>;
-  openGraph?: OpenGraph;
-  additionalMetaTags?: Array<{
-    _key: string;
-  } & MetaTag>;
-  twitter?: Twitter;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
-export type InternationalizedArrayReference = Array<{
-  _key: string;
-} & InternationalizedArrayReferenceValue>;
-
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LocaleBlockContent | LocaleText | LocaleString | Iframe | NewsList | ImageComponent | RichText | NavItem | Navigation | BlockContent | LinkItem | LinkList | CallToAction | Link | Settings | MetaTag | MetaAttribute | Twitter | OpenGraph | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | InternationalizedArrayTextValue | InternationalizedArrayStringValue | InternationalizedArrayText | InternationalizedArrayString | TranslationMetadata | InternationalizedArrayReferenceValue | News | Fragment | SideKickSection | CustomImage | Footer | Header | Page | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | SeoMetaFields | Slug | InternationalizedArrayReference;
+export type AllSanitySchemaTypes = Seo | Iframe | NewsList | ImageComponent | SanityImageCrop | SanityImageHotspot | RichText | Navigation | NavItem | SideKickSection | Footer | Header | BlockContent | LinkItem | LinkList | CustomImage | Link | CallToAction | BetterProducts | OurCommitment | OurImpact | OurProcess | ManufacturingPartnership | Product | Slug | ProductFamily | FilterOption | ProductLine | Catalogue | Fragment | News | SeoMetaFields | Page | HomeHero | Settings | HreflangEntry | Twitter | OpenGraph | MetaTag | MetaAttribute | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -926,6 +1429,7 @@ export type SettingsQueryResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt?: string;
@@ -949,7 +1453,258 @@ export type GetPageQueryResult = {
   subheading: null;
   seo: SeoMetaFields | null;
   redirect: string | null;
-  pageBuilder: null;
+  pageBuilder: Array<{
+    _key: string;
+    _type: "betterProducts";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    description?: string;
+    features?: Array<{
+      icon?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      title?: string;
+      subtitle?: string;
+      _key: string;
+    }>;
+    ctaButton?: CallToAction;
+    rightMicrocopy?: Array<string>;
+    rightImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    footerBannerTitle?: string;
+    footerBannerSubtitle?: string;
+    footerBannerCenterMicrocopy?: Array<string>;
+    footerBannerRightMicrocopy?: Array<string>;
+  } | {
+    _key: string;
+    _type: "homeHero";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    headingLine3?: string;
+    description?: string;
+    primaryCta?: CallToAction;
+    secondaryCta?: CallToAction;
+    backgroundImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    thumbnailImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    bottomMicrocopy?: Array<string>;
+  } | {
+    _key: string;
+    _type: "manufacturingPartnership";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    description?: string;
+    buttonText?: CallToAction;
+    processSteps?: Array<{
+      title?: string;
+      description?: string;
+      _key: string;
+    }>;
+    bottomTags?: Array<string>;
+    blueprintImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    circleMicrocopy?: Array<string>;
+    blueprintMicrocopy?: Array<string>;
+  } | {
+    _key: string;
+    _type: "ourCommitment";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    description?: string;
+    features?: Array<{
+      icon?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      title?: string;
+      subtitle?: string;
+      _key: string;
+    }>;
+    rightMicrocopy?: Array<string>;
+    gallery?: Array<{
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      caption?: string;
+      _key: string;
+    }>;
+    rightCTAHeadingLine1?: string;
+    rightCTAHeadingLine2?: string;
+    rightCTADescription?: string;
+    ctaButton?: CallToAction;
+  } | {
+    _key: string;
+    _type: "ourImpact";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    description?: string;
+    metrics?: Array<{
+      value?: string;
+      label?: string;
+      _key: string;
+    }>;
+    mapImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    globalPartnerTitle?: string;
+    globalPartnerDescription?: string;
+    ctaButton?: CallToAction;
+    rightImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    brandsStripTitle?: string;
+    brandLogos?: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+      _key: string;
+    }>;
+    footerStatementStripLft?: string;
+    footerStatementStripRgt?: string;
+  } | {
+    _key: string;
+    _type: "ourProcess";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    headingLine3?: string;
+    description?: string;
+    rightMicrocopy?: Array<string>;
+    processSteps?: Array<{
+      num?: string;
+      title?: string;
+      desc?: Array<string>;
+      img?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      _key: string;
+    }>;
+    footerLeftMicrocopy?: Array<string>;
+    footerValues?: Array<{
+      title?: string;
+      icon?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      _key: string;
+    }>;
+    footerRightMicrocopy?: Array<string>;
+    ctaButton?: CallToAction;
+  }> | null;
 } | null;
 // Variable: getNewsDetailQuery
 // Query: *[_type == 'news' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    blackBackground,    thumbnail,    seo,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {          link {      ...,        _type == "link" => {    "page": page->slug.current,    "post": post->slug.current,    "car": car->slug.current,  }      },      },      _type == "carModelComponent" => {        carModels[]{          ...,          exploreLink {          text,          link -> {              _id,              title,              "slug": slug.current          }        }        }      },      _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,              _type == "link" => {    "page": page->slug.current,    "post": post->slug.current,    "car": car->slug.current,  }          }        }      },    },  }
@@ -968,6 +1723,7 @@ export type GetNewsDetailQueryResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     _type: "image";
@@ -975,69 +1731,340 @@ export type GetNewsDetailQueryResult = {
   } | {
     _key: string;
     _type: "richText";
-    content?: Array<{
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-      listItem?: "bullet" | "number";
-      markDefs?: Array<{
-        linkType?: "car" | "href" | "page";
-        href?: string;
-        page?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "page";
-        };
-        openInNewTab?: boolean;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    } | {
+    content?: BlockContent;
+    htmlId?: string;
+  }> | null;
+} | null;
+// Variable: catalogueQuery
+// Query: *[_type == "catalogue"][0] {    ...,    "productLines": productLines[]->{      title,      slug,      eyebrow,      thumbnailImage,      description,      "heroImage": heroImage.asset->url    },    "filterCategory": filterCategory[]->{title, slug},    "filterProductType": filterProductType[]->{title, slug},    "filterGenderFit": filterGenderFit[]->{title, slug},    "filterFabricDescription": filterFabricDescription[]->{title, slug},    "filterConstruction": filterConstruction[]->{title, slug}  }
+export type CatalogueQueryResult = {
+  _id: string;
+  _type: "catalogue";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  mainHeading?: string;
+  subtitle?: string;
+  description?: string;
+  bottomTags?: string;
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  productLines: Array<{
+    title: string | null;
+    slug: Slug | null;
+    eyebrow: string | null;
+    thumbnailImage: null;
+    description: string | null;
+    heroImage: string | null;
+  }> | null;
+  filterCategory: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterProductType: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterGenderFit: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterFabricDescription: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterConstruction: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  seo?: Seo;
+} | null;
+// Variable: allProductLinesQuery
+// Query: *[_type == "productLine"] | order(title asc) {    _id,    title,    slug,    thumbnailImage,    eyebrow,    "heroImage": heroImage.asset->url  }
+export type AllProductLinesQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  thumbnailImage: null;
+  eyebrow: string | null;
+  heroImage: string | null;
+}>;
+// Variable: productLineBySlugQuery
+// Query: *[_type == "productLine" && slug.current == $slug][0] {    ...,    "productFamilies": *[_type == "productFamily" && references(^._id)] {      _id,      title,      slug,      thumbnailImage,      eyebrow,      description,      "heroImage": heroImage.asset->url    },    "filterType": filterType[]->{title, slug},    "filterWire": filterWire[]->{title, slug},    "filterPadding": filterPadding[]->{title, slug},    "filterSupport": filterSupport[]->{title, slug},    "filterFabric": filterFabric[]->{title, slug}  }
+export type ProductLineBySlugQueryResult = {
+  _id: string;
+  _type: "productLine";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  mainHeading?: string;
+  subtitle?: string;
+  description?: string;
+  bottomTags?: string;
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  productFamilies: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+    thumbnailImage: {
       asset?: {
         _ref: string;
         _type: "reference";
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
-      alt?: string;
-      caption?: string;
       _type: "image";
-      _key: string;
-    }>;
-    htmlId?: string;
+    } | null;
+    eyebrow: string | null;
+    description: string | null;
+    heroImage: string | null;
+  }>;
+  filterType: Array<{
+    title: string | null;
+    slug: Slug | null;
   }> | null;
+  filterWire: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterPadding: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterSupport: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  filterFabric: Array<{
+    title: string | null;
+    slug: Slug | null;
+  }> | null;
+  seo?: Seo;
 } | null;
-// Variable: catalogueQuery
-// Query: *[_type == "catalogue"][0] {    ...,    "productLines": productLines[]->{      title,      slug,      eyebrow,      thumbnailImage,      description,      "heroImage": heroImage.asset->url    },    "filterCategory": filterCategory[]->{title, slug},    "filterProductType": filterProductType[]->{title, slug},    "filterGenderFit": filterGenderFit[]->{title, slug},    "filterFabricDescription": filterFabricDescription[]->{title, slug},    "filterConstruction": filterConstruction[]->{title, slug}  }
-export type CatalogueQueryResult = null;
-// Variable: allProductLinesQuery
-// Query: *[_type == "productLine"] | order(title asc) {    _id,    title,    slug,    thumbnailImage,    eyebrow,    "heroImage": heroImage.asset->url  }
-export type AllProductLinesQueryResult = Array<never>;
-// Variable: productLineBySlugQuery
-// Query: *[_type == "productLine" && slug.current == $slug][0] {    ...,    "productFamilies": *[_type == "productFamily" && references(^._id)] {      _id,      title,      slug,      thumbnailImage,      eyebrow,      description,      "heroImage": heroImage.asset->url    },    "filterType": filterType[]->{title, slug},    "filterWire": filterWire[]->{title, slug},    "filterPadding": filterPadding[]->{title, slug},    "filterSupport": filterSupport[]->{title, slug},    "filterFabric": filterFabric[]->{title, slug}  }
-export type ProductLineBySlugQueryResult = null;
 // Variable: productFamilyBySlugQuery
 // Query: *[_type == "productFamily" && slug.current == $slug][0] {    ...,    "productLine": productLine->{      title,      slug,      "filterType": filterType[]->{title, slug},      "filterWire": filterWire[]->{title, slug},      "filterPadding": filterPadding[]->{title, slug},      "filterSupport": filterSupport[]->{title, slug},      "filterFabric": filterFabric[]->{title, slug}    },    "products": products[]->{      _id,      title,      slug,      productCode,      "mainImage": mainImage.asset->url    }  }
-export type ProductFamilyBySlugQueryResult = null;
+export type ProductFamilyBySlugQueryResult = {
+  _id: string;
+  _type: "productFamily";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  eyebrow?: string;
+  mainHeading?: string;
+  subtitle?: string;
+  description?: string;
+  bottomTags?: string;
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  heroImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  productLine: {
+    title: string | null;
+    slug: Slug | null;
+    filterType: Array<{
+      title: string | null;
+      slug: Slug | null;
+    }> | null;
+    filterWire: Array<{
+      title: string | null;
+      slug: Slug | null;
+    }> | null;
+    filterPadding: Array<{
+      title: string | null;
+      slug: Slug | null;
+    }> | null;
+    filterSupport: Array<{
+      title: string | null;
+      slug: Slug | null;
+    }> | null;
+    filterFabric: Array<{
+      title: string | null;
+      slug: Slug | null;
+    }> | null;
+  } | null;
+  products: Array<{
+    _id: string;
+    title: string | null;
+    slug: Slug | null;
+    productCode: string | null;
+    mainImage: string | null;
+  }> | null;
+  attrWire?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrPadding?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrCupRange?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrSupport?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  attrFabric?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "filterOption";
+  };
+  seo?: Seo;
+} | null;
 // Variable: productsByFamilyQuery
 // Query: *[_type == "product"     && productFamily->slug.current == $familySlug    && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    shortDescription,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug}  }
-export type ProductsByFamilyQueryResult = Array<never>;
+export type ProductsByFamilyQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  thumbnailImage: string | null;
+  productCode: string | null;
+  shortDescription: string | null;
+  mainImage: string | null;
+  productFamily: {
+    slug: Slug | null;
+  } | null;
+  productLine: {
+    slug: Slug | null;
+  } | null;
+  category: null;
+  productType: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  wire: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  padding: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  support: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+}>;
 // Variable: productsByLineQuery
 // Query: *[_type == "product" && productLine->slug.current == $lineSlug] | order(title asc) {    _id,    title,    slug,    productCode,    shortDescription,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug}  }
-export type ProductsByLineQueryResult = Array<never>;
+export type ProductsByLineQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  productCode: string | null;
+  shortDescription: string | null;
+  mainImage: string | null;
+  productFamily: {
+    slug: Slug | null;
+  } | null;
+  productLine: {
+    slug: Slug | null;
+  } | null;
+  category: null;
+  productType: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  wire: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  padding: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  support: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+}>;
 // Variable: filteredProductsQuery
 // Query: *[_type == "product"     && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    wire->{title, slug},    support->{title, slug}  }
-export type FilteredProductsQueryResult = Array<never>;
+export type FilteredProductsQueryResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  thumbnailImage: string | null;
+  productCode: string | null;
+  mainImage: string | null;
+  productFamily: {
+    slug: Slug | null;
+  } | null;
+  productLine: {
+    slug: Slug | null;
+  } | null;
+  category: null;
+  wire: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  support: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+}>;
 
 // Query TypeMap
 import "@sanity/client";

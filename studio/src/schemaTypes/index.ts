@@ -26,9 +26,19 @@ import { linkItem } from './objects/linkItem'
 import { blockContent } from './objects/blockContent'
 import { sideKickSection } from './documents/fragments/sideKickSection'
 
+import { homeHero } from './objects/homeHero'
+import { manufacturingPartnership } from './objects/manufacturingPartnership'
+import { ourProcess } from './objects/ourProcess'
+import { ourImpact } from './objects/ourImpact'
+import { ourCommitment } from './objects/ourCommitment'
+import { betterProducts } from './objects/betterProducts'
+import { contactForm } from './objects/contactForm'
+import { footerBlock } from './objects/footerBlock'
+
 export const schemaTypes = [
   // Singletons
   settings,
+  homeHero,
   
   // Documents
   page,
@@ -41,6 +51,13 @@ export const schemaTypes = [
   filterOption,
   
   // Objects
+  manufacturingPartnership,
+  ourProcess,
+  ourImpact,
+  ourCommitment,
+  betterProducts,
+  contactForm,
+  footerBlock,
   callToAction,
   link,
   customImage,
@@ -58,3 +75,4 @@ export const schemaTypes = [
   iframe,
   seo,
 ]
+

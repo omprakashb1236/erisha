@@ -1,4 +1,4 @@
-import { defineQuery, groq } from "next-sanity";
+﻿import { defineQuery, groq } from "next-sanity";
 
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
@@ -182,16 +182,110 @@ export const getPageQuery = defineQuery(`
               "slug": slug.current
           }
 }
-      },
-      _type == "bannerCarousel" => {
-        ...,
-        link -> {
+      },      _type == "bannerCarousel" => {
+        slides[]{
+          ...,
+          link -> {
               _id,
               title,
               "slug": slug.current
             }
+        }
       },
-      _type == "thankyouRichText" => {
+      _type == "homeHero" => {
+        ...,
+        "backgroundImage": backgroundImage.asset->url,
+        "thumbnailImage": thumbnailImage.asset->url,
+        primaryCta {
+          ...,
+          ${linkFields}
+        },
+        secondaryCta {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "manufacturingPartnership" => {
+        ...,
+        "blueprintImage": blueprintImage.asset->url,
+        buttonText {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "ourProcess" => {
+        ...,
+        processSteps[]{
+          ...,
+          "img": img.asset->url
+        },
+        footerValues[]{
+          ...,
+          "icon": icon.asset->url
+        },
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "ourImpact" => {
+        ...,
+        "mapImage": mapImage.asset->url,
+        "rightImage": rightImage.asset->url,
+        "brandLogos": brandLogos[].asset->url,
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "ourCommitment" => {
+        ...,
+        features[]{
+          ...,
+          "icon": icon.asset->url
+        },
+        gallery[]{
+          ...,
+          "image": image.asset->url
+        },
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "betterProducts" => {
+        ...,
+        "rightImage": rightImage.asset->url,
+        features[]{
+          ...,
+          "icon": icon.asset->url
+        },
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "contactForm" => {
+        ...,
+        features[]{
+          ...,
+          "icon": icon.asset->url
+        }
+      },
+      _type == "footerBlock" => {
+        ...,
+        linkColumns[]{
+          ...,
+          links[]{
+            ...,
+            ${linkFields}
+          }
+        },
+        bottomLinks[]{
+          ...,
+          ${linkFields}
+        }
+      }      _type == "thankyouRichText" => {
         ...,
         callToActionButton{
         ...,
@@ -325,8 +419,7 @@ export const getHomePageQuery = () => {
           }
         }
         }
-      },
-      _type == "bannerCarousel" => {
+      },      _type == "bannerCarousel" => {
         slides[]{
           ...,
           link -> {
@@ -336,7 +429,100 @@ export const getHomePageQuery = () => {
             }
         }
       },
+      _type == "homeHero" => {
+        ...,
+        "backgroundImage": backgroundImage.asset->url,
+        "thumbnailImage": thumbnailImage.asset->url,
+        primaryCta {
+          ...,
+          ${linkFields}
+        },
+        secondaryCta {
+          ...,
+          ${linkFields}
+        }
       },
+      _type == "manufacturingPartnership" => {
+        ...,
+        "blueprintImage": blueprintImage.asset->url,
+        buttonText {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "ourProcess" => {
+        ...,
+        processSteps[]{
+          ...,
+          "img": img.asset->url
+        },
+        footerValues[]{
+          ...,
+          "icon": icon.asset->url
+        },
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "ourImpact" => {
+        ...,
+        "mapImage": mapImage.asset->url,
+        "rightImage": rightImage.asset->url,
+        "brandLogos": brandLogos[].asset->url,
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "ourCommitment" => {
+        ...,
+        features[]{
+          ...,
+          "icon": icon.asset->url
+        },
+        gallery[]{
+          ...,
+          "image": image.asset->url
+        },
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "betterProducts" => {
+        ...,
+        "rightImage": rightImage.asset->url,
+        features[]{
+          ...,
+          "icon": icon.asset->url
+        },
+        ctaButton {
+          ...,
+          ${linkFields}
+        }
+      },
+      _type == "contactForm" => {
+        ...,
+        features[]{
+          ...,
+          "icon": icon.asset->url
+        }
+      },
+      _type == "footerBlock" => {
+        ...,
+        linkColumns[]{
+          ...,
+          links[]{
+            ...,
+            ${linkFields}
+          }
+        },
+        bottomLinks[]{
+          ...,
+          ${linkFields}
+        }
+      }      },
     }
   `);
 };
@@ -481,3 +667,5 @@ export const filteredProductsQuery = defineQuery(`
     support->{title, slug}
   }
 `)
+
+

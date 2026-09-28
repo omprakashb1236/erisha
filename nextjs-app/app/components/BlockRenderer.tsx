@@ -3,6 +3,12 @@ import React from "react";
 import { dataAttr } from "@/sanity/lib/utils";
 import Cta from "@/app/components/Cta";
 import Info from "@/app/components/InfoSection";
+import Hero from "@/app/components/Hero"
+import ManufacturingPartnership from "@/app/components/ManufacturingPartnership"
+import OurProcess from "@/app/components/OurProcess"
+import OurImpact from "@/app/components/OurImpact"
+import OurCommitment from "@/app/components/OurCommitment"
+import BetterProducts from "@/app/components/BetterProducts"
 
 type BlocksType = {
   [key: string]: React.FC<any>;
@@ -22,7 +28,13 @@ type BlockProps = {
 
 const Blocks: BlocksType = {
   callToAction: Cta,
-  infoSection: Info
+  infoSection: Info,
+  homeHero : Hero,
+  manufacturingPartnership: ManufacturingPartnership,
+  ourProcess: OurProcess,
+  ourImpact: OurImpact,
+  ourCommitment: OurCommitment,
+  betterProducts: BetterProducts
 };
 
 /**

@@ -1,4 +1,4 @@
-﻿import { ColorWheelIcon, ComponentIcon, FolderIcon, UlistIcon, EarthGlobeIcon, TiersIcon, CogIcon, DocumentIcon, BookIcon, ProjectsIcon, CubeIcon, TagIcon } from '@sanity/icons'
+import { ColorWheelIcon, ComponentIcon, FolderIcon, UlistIcon, EarthGlobeIcon, TiersIcon, CogIcon, DocumentIcon, BookIcon, ProjectsIcon, CubeIcon, TagIcon } from '@sanity/icons'
 import type { StructureBuilder, StructureResolver } from 'sanity/structure'
 
 export const structure: StructureResolver = (S: StructureBuilder) =>

@@ -6,3 +6,8 @@
     max-width: 1456px;
     margin: 0 auto;
 }
+.manufacturingPartnership{
+    background-image: url(../public/images/manufacturingPartnership-bg.png);
+    background-position: top right;
+    background-repeat: no-repeat;
+}

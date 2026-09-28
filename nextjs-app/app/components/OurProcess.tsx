@@ -1,97 +1,74 @@
+﻿import React from 'react';
 import Image from "next/image";
 import Button from "./Button";
 
-const steps = [
-  {
-    num: "01",
-    title: "DESIGN & DEVELOPMENT",
-    desc: [
-      "Translating your vision into",
-      "technical specifications",
-      "and precise patterns.",
-    ],
-    img: "/process-step1.png",
-  },
-  {
-    num: "02",
-    title: "SOURCING",
-    desc: [
-      "Selecting the perfect",
-      "materials, laces, elastics",
-      "and hardware.",
-    ],
-    img: "/process-step2.png",
-  },
-  {
-    num: "03",
-    title: "PROTOTYPING",
-    desc: [
-      "Physical sampling to",
-      "refine fit, feel and",
-      "construction details.",
-    ],
-    img: "/process-step3.png",
-  },
-  {
-    num: "04",
-    title: "FIT & APPROVAL",
-    desc: [
-      "Rigorous fit testing",
-      "across sizes to ensure",
-      "absolute comfort.",
-    ],
-    img: "/process-step4.png",
-  },
-  {
-    num: "05",
-    title: "PRODUCTION",
-    desc: [
-      "Skilled manufacturing",
-      "with continuous quality",
-      "control checks.",
-    ],
-    img: "/process-step5.png",
-  },
-  {
-    num: "06",
-    title: "DELIVERY",
-    desc: [
-      "Final inspection, careful",
-      "packaging and global",
-      "logistics support.",
-    ],
-    img: "/process-step6.png",
-  },
-];
 
-export default function OurProcess() {
+
+export default function OurProcess({ block }: { block?: any }) {
+  const eyebrow = block?.eyebrow || "OUR PROCESS";
+  const headingLine1 = block?.headingLine1 || "From an idea";
+  const headingLine2 = block?.headingLine2 || "to ";
+  const headingLine3 = block?.headingLine3 || "what's next.";
+  const description = block?.description || "A collaborative and transparent process, designed to bring your vision to life � with precision, care and expertise at every step.";
+  const rightMicrocopy = block?.rightMicrocopy || ["YOUR VISION. OUR EXPERTISE.", "A BETTER TOMORROW."];
+  
+  const defaultSteps = [
+    { num: "01", title: "DESIGN & DEVELOPMENT", desc: ["Translating your vision into", "technical specifications", "and precise patterns."], img: "/process-step1.png" },
+    { num: "02", title: "SOURCING", desc: ["Selecting the perfect", "materials, laces, elastics", "and hardware."], img: "/process-step2.png" },
+    { num: "03", title: "PROTOTYPING", desc: ["Physical sampling to", "refine fit, feel and", "construction details."], img: "/process-step3.png" },
+    { num: "04", title: "FIT & APPROVAL", desc: ["Rigorous fit testing", "across sizes to ensure", "absolute comfort."], img: "/process-step4.png" },
+    { num: "05", title: "PRODUCTION", desc: ["Skilled manufacturing", "with continuous quality", "control checks."], img: "/process-step5.png" },
+    { num: "06", title: "DELIVERY", desc: ["Final inspection, careful", "packaging and global", "logistics support."], img: "/process-step6.png" }
+  ];
+  const steps = block?.processSteps?.length ? block.processSteps : defaultSteps;
+
+  const footerLeftMicrocopy = block?.footerLeftMicrocopy || ["A LONGER", "JOURNEY TOGETHER"];
+  const footerRightMicrocopy = block?.footerRightMicrocopy || ["FROM", "CONCEPT", "TO COLLECTION"];
+  
+  const defaultFooterValues = [
+    { title: "RESPONSIBLE\nMANUFACTURING", icon: "/footer-icon0.svg" },
+    { title: "PEOPLE\nAT THE CORE", icon: "/footer-icon1.svg" },
+    { title: "CONSISTENT\nQUALITY", icon: "/footer-icon2.svg" },
+    { title: "BUILT FOR\nLASTING PARTNERSHIPS", icon: "/footer-icon3.svg" }
+  ];
+  const footerValues = block?.footerValues?.length ? block.footerValues : defaultFooterValues;
+
+  const ctaText = block?.ctaButton?.buttonText || "{ctaText}";
+  const linkObj = block?.ctaButton?.link as any;
+  const ctaLink = linkObj?.linkType === 'page' && linkObj?.page?.slug
+    ? `/${linkObj.page.slug}`
+    : linkObj?.linkType === 'path' && linkObj?.path
+      ? linkObj.path
+      : linkObj?.linkType === 'href' && linkObj?.href
+        ? linkObj.href
+        : '/start-project';
+
   return (
     <section className="relative w-full bg-[#f9f5ef] overflow-hidden">
       
       <div className="w-full container mx-auto min-h-screen lg:min-h-[971px] flex flex-col pt-12 lg:pt-0 relative">
         
         {/* Intro */}
-        <div className="flex flex-col px-6 lg:px-[74px] lg:pt-[47px] relative z-20">
+        <div className="flex flex-col  lg:pt-[47px] relative z-20">
           
-          <p className="text-[#965745] text-[11px] font-medium tracking-[3.2px] mb-4">OUR PROCESS</p>
+          <p className="text-[#965745] text-[11px] font-medium tracking-[3.2px] mb-4">{eyebrow}</p>
           <div className="w-[48px] h-px bg-[#965745]/55 mb-8 lg:mb-6" />
 
-          <h2 className="text-[#1b2845] font-playfair leading-none mb-6 text-5xl lg:text-[72px]">
-            <span className="block mb-2">From an idea</span>
+          <h2 className="text-[#1b2845] max-w-[500px] font-playfair leading-none mb-6 text-5xl lg:text-[72px]">
+           
             <span className="block">
-              <span className="text-5xl lg:text-[72px]">to </span>
-              <span className="text-[#965745] font-extrabold italic text-5xl lg:text-[60px]">what’s next.</span>
+              <span className="text-5xl lg:text-[72px]">{headingLine1}</span>{" "}
+              <span className="text-[#965745] font-extrabold italic text-5xl lg:text-[60px]">{headingLine2}</span>
             </span>
           </h2>
 
           <div className="text-[#4a505e] text-[16px] leading-[24px] tracking-[0.05px] max-w-[500px] mb-10">
-            <p>A collaborative and transparent process, designed to bring your vision to life — with precision, care and expertise at every step.</p>
+            <p>{description}</p>
           </div>
 
           <div className="hidden lg:flex flex-col absolute right-[100px] top-[64px] items-end">
             <div className="text-[#1b2845] text-[9.5px] font-medium tracking-[2.3px] leading-[18px] text-right">
-              <p>YOUR VISION. OUR EXPERTISE.</p>
-              <p>A BETTER TOMORROW.</p>
+              {rightMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
             </div>
           </div>
           
@@ -106,11 +83,11 @@ export default function OurProcess() {
         </div>
 
         {/* Process Timeline */}
-        <div className="px-6 lg:px-[60px] lg:mt-8 relative z-20 overflow-x-auto custom-scrollbar pb-6 lg:pb-0">
-          <div className="hidden lg:block w-[1340px] h-px bg-[#b88e78]/45 mb-12" />
+        <div className="lg:mt-8 relative z-20 overflow-x-auto custom-scrollbar pb-6 lg:pb-8">
+          <div className="hidden lg:block w-[100%] h-px bg-[#b88e78]/45 mb-12" />
           
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-[25px] w-full min-w-max">
-            {steps.map((step, idx) => (
+            {steps.map((step: any, idx: number) => (
               <div key={idx} className="flex flex-col lg:w-[205px] relative">
                 
                 <div className="flex items-center gap-4 lg:block">
@@ -128,7 +105,7 @@ export default function OurProcess() {
                 </div>
 
                 <div className="text-[#4a505e] text-[13.2px] leading-[20px] mt-2 lg:mt-0 mb-6 h-auto lg:h-[60px]">
-                  {step.desc.map((line, i) => <p key={i}>{line}</p>)}
+                  {step.desc.map((line: string, i: number) => <p key={i}>{line}</p>)}
                 </div>
 
                 <div className="w-full lg:w-[198px] h-[210px] rounded-[11px] overflow-hidden relative">
@@ -144,52 +121,37 @@ export default function OurProcess() {
           
           <div className="flex flex-col mb-8 lg:mb-0 lg:absolute lg:left-[62px] lg:top-[48px]">
             <div className="text-[#1b2845] text-[10.5px] font-medium tracking-[2.9px] leading-[20px]">
-              <p>A LONGER</p><p>JOURNEY TOGETHER</p>
+              {footerLeftMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
             </div>
             <div className="w-[50px] h-px bg-[#1b2845]/50 mt-4" />
           </div>
 
           <div className="flex flex-col sm:flex-row lg:flex-row flex-wrap lg:flex-nowrap gap-8 sm:gap-12 lg:gap-0 lg:mx-auto items-start lg:items-center justify-center pt-4 lg:pt-0">
             
-            {/* Value 1 */}
-            <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
-              <div className="w-[42px] h-[42px] relative shrink-0"><Image src="/footer-icon0.svg" alt="" fill /></div>
-              <p className="text-[#1b2845] text-[9.3px] font-medium tracking-[2.3px] leading-[17px] lg:text-center">RESPONSIBLE<br/>MANUFACTURING</p>
-            </div>
-            <div className="hidden lg:block w-px h-[82px] bg-[#b88e78]/40 mx-[15px]" />
-
-            {/* Value 2 */}
-            <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
-              <div className="w-[42px] h-[42px] relative shrink-0"><Image src="/footer-icon1.svg" alt="" fill /></div>
-              <p className="text-[#1b2845] text-[9.3px] font-medium tracking-[2.3px] leading-[17px] lg:text-center">PEOPLE<br/>AT THE CORE</p>
-            </div>
-            <div className="hidden lg:block w-px h-[82px] bg-[#b88e78]/40 mx-[15px]" />
-
-            {/* Value 3 */}
-            <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
-              <div className="w-[42px] h-[42px] relative shrink-0"><Image src="/footer-icon2.svg" alt="" fill /></div>
-              <p className="text-[#1b2845] text-[9.3px] font-medium tracking-[2.3px] leading-[17px] lg:text-center">CONSISTENT<br/>QUALITY</p>
-            </div>
-            <div className="hidden lg:block w-px h-[82px] bg-[#b88e78]/40 mx-[15px]" />
-
-            {/* Value 4 */}
-            <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
-              <div className="w-[42px] h-[42px] relative shrink-0"><Image src="/footer-icon3.svg" alt="" fill /></div>
-              <p className="text-[#1b2845] text-[9.3px] font-medium tracking-[2.2px] leading-[17px] lg:text-center">BUILT FOR<br/>LASTING PARTNERSHIPS</p>
-            </div>
+                        {footerValues.map((val: any, i: number) => (
+              <React.Fragment key={i}>
+                <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
+                  <div className="w-[42px] h-[42px] relative shrink-0"><Image src={val.icon || "/footer-icon0.svg"} alt="" fill /></div>
+                  <p className="text-[#1b2845] text-[9.3px] font-medium tracking-[2.3px] leading-[17px] lg:text-center whitespace-pre-wrap">{val.title}</p>
+                </div>
+                {i < footerValues.length - 1 && (
+                  <div className="hidden lg:block w-px h-[82px] bg-[#b88e78]/40 mx-[15px]" />
+                )}
+              </React.Fragment>
+            ))}
 
             <Button 
-              href="/start-project"
+              href={ctaLink}
               variant="primary"
               className="w-full sm:w-auto lg:w-[220px] h-[50px] rounded-[25px] mt-6 sm:mt-0 lg:ml-[25px] !text-[12px] tracking-[0.6px]"
               icon={<span className="text-[20px] font-normal leading-[22px] -mt-1 ml-2">→</span>}
             >
-              Start Your Project
+              {ctaText}
             </Button>
           </div>
 
           <div className="hidden lg:flex flex-col absolute right-[60px] top-[45px] items-end text-[#1b2845] text-[9px] font-medium tracking-[2.4px] leading-[18px]">
-            <p>FROM</p><p>CONCEPT</p><p>TO COLLECTION</p>
+            {footerRightMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
           </div>
 
         </div>
@@ -205,3 +167,8 @@ export default function OurProcess() {
     </section>
   );
 }
+
+
+
+
+
