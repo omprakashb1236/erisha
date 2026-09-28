@@ -1,4 +1,4 @@
-import { defineType, defineField, defineArrayMember } from 'sanity'
+﻿import { defineType, defineField, defineArrayMember } from 'sanity'
 
 export const fragment = defineType({
   name: 'fragment',
@@ -16,8 +16,6 @@ export const fragment = defineType({
         list: ['Header', 'Footer', 'SideKick'],
         layout: 'dropdown'
       },
-      readOnly: true,
-      hidden : true,
       group: 'details'
     }),
 
@@ -63,3 +61,4 @@ export const fragment = defineType({
   }
 
 });
+

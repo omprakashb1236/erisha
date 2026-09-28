@@ -5,7 +5,6 @@ import Link from "next/link";
 import ProductCard from "@/app/components/catalogue/ProductCard";
 import CatalogueFilters from "@/app/components/catalogue/CatalogueFilters";
 import Header from "@/app/components/Header";
-import ContactFooter from "@/app/components/ContactFooter";
 import ProductBanner from "@/app/components/ProductBanner";
 
 export default async function ProductFamilyPage({
@@ -148,7 +147,6 @@ export default async function ProductFamilyPage({
 
 
       </main>
-      <ContactFooter />
     </>
   );
 }

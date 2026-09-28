@@ -1,4 +1,4 @@
-import React from "react";
+﻿import React from "react";
 
 import { dataAttr } from "@/sanity/lib/utils";
 import Cta from "@/app/components/Cta";
@@ -9,6 +9,7 @@ import OurProcess from "@/app/components/OurProcess"
 import OurImpact from "@/app/components/OurImpact"
 import OurCommitment from "@/app/components/OurCommitment"
 import BetterProducts from "@/app/components/BetterProducts"
+import ContactForm from "@/app/components/ContactForm"
 
 type BlocksType = {
   [key: string]: React.FC<any>;
@@ -34,7 +35,8 @@ const Blocks: BlocksType = {
   ourProcess: OurProcess,
   ourImpact: OurImpact,
   ourCommitment: OurCommitment,
-  betterProducts: BetterProducts
+  betterProducts: BetterProducts,
+  contactForm: ContactForm
 };
 
 /**
@@ -75,3 +77,5 @@ export default function BlockRenderer({
     { key: block._key },
   );
 }
+
+

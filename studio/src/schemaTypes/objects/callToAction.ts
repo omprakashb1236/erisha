@@ -1,4 +1,4 @@
-import {defineField, defineType} from 'sanity'
+﻿import {defineField, defineType} from 'sanity'
 import {BulbOutlineIcon} from '@sanity/icons'
 
 
@@ -10,8 +10,10 @@ export const callToAction = defineType({
   validation: (Rule) =>
     
     Rule.custom((fields) => {
-      const {buttonText, link} = fields || {}
-      if ((buttonText && link) || (!buttonText && !link)) {
+      const {buttonText, link} = (fields || {}) as any
+      const hasLinkTarget = link && (link.href || link.page || link.path || link.post || link.car)
+      
+      if ((buttonText && hasLinkTarget) || (!buttonText && !hasLinkTarget)) {
         return true
       }
       return 'Both Button text and Button link must be set, or both must be empty'
@@ -43,3 +45,6 @@ export const callToAction = defineType({
     },
   },
 })
+
+
+

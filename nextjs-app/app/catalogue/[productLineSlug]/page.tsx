@@ -6,7 +6,6 @@ import ProductCard from "@/app/components/catalogue/ProductCard";
 import ProductFamilyCard from "@/app/components/catalogue/ProductFamilyCard";
 import CatalogueFilters from "@/app/components/catalogue/CatalogueFilters";
 import Header from "@/app/components/Header";
-import ContactFooter from "@/app/components/ContactFooter";
 import ProductBanner from "@/app/components/ProductBanner";
 
 export default async function ProductLinePage({ 
@@ -141,7 +140,6 @@ export default async function ProductLinePage({
       
 
     </main>
-    <ContactFooter />
     </>
   );
 }

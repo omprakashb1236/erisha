@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/utils";
 import Header from "../components/Header";
-import ContactFooter from "../components/ContactFooter";
 import CatalogueFilters from "../components/catalogue/CatalogueFilters";
 import CatalogueHero from "../components/catalogue/CatalogueHero";
 
@@ -139,7 +138,6 @@ export default async function CataloguePage() {
         </section>
 
       </main>
-      <ContactFooter />
     </>
   );
 }

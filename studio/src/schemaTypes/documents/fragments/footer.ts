@@ -1,75 +1,52 @@
-import { defineField, defineType } from "sanity";
+﻿import { defineField, defineType } from 'sanity'
+import { InsertAboveIcon } from '@sanity/icons'
 
 export const footer = defineType({
-    name: 'footer',
-    title: 'Footer',
-    type: 'object',
-    fields: [
-        defineField({
-            name: 'copyrightText',
-            type: 'string',
-            title: 'Copyright Text',
-        }),
-        defineField({
-            name: 'footerLogo',
-            type: 'customImage',
-            title: 'Footer Logo',
-        }),
-        defineField({
-            name: 'footerLogo2',
-            type: 'customImage',
-            title: 'Footer Logo 2',
-        }),
+  name: 'footer',
+  title: 'Footer',
+  type: 'object',
+  icon: InsertAboveIcon,
+  fields: [
+    defineField({ name: 'title', title: 'Title', type: 'string' }),
+    defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),
+    defineField({
+      name: 'descriptionLines',
+      title: 'Description Lines',
+      type: 'array',
+      of: [{ type: 'string' }]
+    }),
+    defineField({
+      name: 'linkColumns',
+      title: 'Link Columns',
+      type: 'array',
+      of: [
+        {
+          name: 'linkColumn',
+          type: 'object',
+          fields: [
+            defineField({ name: 'heading', title: 'Column Heading', type: 'string' }),
+            defineField({
+              name: 'links',
+              title: 'Links',
+              type: 'array',
+              of: [{ type: 'callToAction' }]
+            })
+          ]
+        }
+      ]
+    }),
+    defineField({
+      name: 'bottomLinks',
+      title: 'Bottom Links',
+      type: 'array',
+      of: [{ type: 'callToAction' }]
+    }),
+    defineField({ name: 'copyright', title: 'Copyright Text', type: 'string' })
+  ]
+})
 
-        defineField({
-            name: 'linkList',
-            type: 'linkList',
-            title: 'Link List',
-            description: 'This link list is below copyright text'
-        }),
-        defineField({
-            name: 'linkList1',
-            type: 'linkList',
-            title: 'Link List 1',
-        }),
-        defineField({
-            name: 'linkList2',
-            type: 'linkList',
-            title: 'Link List 2',
-        }),
-        defineField({
-            name: 'linkList3',
-            type: 'linkList',
-            title: 'Link List 3',
-        }),
-        defineField({
-            name: 'imageLinkArray',
-            title: 'StickyLinks',
-            type: 'array',
-            of: [
-                {
-                    type: 'object',
-                    fields: [
-                        defineField({
-                            name: 'image',
-                            type: 'customImage',
-                            title: 'Image',
-                        }),
-                        defineField({
-                            name: 'title',
-                            type: 'string',
-                            title: 'Title',
-                        }),
-                        defineField({
-                            name: 'pageLink',
-                            title: 'Select Page Link',
-                            type: 'reference',
-                            to: [{ type: 'page' }],
-                        }),
-                    ],
-                },
-            ],
-        }),
 
-    ],
-});
+
+
+
+

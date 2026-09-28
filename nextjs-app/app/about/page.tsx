@@ -14,7 +14,6 @@ import OurProcess from "../components/OurProcess";
 import OurImpact from "../components/OurImpact";
 import OurCommitment from "../components/OurCommitment";
 import BetterProducts from "../components/BetterProducts";
-import ContactFooter from "../components/ContactFooter";
 import AboutHero from "../components/AboutHero";
 import OurStory from "../components/OurStory";
 import WhatWeStandFor from "../components/WhatWeStandFor";
@@ -42,7 +41,6 @@ export default async function Page() {
         <AboutHero/>
         <OurStory />
         <WhatWeStandFor />
-        <ContactFooter />
       </main>
     </div>
   );

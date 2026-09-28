@@ -669,3 +669,41 @@ export const filteredProductsQuery = defineQuery(`
 `)
 
 
+
+export const headerQuery = defineQuery(`*[_type == "fragment" && type == "Header"][0]{
+  header {
+    ...,
+    "logo": logo.asset->url,
+    "logoText": logoText.asset->url,
+    "logoSubtext": logoSubtext.asset->url,
+    primaryNavigationLeft[]{
+      ...,
+      ${linkFields}
+    },
+    primaryNavigationRight[]{
+      ...,
+      ${linkFields}
+    },
+    ctaButton {
+      ...,
+      ${linkFields}
+    }
+  }
+}`);
+
+export const footerQuery = defineQuery(`*[_type == "fragment" && type == "Footer"][0]{
+  footer {
+    ...,
+    linkColumns[]{
+      ...,
+      links[]{
+        ...,
+        ${linkFields}
+      }
+    },
+    bottomLinks[]{
+      ...,
+      ${linkFields}
+    }
+  }
+}`);

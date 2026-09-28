@@ -7,7 +7,6 @@ import { sanityFetchCustom } from "@/sanity/lib/client";
 import { notFound } from "next/navigation";
 import App from "next/app";
 import Header from "../components/Header";
-import ContactFooter from "../components/ContactFooter";
 import WhatWeStandFor from "../components/WhatWeStandFor";
 import ProductBanner from "../components/ProductBanner";
 import CategoryIndex from "../components/CategoryIndex";
@@ -56,7 +55,6 @@ export default async function Page() {
         <Products />
 
         <WhatWeStandFor />
-        <ContactFooter />
       </main>
     </div>
   );

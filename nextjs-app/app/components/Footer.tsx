@@ -5,10 +5,10 @@ import Button from './Button';
 import type { FooterBlock } from '@/sanity.types';
 
 type FooterProps = {
-  block?: any;
+  fragment?: any;
 };
 
-export default function Footer({ block }: FooterProps) {
+export default function Footer({ fragment: block }: FooterProps) {
   const title = block?.title || "E R I S H A";
   const subtitle = block?.subtitle || "I N T E R N A T I O N A L";
   const descriptionLines = block?.descriptionLines?.length ? block.descriptionLines : [
@@ -30,8 +30,8 @@ export default function Footer({ block }: FooterProps) {
   const renderLink = (linkItem: any, key: number) => {
     const text = typeof linkItem === 'string' ? linkItem : linkItem?.buttonText || '';
     const linkObj = typeof linkItem === 'string' ? null : linkItem?.link;
-    const href = linkObj?.linkType === 'page' && linkObj?.page?.slug
-      ? `/${linkObj.page.slug}`
+    const href = linkObj?.linkType === 'page' && (linkObj?.page?.slug || (typeof linkObj?.page === 'string' && linkObj?.page))
+      ? `/${linkObj?.page?.slug || linkObj?.page}`
       : linkObj?.linkType === 'path' && linkObj?.path
         ? linkObj.path
         : linkObj?.linkType === 'href' && linkObj?.href
@@ -107,5 +107,6 @@ export default function Footer({ block }: FooterProps) {
     </section>
   );
 }
+
 
 

@@ -1,12 +1,57 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import Button from "./Button";
+import { usePathname } from "next/navigation";
 
-export default function Header() {
+type HeaderProps = {
+  fragment?: any;
+};
+
+export default function Header({ fragment }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const utilityLeft = fragment?.utilityTextLeft || "Intimatewear & Apparel Manufacturing";
+  const utilityRight = fragment?.utilityTextRight || "Let's create together";
+
+  const logoUrl = fragment?.logo || "/erisha-logo.svg";
+  const logoTextUrl = fragment?.logoText || "/erisha-text.svg";
+  const logoSubtextUrl = fragment?.logoSubtext || "/international-text.svg";
+
+  const leftNav = fragment?.primaryNavigationLeft || [];
+  const rightNav = fragment?.primaryNavigationRight || [];
+
+  const ctaButton = fragment?.ctaButton;
+
+  const renderNav = (navItems: any[]) => {
+    return navItems.map((item: any, i: number) => {
+      const slug = item.link?.page?.slug || (typeof item.link?.page === 'string' && item.link?.page);
+      const href = item.link?.linkType === 'page' && slug ? (slug === 'home' ? '/' : '/' + slug) : item.link?.path || item.link?.href || '#';
+      const text = item.buttonText || item.title || item.linkText || 'Link';
+      
+      const isActive = pathname === href;
+
+      if (isActive) {
+        return (
+          <div key={i} className="relative h-full flex items-center">
+            <Link href={href} className="text-[#be6852] text-[15px] font-medium whitespace-nowrap">
+              {text}
+            </Link>
+            <div className="absolute -bottom-[28px] left-0 h-[2px] w-[41px] bg-[#be6852]" />
+          </div>
+        );
+      }
+
+      return (
+        <Link key={i} href={href} className="text-[#122c52] text-[15px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
+          {text}
+        </Link>
+      );
+    });
+  };
 
   return (
     <header className="w-full relative md:absolute z-50 h-[132px]">
@@ -19,19 +64,18 @@ export default function Header() {
       {/* Utility Bar (Hidden on mobile) */}
       <div className="hidden lg:flex w-full mx-auto relative h-[50px]">
         <div className="absolute left-0 bottom-0 w-full h-px bg-[#daccc2] opacity-72" />
-        <div className="container items-center justify-between flex">
-        
-        <p className="text-[#122c52] text-[11px] font-medium tracking-[3.52px] uppercase z-10">
-          Intimatewear & Apparel Manufacturing
-        </p>
-        <p className="text-[#122c52] text-[11px] font-medium tracking-[1.98px] z-10">
-          Let’s create together
-        </p>
+        <div className="container mx-auto items-center justify-between flex">
+          <p className="text-[#122c52] text-[11px] font-medium tracking-[3.52px] uppercase z-10">
+            {utilityLeft}
+          </p>
+          <p className="text-[#122c52] text-[11px] font-medium tracking-[1.98px] z-10">
+            {utilityRight}
+          </p>
         </div>
       </div>
 
       {/* Main Header Container */}
-      <div className="w-full container relative flex items-center justify-between h-[82px] lg:h-[82px]">
+      <div className="w-full container mx-auto relative flex items-center justify-between h-[82px] lg:h-[82px]">
         
         {/* Mobile Menu Button */}
         <button 
@@ -45,27 +89,13 @@ export default function Header() {
 
         {/* Primary Navigation - Left */}
         <nav className="hidden lg:flex items-center gap-8 xl:gap-[44px] w-1/3">
-          <div className="relative h-full flex items-center">
-            <Link href="/" className="text-[#be6852] text-[15px] font-medium whitespace-nowrap">
-              Home
-            </Link>
-            <div className="absolute -bottom-[28px] left-0 h-[2px] w-[41px] bg-[#be6852]" />
-          </div>
-          <Link href="/our-story" className="text-[#122c52] text-[15px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
-            Our Story
-          </Link>
-          <Link href="/what-we-make" className="text-[#122c52] text-[15px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
-            What We Make
-          </Link>
-          <Link href="/our-process" className="text-[#122c52] text-[15px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
-            Our Process
-          </Link>
+          {renderNav(leftNav)}
         </nav>
 
         {/* Center Logo Area */}
         <Link href="/" className="absolute left-1/2 -translate-x-1/2 top-[-38px] flex flex-col items-center z-10">
           <Image 
-            src="/erisha-logo.svg" 
+            src={logoUrl} 
             alt="Erisha Logo" 
             width={70} 
             height={120} 
@@ -74,14 +104,14 @@ export default function Header() {
           />
           <div className="flex flex-col items-center gap-[5px] mt-1">
             <Image 
-              src="/erisha-text.svg" 
+              src={logoTextUrl} 
               alt="ERISHA" 
               width={131} 
               height={23} 
               className="w-[131.3px] h-[22.7px] object-contain"
             />
             <Image 
-              src="/international-text.svg" 
+              src={logoSubtextUrl} 
               alt="INTERNATIONAL" 
               width={133} 
               height={7} 
@@ -92,29 +122,21 @@ export default function Header() {
 
         {/* Primary Navigation - Right */}
         <nav className="hidden lg:flex items-center justify-end gap-8 xl:gap-[44px] w-1/3">
-          <Link href="/sustainability" className="text-[#122c52] text-[14.5px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
-            Sustainability
-          </Link>
-          <Link href="/resources" className="text-[#122c52] text-[14.5px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
-            Resources
-          </Link>
-          <Link href="/contact" className="text-[#122c52] text-[14.5px] font-medium hover:text-[#be6852] transition-colors whitespace-nowrap">
-            Contact
-          </Link>
+          {renderNav(rightNav)}
           
           <Button 
-            href="/start-project" 
+            href={ctaButton?.linkType === 'page' && (ctaButton?.page?.slug || (typeof ctaButton?.page === 'string' && ctaButton?.page)) ? ((ctaButton?.page?.slug || ctaButton?.page) === 'home' ? '/' : '/' + (ctaButton?.page?.slug || ctaButton?.page)) : ctaButton?.path || ctaButton?.href || '/start-project'}
             variant="header"
             icon={<Image src="/cta-icon.svg" alt="" width={10} height={10} className="w-[10px] h-[10px] ml-2" />}
           >
-            Start a Project
+            {ctaButton?.buttonText || "Start a Project"}
           </Button>
         </nav>
 
         {/* Mobile CTA (Visible on mobile) */}
         <div className="lg:hidden">
-           <Link href="/start-project" className="flex items-center justify-center bg-[#122c52] text-[#faf6f0] h-10 px-4 rounded-full font-medium text-sm">
-            Start
+           <Link href={ctaButton?.linkType === 'page' && (ctaButton?.page?.slug || (typeof ctaButton?.page === 'string' && ctaButton?.page)) ? ((ctaButton?.page?.slug || ctaButton?.page) === 'home' ? '/' : '/' + (ctaButton?.page?.slug || ctaButton?.page)) : ctaButton?.path || ctaButton?.href || '/start-project'} className="flex items-center justify-center bg-[#122c52] text-[#faf6f0] h-10 px-4 rounded-full font-medium text-sm">
+            {ctaButton?.buttonText || "Start"}
           </Link>
         </div>
       </div>
@@ -122,14 +144,18 @@ export default function Header() {
       {/* Mobile Menu Dropdown */}
       {isMobileMenuOpen && (
         <div className="absolute top-[132px] left-0 w-full bg-[#f9f4ee] shadow-lg lg:hidden z-40 border-t border-[#daccc2] p-6 flex flex-col gap-4">
-          <Link href="/" className="text-[#be6852] text-lg font-medium">Home</Link>
-          <Link href="/our-story" className="text-[#122c52] text-lg font-medium">Our Story</Link>
-          <Link href="/what-we-make" className="text-[#122c52] text-lg font-medium">What We Make</Link>
-          <Link href="/our-process" className="text-[#122c52] text-lg font-medium">Our Process</Link>
-          <div className="h-px w-full bg-[#daccc2] my-2" />
-          <Link href="/sustainability" className="text-[#122c52] text-lg font-medium">Sustainability</Link>
-          <Link href="/resources" className="text-[#122c52] text-lg font-medium">Resources</Link>
-          <Link href="/contact" className="text-[#122c52] text-lg font-medium">Contact</Link>
+          {[...leftNav, ...rightNav].map((item: any, i: number) => {
+            const slug = item.link?.page?.slug || (typeof item.link?.page === 'string' && item.link?.page);
+            const href = item.link?.linkType === 'page' && slug ? (slug === 'home' ? '/' : '/' + slug) : item.link?.path || item.link?.href || '#';
+            const text = item.buttonText || item.title || item.linkText || 'Link';
+            const isActive = pathname === href;
+            
+            return (
+              <Link key={i} href={href} className={`${isActive ? 'text-[#be6852]' : 'text-[#122c52]'} text-lg font-medium`}>
+                {text}
+              </Link>
+            )
+          })}
         </div>
       )}
     </header>

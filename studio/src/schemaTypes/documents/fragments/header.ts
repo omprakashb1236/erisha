@@ -1,74 +1,62 @@
-import { defineField, defineType } from "sanity";
+﻿import { defineField, defineType } from "sanity";
 
 export const header = defineType({
     name: 'header',
-    title: 'Header',
+    title: 'Header Fragment',
     type: 'object',
     fields: [
+        defineField({
+            name: 'utilityTextLeft',
+            title: 'Utility Bar Text Left',
+            type: 'string',
+        }),
+        defineField({
+            name: 'utilityTextRight',
+            title: 'Utility Bar Text Right',
+            type: 'string',
+        }),
         defineField({
             name: 'logo',
             type: 'customImage',
             title: 'Logo Image',
-            validation : rule => rule.required().error("please select logo"),
         }),
         defineField({
-            name: 'blackLogo',
+            name: 'logoText',
             type: 'customImage',
-            title: 'Black Logo Image',
-            validation : rule => rule.required().error("please select logo"),
+            title: 'Logo Text Image',
         }),
         defineField({
-            name: 'navigation',
-            type: 'navigation',
-            title: 'Navigation'
-        }),
-        defineField({
-            name: 'searchIcon',
+            name: 'logoSubtext',
             type: 'customImage',
-            title: 'Search Icon',
-            validation : rule => rule.required().error("please select searchIcon"),
+            title: 'Logo Subtext Image',
         }),
         defineField({
-            name: 'searchIconBlack',
-            type: 'customImage',
-            title: 'Search Icon Black',
-            validation : rule => rule.required().error("please select searchIcon"),
+            name: 'primaryNavigationLeft',
+            title: 'Primary Navigation (Left)',
+            type: 'array',
+            of: [{ type: 'callToAction' }],
         }),
         defineField({
-            name: 'mapIcon',
-            type: 'customImage',
-            title: 'Map Icon',
-            validation : rule => rule.required().error("please select Map Icon"),
+            name: 'primaryNavigationRight',
+            title: 'Primary Navigation (Right)',
+            type: 'array',
+            of: [{ type: 'callToAction' }],
         }),
         defineField({
-            name: 'mapIconBlack',
-            type: 'customImage',
-            title: 'Map Icon Black',
-            validation : rule => rule.required().error("please select Map Icon"),
-        }),
-        defineField({
-            name: 'toggleMenuIcon',
-            type: 'customImage',
-            title: 'Toggle Menu Icon',
-            validation : rule => rule.required().error("please select Menu Icon"),
-        }),
-        defineField({
-            name: 'toggleMenuIconBlack',
-            type: 'customImage',
-            title: 'Toggle Menu Icon Black',
-            validation : rule => rule.required().error("please select Menu Icon"),
+            name: 'ctaButton',
+            title: 'CTA Button',
+            type: 'callToAction',
         }),
     ],
     preview: {
         select: {
-            logo: 'logo',
-            navItems: 'navigation.navItems'
+            title: 'utilityTextLeft',
+            media: 'logo'
         },
-        prepare({ logo, navItems }) {
+        prepare({ title, media }) {
             return {
-                title: `Header`,
-                subtitle: `${navItems.length} navigation items`,
-                media: logo
+                title: title || 'Header Fragment',
+                media: media
             }
         }
     }
