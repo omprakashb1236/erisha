@@ -1,11 +1,12 @@
 import { sanityFetchCustom } from "@/sanity/lib/client";
-import { productFamilyBySlugQuery, productsByFamilyQuery } from "@/sanity/lib/queries";
+import { footerQuery, headerQuery, productFamilyBySlugQuery, productsByFamilyQuery } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ProductCard from "@/app/components/catalogue/ProductCard";
 import CatalogueFilters from "@/app/components/catalogue/CatalogueFilters";
 import Header from "@/app/components/Header";
 import ProductBanner from "@/app/components/ProductBanner";
+import Footer from "@/app/components/Footer";
 
 export default async function ProductFamilyPage({
   params,
@@ -44,6 +45,16 @@ export default async function ProductFamilyPage({
     },
     tags: ["product"]
   });
+  const [headerData, footerData] = await Promise.all([
+    sanityFetchCustom({
+      query: headerQuery,
+      tags: ["fragment"],
+    }),
+    sanityFetchCustom({
+      query: footerQuery,
+      tags: ["fragment"],
+    })
+  ]);
 
   // Re-map Sanity filter schema definitions into the prop structure CatalogueFilters expects (inheriting from the parent productLine)
   const filterGroups = [];
@@ -62,7 +73,7 @@ export default async function ProductFamilyPage({
 
   return (
     <>
-      <Header />
+      <Header fragment={headerData?.header} />
       <ProductBanner
         imageAlign="right"
         imageInsideContainer={false}
@@ -147,6 +158,7 @@ export default async function ProductFamilyPage({
 
 
       </main>
+      <Footer fragment={footerData?.footer} />
     </>
   );
 }

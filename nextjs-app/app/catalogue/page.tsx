@@ -1,14 +1,27 @@
 import { sanityFetchCustom } from "@/sanity/lib/client";
-import { catalogueQuery, allProductLinesQuery } from "@/sanity/lib/queries";
+import { catalogueQuery, allProductLinesQuery, headerQuery, footerQuery } from "@/sanity/lib/queries";
 import Link from "next/link";
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/utils";
 import Header from "../components/Header";
 import CatalogueFilters from "../components/catalogue/CatalogueFilters";
 import CatalogueHero from "../components/catalogue/CatalogueHero";
+import Footer from "../components/Footer";
 
 // Make sure to define the expected Sanity return types loosely or via generated types
 export default async function CataloguePage() {
+
+  const [headerData, footerData] = await Promise.all([
+      sanityFetchCustom({
+        query: headerQuery,
+        tags: ["fragment"],
+      }),
+      sanityFetchCustom({
+        query: footerQuery,
+        tags: ["fragment"],
+      })
+    ]);
+
   const catalogue = await sanityFetchCustom({ query: catalogueQuery, tags: ["catalogue"] });
   const allProductLines = await sanityFetchCustom({ query: allProductLinesQuery, tags: ["productLine"] });
 
@@ -43,7 +56,7 @@ export default async function CataloguePage() {
 
   return (
     <>
-      <Header />
+      <Header fragment={headerData?.header}/>
       
 
       <main className="w-full min-h-screen bg-[#f9f2ea] overflow-hidden">
@@ -138,6 +151,7 @@ export default async function CataloguePage() {
         </section>
 
       </main>
+      <Footer fragment={footerData?.footer} />
     </>
   );
 }

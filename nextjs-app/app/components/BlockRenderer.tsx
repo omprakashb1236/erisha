@@ -13,6 +13,10 @@ import ProductBanner from "@/app/components/ProductBanner"
 import ContactForm from "@/app/components/ContactForm"
 import CategoryIndex from "./CategoryIndex";
 import OurStory from "./OurStory";
+import JourneyOverview from "./JourneyOverview";
+import PeopleProductsPlanet from "./PeopleProductsPlanet";
+import QualityProgress from "./QualityProgress";
+import ClosingStatement from "./ClosingStatement";
 import CategoryBlock from "./CategoryBlock";
 
 type BlocksType = {
@@ -44,7 +48,11 @@ const Blocks: BlocksType = {
   contactForm: ContactForm,
   categoryIndex : CategoryIndex,
   ourStory : OurStory,
-  categoryBlock : CategoryBlock
+  categoryBlock : CategoryBlock,
+  journeyOverview : JourneyOverview,
+  peopleProductsPlanet : PeopleProductsPlanet,
+  qualityProgress : QualityProgress,
+  closingStatement : ClosingStatement
 };
 
 /**

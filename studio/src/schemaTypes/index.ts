@@ -1,6 +1,10 @@
 ﻿import { productBanner } from './objects/productBanner'
 import { categoryIndex } from './objects/categoryIndex'
 import { ourStory } from './objects/ourStory'
+import { journeyOverview } from './objects/journeyOverview'
+import { peopleProductsPlanet } from './objects/peopleProductsPlanet'
+import { qualityProgress } from './objects/qualityProgress'
+import { closingStatement } from './objects/closingStatement'
 import { categoryBlock } from './objects/categoryBlock'
 import news from './documents/news'
 import { page } from './documents/page'
@@ -43,6 +47,10 @@ export const schemaTypes = [
   productBanner,
   categoryIndex,
   ourStory,
+  journeyOverview,
+  peopleProductsPlanet,
+  qualityProgress,
+  closingStatement,
   categoryBlock,
   // Singletons
   settings,

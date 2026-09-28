@@ -2,9 +2,8 @@
 import PageBuilderPage from "@/app/components/PageBuilder";
 import { footerQuery, getPageQuery, headerQuery } from "@/sanity/lib/queries";
 import { GetPageQueryResult } from "@/sanity.types";
-import { PageOnboarding } from "@/app/components/Onboarding";
 import { sanityFetchCustom } from "@/sanity/lib/client";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 

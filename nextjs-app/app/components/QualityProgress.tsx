@@ -1,6 +1,28 @@
-import Image from "next/image";
+﻿import Image from "next/image";
+import type { QualityProgress as QualityProgressType } from "@/sanity.types";
 
-export default function QualityProgress() {
+export default function QualityProgress({ block }: { block?: QualityProgressType }) {
+  const eyebrow = block?.eyebrow ?? "QUALITY & PROGRESS";
+  const headlineLine1 = block?.headlineLine1 ?? "Quality is part of";
+  const headlineLine2 = block?.headlineLine2 ?? "responsibility.";
+  const paragraph = block?.paragraph ?? "Consistency prevents rework, protects materials and builds trust. That is why quality control sits throughout the process rather than waiting at the end.";
+  
+  const defaultStats = [
+    { statValue: "100%", statTitle: "QUALITY CHECKS", statSubtitle: "At every stage", isMediumSize: false },
+    { statValue: "30%", statTitle: "REDUCTION IN WASTE", statSubtitle: "Through efficient production", isMediumSize: false },
+    { statValue: "100+", statTitle: "SKILLED PROFESSIONALS", statSubtitle: "Across design and production", isMediumSize: false },
+    { statValue: "GLOBAL", statTitle: "COMPLIANCE STANDARDS", statSubtitle: "For peace of mind", isMediumSize: true },
+  ];
+  const stats = block?.stats?.length ? block.stats : defaultStats;
+
+  const defaultPhotos = [
+    { image: "/quality-1.png", caption: "CRAFTED BY EXPERTS" },
+    { image: "/quality-2.png", caption: "PREMIUM MATERIALS" },
+    { image: "/quality-3.png", caption: "CONSISTENT QUALITY" },
+    { image: "/quality-4.png", caption: "READY FOR THE WORLD" },
+  ];
+  const photos = block?.photos?.length ? block.photos : defaultPhotos;
+
   return (
     <section className="w-full bg-[#f9f2ea] overflow-hidden py-[80px] lg:pt-[60px] lg:pb-[100px]">
       <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col lg:flex-row lg:justify-between items-start gap-16 lg:gap-10">
@@ -8,17 +30,17 @@ export default function QualityProgress() {
         {/* Left Intro Column */}
         <div className="flex flex-col w-full lg:w-[500px] shrink-0">
           <p className="text-[#b86e58] text-[10px] lg:text-[10.5px] font-medium tracking-[2px] lg:tracking-[2.9px] leading-[17px] uppercase mb-[14px]">
-            QUALITY & PROGRESS
+            {eyebrow}
           </p>
           <div className="w-[44px] h-px bg-[#b86e58]/52 mb-[28px]" />
           
           <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[55px] leading-[1.1] lg:leading-[58px] mb-[40px] lg:mb-[90px]">
-            <span className="block">Quality is part of</span>
-            <span className="block">responsibility.</span>
+            {headlineLine1 && <span className="block">{headlineLine1}</span>}
+            {headlineLine2 && <span className="block">{headlineLine2}</span>}
           </h2>
           
           <p className="text-[#4a505e] text-[14px] lg:text-[14.5px] leading-[1.6] lg:leading-[24px]">
-            Consistency prevents rework, protects materials and builds trust. That is why quality control sits throughout the process rather than waiting at the end.
+            {paragraph}
           </p>
         </div>
 
@@ -27,55 +49,25 @@ export default function QualityProgress() {
           
           {/* Top Stats Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-10 mb-[50px] lg:mb-[85px]">
-            
-            <div className="flex flex-col">
-              <p className="font-playfair text-[#b86e58] text-[32px] lg:text-[40px] leading-none lg:leading-[45px] mb-[15px]">
-                100%
-              </p>
-              <p className="text-[#1b2845] text-[8px] lg:text-[8.8px] font-medium tracking-[1.4px] leading-[14px] uppercase mb-[10px]">
-                QUALITY CHECKS
-              </p>
-              <p className="text-[#4a505e] text-[11px] lg:text-[11.5px] leading-[1.4] lg:leading-[18px]">
-                At every stage
-              </p>
-            </div>
-
-            <div className="flex flex-col">
-              <p className="font-playfair text-[#b86e58] text-[32px] lg:text-[40px] leading-none lg:leading-[45px] mb-[15px]">
-                30%
-              </p>
-              <p className="text-[#1b2845] text-[8px] lg:text-[8.8px] font-medium tracking-[1.4px] leading-[14px] uppercase mb-[10px]">
-                REDUCTION IN WASTE
-              </p>
-              <p className="text-[#4a505e] text-[11px] lg:text-[11.5px] leading-[1.4] lg:leading-[18px]">
-                Through efficient production
-              </p>
-            </div>
-
-            <div className="flex flex-col">
-              <p className="font-playfair text-[#b86e58] text-[32px] lg:text-[40px] leading-none lg:leading-[45px] mb-[15px]">
-                100+
-              </p>
-              <p className="text-[#1b2845] text-[8px] lg:text-[8.8px] font-medium tracking-[1.4px] leading-[14px] uppercase mb-[10px]">
-                SKILLED PROFESSIONALS
-              </p>
-              <p className="text-[#4a505e] text-[11px] lg:text-[11.5px] leading-[1.4] lg:leading-[18px]">
-                Across design and production
-              </p>
-            </div>
-
-            <div className="flex flex-col">
-              <p className="font-playfair text-[#b86e58] text-[26px] lg:text-[31px] leading-none lg:leading-[45px] mb-[15px]">
-                GLOBAL
-              </p>
-              <p className="text-[#1b2845] text-[8px] lg:text-[8.8px] font-medium tracking-[1.4px] leading-[14px] uppercase mb-[10px]">
-                COMPLIANCE STANDARDS
-              </p>
-              <p className="text-[#4a505e] text-[11px] lg:text-[11.5px] leading-[1.4] lg:leading-[18px]">
-                For peace of mind
-              </p>
-            </div>
-
+            {stats.map((stat, index) => {
+              const valueSizeClass = stat.isMediumSize 
+                ? "text-[26px] lg:text-[31px] leading-none lg:leading-[45px]" 
+                : "text-[32px] lg:text-[40px] leading-none lg:leading-[45px]";
+                
+              return (
+                <div key={index} className="flex flex-col">
+                  <p className={`font-playfair text-[#b86e58] ${valueSizeClass} mb-[15px]`}>
+                    {stat.statValue}
+                  </p>
+                  <p className="text-[#1b2845] text-[8px] lg:text-[8.8px] font-medium tracking-[1.4px] leading-[14px] uppercase mb-[10px]">
+                    {stat.statTitle}
+                  </p>
+                  <p className="text-[#4a505e] text-[11px] lg:text-[11.5px] leading-[1.4] lg:leading-[18px]">
+                    {stat.statSubtitle}
+                  </p>
+                </div>
+              );
+            })}
           </div>
 
           {/* Divider Rule */}
@@ -83,43 +75,21 @@ export default function QualityProgress() {
 
           {/* Bottom Photos Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-8">
-            
-            <div className="flex flex-col">
-              <div className="w-full aspect-[17/18] lg:h-[180px] relative mb-[12px]">
-                <Image src="/quality-1.png" alt="Crafted by experts" fill className="object-cover" />
+            {photos.map((photo, index) => (
+              <div key={index} className="flex flex-col">
+                <div className="w-full aspect-[17/18] lg:h-[180px] relative mb-[12px]">
+                  <Image 
+                    src={typeof photo.image === 'string' ? photo.image : '/quality-1.png'} 
+                    alt={photo.caption || "Quality Image"} 
+                    fill 
+                    className="object-cover" 
+                  />
+                </div>
+                <p className="text-[#4a505e] text-[8px] lg:text-[8.5px] font-medium tracking-[1.4px] leading-[14px] uppercase">
+                  {photo.caption}
+                </p>
               </div>
-              <p className="text-[#4a505e] text-[8px] lg:text-[8.5px] font-medium tracking-[1.4px] leading-[14px] uppercase">
-                CRAFTED BY EXPERTS
-              </p>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="w-full aspect-[17/18] lg:h-[180px] relative mb-[12px]">
-                <Image src="/quality-2.png" alt="Premium materials" fill className="object-cover" />
-              </div>
-              <p className="text-[#4a505e] text-[8px] lg:text-[8.5px] font-medium tracking-[1.4px] leading-[14px] uppercase">
-                PREMIUM MATERIALS
-              </p>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="w-full aspect-[17/18] lg:h-[180px] relative mb-[12px]">
-                <Image src="/quality-3.png" alt="Consistent quality" fill className="object-cover" />
-              </div>
-              <p className="text-[#4a505e] text-[8px] lg:text-[8.5px] font-medium tracking-[1.4px] leading-[14px] uppercase">
-                CONSISTENT QUALITY
-              </p>
-            </div>
-
-            <div className="flex flex-col">
-              <div className="w-full aspect-[17/18] lg:h-[180px] relative mb-[12px]">
-                <Image src="/quality-4.png" alt="Ready for the world" fill className="object-cover" />
-              </div>
-              <p className="text-[#4a505e] text-[8px] lg:text-[8.5px] font-medium tracking-[1.4px] leading-[14px] uppercase">
-                READY FOR THE WORLD
-              </p>
-            </div>
-
+            ))}
           </div>
 
         </div>

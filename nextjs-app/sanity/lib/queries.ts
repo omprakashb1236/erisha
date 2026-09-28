@@ -192,6 +192,13 @@ export const getPageQuery = defineQuery(`
             }
           }
         },
+        _type == "qualityProgress" => {
+          ...,
+          photos[]{
+            ...,
+            "image": image.asset->url
+          }
+        },
         _type == "betterProducts" => {
         ...,
         "rightImage": rightImage.asset->url,

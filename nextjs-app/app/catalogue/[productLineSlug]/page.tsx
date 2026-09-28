@@ -1,5 +1,5 @@
 import { sanityFetchCustom } from "@/sanity/lib/client";
-import { productLineBySlugQuery, filteredProductsQuery } from "@/sanity/lib/queries";
+import { productLineBySlugQuery, filteredProductsQuery, headerQuery, footerQuery } from "@/sanity/lib/queries";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import ProductCard from "@/app/components/catalogue/ProductCard";
@@ -7,6 +7,7 @@ import ProductFamilyCard from "@/app/components/catalogue/ProductFamilyCard";
 import CatalogueFilters from "@/app/components/catalogue/CatalogueFilters";
 import Header from "@/app/components/Header";
 import ProductBanner from "@/app/components/ProductBanner";
+import Footer from "@/app/components/Footer";
 
 export default async function ProductLinePage({ 
   params,
@@ -24,6 +25,17 @@ export default async function ProductLinePage({
     params: { slug: productLineSlug },
     tags: ["productLine"] 
   });
+
+  const [headerData, footerData] = await Promise.all([
+        sanityFetchCustom({
+          query: headerQuery,
+          tags: ["fragment"],
+        }),
+        sanityFetchCustom({
+          query: footerQuery,
+          tags: ["fragment"],
+        })
+      ]);
 
   if (!productLine) {
     notFound();
@@ -59,7 +71,7 @@ export default async function ProductLinePage({
 
   return (
     <>
-    <Header />
+     <Header fragment={headerData?.header}/>
     
     <main className="w-full min-h-screen bg-[#f9f2ea] overflow-hidden">
       <ProductBanner 
@@ -140,6 +152,7 @@ export default async function ProductLinePage({
       
 
     </main>
+    <Footer fragment={footerData?.footer} />
     </>
   );
 }

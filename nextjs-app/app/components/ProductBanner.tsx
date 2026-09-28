@@ -70,7 +70,7 @@ export default function ProductBanner({
             </div>
           ))}
 
-          {ctaButton && (
+          {ctaButton && ctaButton?.buttonText && (
             <div>
               <Button
                 href={ctaButton.link?.linkType === 'page' && (ctaButton.link?.page?.slug || (typeof ctaButton.link?.page === 'string' && ctaButton.link?.page))

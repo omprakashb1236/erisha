@@ -66,6 +66,10 @@ export const page = defineType({
           { type: 'footerBlock' },
           {type : 'ourStory'},
           {type : 'categoryBlock'},
+          {type : 'journeyOverview'},
+          {type : 'peopleProductsPlanet'},
+          {type : 'qualityProgress'},
+          {type : 'closingStatement'},
       ],
 
       options: {
