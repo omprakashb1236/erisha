@@ -11,7 +11,7 @@ export default function OurProcess({ block }: { block?: any }) {
   const headingLine3 = block?.headingLine3 || "what's next.";
   const description = block?.description || "A collaborative and transparent process, designed to bring your vision to life � with precision, care and expertise at every step.";
   const rightMicrocopy = block?.rightMicrocopy || ["YOUR VISION. OUR EXPERTISE.", "A BETTER TOMORROW."];
-  
+
   const defaultSteps = [
     { num: "01", title: "DESIGN & DEVELOPMENT", desc: ["Translating your vision into", "technical specifications", "and precise patterns."], img: "/process-step1.png" },
     { num: "02", title: "SOURCING", desc: ["Selecting the perfect", "materials, laces, elastics", "and hardware."], img: "/process-step2.png" },
@@ -24,7 +24,7 @@ export default function OurProcess({ block }: { block?: any }) {
 
   const footerLeftMicrocopy = block?.footerLeftMicrocopy || ["A LONGER", "JOURNEY TOGETHER"];
   const footerRightMicrocopy = block?.footerRightMicrocopy || ["FROM", "CONCEPT", "TO COLLECTION"];
-  
+
   const defaultFooterValues = [
     { title: "RESPONSIBLE\nMANUFACTURING", icon: "/footer-icon0.svg" },
     { title: "PEOPLE\nAT THE CORE", icon: "/footer-icon1.svg" },
@@ -45,17 +45,17 @@ export default function OurProcess({ block }: { block?: any }) {
 
   return (
     <section className="relative w-full bg-[#f9f5ef] overflow-hidden">
-      
-      <div className="w-full container mx-auto min-h-screen lg:min-h-[971px] flex flex-col pt-12 lg:pt-0 relative">
-        
+
+      <div className="w-full container mx-auto flex flex-col pt-12 lg:pt-0 relative">
+
         {/* Intro */}
         <div className="flex flex-col  lg:pt-[47px] relative z-20">
-          
+
           <p className="text-[#965745] text-[11px] font-medium tracking-[3.2px] mb-4">{eyebrow}</p>
           <div className="w-[48px] h-px bg-[#965745]/55 mb-8 lg:mb-6" />
 
           <h2 className="text-[#1b2845] max-w-[500px] font-playfair leading-none mb-6 text-5xl lg:text-[72px]">
-           
+
             <span className="block">
               <span className="text-5xl lg:text-[72px]">{headingLine1}</span>{" "}
               <span className="text-[#965745] font-extrabold italic text-5xl lg:text-[60px]">{headingLine2}</span>
@@ -71,12 +71,12 @@ export default function OurProcess({ block }: { block?: any }) {
               {rightMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
             </div>
           </div>
-          
+
           {/* Desktop Decoratives in Intro */}
           <div className="hidden lg:block absolute left-[575px] top-[68px] w-[845px] h-[150px] -z-10">
             <Image src="/process-loop.svg" alt="" fill className="object-cover" />
           </div>
-          
+
           <div className="hidden lg:block absolute left-[1218px] top-[145px] w-[160px] h-[160px]">
             <Image src="/process-badge.svg" alt="" fill />
           </div>
@@ -85,16 +85,16 @@ export default function OurProcess({ block }: { block?: any }) {
         {/* Process Timeline */}
         <div className="lg:mt-8 relative z-20 overflow-x-auto custom-scrollbar pb-6 lg:pb-8">
           <div className="hidden lg:block w-[100%] h-px bg-[#b88e78]/45 mb-12" />
-          
+
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-[25px] w-full min-w-max">
             {steps.map((step: any, idx: number) => (
-              <div key={idx} className="flex flex-col lg:w-[205px] relative">
-                
+              <div key={idx} className="flex flex-col lg:w-[210px] relative">
+
                 <div className="flex items-center gap-4 lg:block">
                   <p className="text-[#965745] text-[24px] font-playfair tracking-[-0.2px] leading-[32px] lg:mb-4">
                     {step.num}
                   </p>
-                  
+
                   <div className="w-[14px] h-[14px] relative hidden lg:block lg:mb-6">
                     <Image src="/process-node.svg" alt="" fill />
                   </div>
@@ -116,10 +116,13 @@ export default function OurProcess({ block }: { block?: any }) {
           </div>
         </div>
 
-        {/* Values Footer */}
-        <div className="bg-[#f4ede6] w-full mt-12 lg:mt-auto py-10 lg:py-0 lg:h-[176px] relative flex flex-col lg:flex-row lg:items-center px-6 lg:px-[62px]">
-          
-          <div className="flex flex-col mb-8 lg:mb-0 lg:absolute lg:left-[62px] lg:top-[48px]">
+
+
+      </div>
+      {/* Values Footer */}
+      <div className="bg-[#f4ede6] w-full mt-12 lg:mt-auto py-10 lg:py-0 lg:h-[176px] relative flex flex-col lg:flex-row lg:items-center">
+        <div className='container relative'>
+          <div className="flex flex-col mb-8 lg:mb-0 lg:absolute lg:top-[48px]">
             <div className="text-[#1b2845] text-[10.5px] font-medium tracking-[2.9px] leading-[20px]">
               {footerLeftMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
             </div>
@@ -127,8 +130,8 @@ export default function OurProcess({ block }: { block?: any }) {
           </div>
 
           <div className="flex flex-col sm:flex-row lg:flex-row flex-wrap lg:flex-nowrap gap-8 sm:gap-12 lg:gap-0 lg:mx-auto items-start lg:items-center justify-center pt-4 lg:pt-0">
-            
-                        {footerValues.map((val: any, i: number) => (
+
+            {footerValues.map((val: any, i: number) => (
               <React.Fragment key={i}>
                 <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
                   <div className="w-[42px] h-[42px] relative shrink-0"><Image src={val.icon || "/footer-icon0.svg"} alt="" fill /></div>
@@ -140,7 +143,7 @@ export default function OurProcess({ block }: { block?: any }) {
               </React.Fragment>
             ))}
 
-            <Button 
+            <Button
               href={ctaLink}
               variant="primary"
               className="w-full sm:w-auto lg:w-[220px] h-[50px] rounded-[25px] mt-6 sm:mt-0 lg:ml-[25px] !text-[12px] tracking-[0.6px]"
@@ -153,12 +156,12 @@ export default function OurProcess({ block }: { block?: any }) {
           <div className="hidden lg:flex flex-col absolute right-[60px] top-[45px] items-end text-[#1b2845] text-[9px] font-medium tracking-[2.4px] leading-[18px]">
             {footerRightMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
           </div>
-
         </div>
 
       </div>
 
-      <style dangerouslySetInnerHTML={{ __html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .custom-scrollbar::-webkit-scrollbar { height: 6px; }
         .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(184, 142, 120, 0.4); border-radius: 4px; }

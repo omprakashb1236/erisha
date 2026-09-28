@@ -62,7 +62,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
 
   // @ts-ignore
   const metricsBadgeText = block?.metricsBadgeText || ['A MORE', 'CONSCIOUS', 'TOMORROW'];
-  
+
   // @ts-ignore
   const footerBannerLeftText = block?.footerBannerLeftText || 'BEAUTIFUL PRODUCTS. BRIGHTER POSSIBILITIES.';
   // @ts-ignore
@@ -72,26 +72,26 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
     <section className="relative w-full overflow-hidden bg-[#f9f5ef]">
       {/* Main Content Area */}
       <div className="w-full container flex flex-col pt-12 lg:pt-[40px]">
-        
+
         {/* Top Split Section */}
         <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
           {/* Left Intro */}
-          <div className="flex flex-col lg:mt-8 flex-1 max-w-[520px]">
+          <div className="flex flex-col lg:mt-8 flex-1 max-w-[500px]">
             <p className="text-[#965745] text-[11px] font-medium tracking-[3.4px] leading-[16px] mb-4">{eyebrow}</p>
             <div className="w-[48px] h-px bg-[#965745]/55 mb-8" />
-            
+
             <h2 className="text-[#1b2845] font-playfair leading-none mb-6 text-5xl lg:text-[70px]">
               <span className="block mb-2 lg:mb-0">{headingLine1}</span>
               <span className="block text-[#965745] text-5xl lg:text-[62px] font-extrabold italic">{headingLine2}</span>
             </h2>
-            
+
             <p className="text-[#4a505e] text-[15px] leading-[24px] lg:mt-16">
               {description}
             </p>
           </div>
 
           {/* Right Features */}
-          <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap gap-8 lg:gap-0 lg:mt-[100px] flex-1 justify-end md:mr-[150px] max-w-[650px]">
+          <div className="flex flex-col sm:flex-row sm:flex-wrap lg:flex-nowrap gap-8 lg:gap-0 lg:mt-[100px] flex-1 justify-end xl:mr-[190px] max-w-[650px]">
             {features.map((feat: any, i: number) => (
               <React.Fragment key={i}>
                 <div className="flex gap-4 items-start sm:w-[45%] lg:w-auto lg:flex-col lg:items-center lg:flex-1">
@@ -119,7 +119,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
 
         {/* Gallery & Lower Section */}
         <div className="py-12 lg:pt-[40px] flex flex-col lg:flex-row justify-start lg:items-end gap-12 lg:gap-8 relative z-10">
-          
+
           <div className="grid grid-cols-2 lg:flex lg:flex-row gap-4 lg:gap-6 flex-1 max-w-[885px]">
             {gallery.map((item: any, i: number) => (
               <div key={i} className="flex flex-col gap-3 lg:gap-6 w-full lg:w-[204px]">
@@ -141,8 +141,8 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
             <div className="text-[#4a505e] text-[13.5px] leading-[20px] mb-4">
               <p>{rightCTADescription}</p>
             </div>
-            <Button 
-              href={ctaLink} 
+            <Button
+              href={ctaLink}
               variant="light"
               className="w-[180px] h-[42px] !border-[#965745]/60 !text-[#1b2845] !justify-between !px-[22px]"
               icon={<span className="text-[20px]">→</span>}
@@ -156,7 +156,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
       </div>
 
       {/* Decorative Right Graphic Desktop */}
-      <div className="hidden lg:block absolute right-[20px] xl:right-0 top-[160px] w-[206px] h-[562px]">
+      <div className="hidden xl:block absolute right-[20px] xl:right-0 top-[160px] w-[206px] h-[562px]">
         <Image src="/commitment-detail.png" alt="" fill className="object-cover object-left" />
         <div className="absolute right-[50px] top-[447px] text-[#faf6f2] text-[9.1px] font-medium tracking-[2.6px] leading-[18px]">
           {rightGraphicText.map((line: string, i: number) => <p key={i}>{line}</p>)}
@@ -167,7 +167,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
       {/* Metrics Banner */}
       <div className="bg-[#f7f1eb] w-full">
         <div className="w-full container py-12 lg:py-[35px] flex flex-col lg:flex-row gap-10 lg:gap-0 lg:justify-between items-center text-center">
-          
+
           {metrics.map((metric: any, i: number) => (
             <React.Fragment key={i}>
               <div className="flex flex-col items-center border-t lg:border-none border-[#b89e8f]/35 pt-8 lg:pt-0">
@@ -182,17 +182,17 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
           ))}
 
           <div className="hidden lg:flex items-center gap-4 border-l border-[#b89e8f]/35 pl-[80px] ml-[40px]">
-             <div className="w-[62px] h-[62px] relative"><Image src="/commitment-leaf.svg" alt="" fill /></div>
-             <div className="text-left font-medium text-[#4a505e] text-[8.5px] tracking-[2.5px] leading-[15px]">
-               {metricsBadgeText.map((line: string, i: number) => <p key={i}>{line}</p>)}
-             </div>
+            <div className="w-[62px] h-[62px] relative"><Image src="/commitment-leaf.svg" alt="" fill /></div>
+            <div className="text-left font-medium text-[#4a505e] text-[8.5px] tracking-[2.5px] leading-[15px]">
+              {metricsBadgeText.map((line: string, i: number) => <p key={i}>{line}</p>)}
+            </div>
           </div>
         </div>
       </div>
 
       {/* Footer Banner */}
       <div className="bg-[#b17c71] w-full">
-        <div className="w-full container py-8 lg:py-10 flex flex-col lg:flex-row gap-4 lg:gap-0 lg:justify-between items-center text-center">
+        <div className="w-full xl:max-w-[800px] m-auto py-8 lg:py-10 flex flex-col lg:flex-row gap-4 lg:gap-0 lg:justify-between items-center text-center">
           <p className="text-[#faf6f2] text-[9.2px] font-medium tracking-[4px]">{footerBannerLeftText}</p>
           <div className="w-[44px] lg:w-px h-px lg:h-[44px] bg-[#faf6f2]/40" />
           <p className="text-[#faf6f2] text-[9.2px] font-medium tracking-[4px]">{footerBannerRightText}</p>

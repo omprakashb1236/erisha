@@ -32,26 +32,25 @@ export default function OurImpact({ block }: { block?: any }) {
   const rightImage = block?.rightImage || "/impact-photo1.png";
   const brandsStripTitle = block?.brandsStripTitle || "IN GOOD COMPANY";
   const brandLogos = block?.brandLogos?.length ? block.brandLogos : [""];
-  console.log("brandLogos",brandLogos)
 
   return (
-    <section className="w-full bg-[#f8f4ee] overflow-hidden flex flex-col items-center">
+    <section className="w-full bg-[#f8f4ee] relative overflow-hidden flex flex-col items-center">
 
       {/* Main Content Area: Split 50/50 Desktop */}
       <div className="w-full container flex flex-col lg:flex-row">
 
         {/* LEFT COLUMN */}
-        <div className="w-full lg:w-[58%] flex flex-col pt-12 lg:pt-[100px] px-6 lg:pl-[75px] lg:pr-[60px] pb-12 lg:pb-[100px]">
+        <div className="w-full lg:w-[52%] flex flex-col pt-12 lg:pt-[100px] lg:pr-[60px] pb-12 lg:pb-[100px]">
 
-          <div className="flex flex-col max-w-[620px]">
+          <div className="flex flex-col">
             <p className="text-[#b86e58] text-[10px] lg:text-[11px] font-bold tracking-[2px] lg:tracking-[3.4px] mb-[18px] uppercase">
               {eyebrow}
             </p>
             <div className="w-[48px] h-px bg-[#965745]/55 mb-[26px]" />
 
             <h2 className="font-playfair leading-none mb-6 lg:mb-[40px]">
-              <span className="block text-[#1b2845] text-4xl lg:text-[56px] xl:text-[62px] mb-2">{headingLine1}</span>
-              <span className="block text-[#965745] text-4xl lg:text-[54px] xl:text-[60px] font-extrabold italic">{headingLine2}</span>
+              <span className="block text-[#1b2845] text-4xl lg:text-[56px] leading-[1]">{headingLine1}</span>
+              <span className="block text-[#965745] text-4xl lg:text-[52px] leading-[1] font-extrabold italic">{headingLine2}</span>
             </h2>
 
             <div className="text-[#4a505e] text-[14px] lg:text-[15px] leading-[1.6] mb-12">
@@ -60,7 +59,7 @@ export default function OurImpact({ block }: { block?: any }) {
           </div>
 
           {/* Metrics Grid */}
-          <div className="flex flex-wrap lg:flex-nowrap items-center w-full max-w-[620px] mb-12 lg:mb-16">
+          <div className="flex flex-wrap lg:flex-nowrap items-center w-full mb-12 lg:mb-16">
             {metrics.map((metric: any, i: number) => (
               <div key={i} className="w-1/2 lg:flex-1 flex flex-col">
                 <p className="text-[#965745] text-4xl lg:text-[42px] xl:text-[46px] font-didot tracking-[-0.3px]">{metric.value}</p>
@@ -97,7 +96,7 @@ export default function OurImpact({ block }: { block?: any }) {
         </div>
 
         {/* RIGHT COLUMN (Single Image) */}
-        <div className="w-full lg:w-[42%] relative h-[400px] lg:h-auto min-h-[500px]">
+        <div className="w-full lg:w-[48%] relative h-[400px] lg:h-auto min-h-[500px] xl:absolute xl:h-[60%] right-0 top-0 3xl:h-auto 3xl:relative">
           <Image src={rightImage} alt="Impact Reference" fill className="object-cover" />
         </div>
 
@@ -114,7 +113,7 @@ export default function OurImpact({ block }: { block?: any }) {
             <div className="w-[43px] h-px bg-[#0e1b30]/40 mt-4" />
           </div>
 
-          <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-[40px] xl:gap-[60px] flex-1 lg:px-12">
+          <div className="flex flex-wrap justify-center items-center gap-6 lg:gap-[20px] 2xl:gap-[48px] flex-1 lg:px-6">
             {brandLogos.map((brand: any, index: number) => (
               <div
                 key={brand?._key || index}
@@ -149,7 +148,7 @@ export default function OurImpact({ block }: { block?: any }) {
           <div className="w-px h-[24px] lg:h-[46px] bg-[#faf6f2]/45 hidden lg:block" />
           <div className="h-px w-[40px] bg-[#faf6f2]/45 lg:hidden" />
           <p className="text-[#faf6f2] text-[9.2px] font-medium tracking-[4.1px] leading-[14px]">
-             {block?.footerStatementStripRgt}
+            {block?.footerStatementStripRgt}
           </p>
         </div>
       </div>

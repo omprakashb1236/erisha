@@ -79,7 +79,7 @@ export default function Header({ fragment }: HeaderProps) {
         
         {/* Mobile Menu Button */}
         <button 
-          className="lg:hidden text-[#122c52] p-2"
+          className="lg:hidden text-[#122c52] p-2 pl-0"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">

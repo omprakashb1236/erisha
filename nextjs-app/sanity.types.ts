@@ -34,7 +34,7 @@ export type Seo = {
 export type Iframe = {
   _type: "iframe";
   title?: string;
-  url: string;
+  url?: string;
 };
 
 export type NewsList = {
@@ -45,7 +45,7 @@ export type NewsList = {
 
 export type ImageComponent = {
   _type: "imageComponent";
-  image: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -57,23 +57,23 @@ export type ImageComponent = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  alt: string;
+  alt?: string;
 };
 
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
-  top: number;
-  bottom: number;
-  left: number;
-  right: number;
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
 };
 
 export type SanityImageHotspot = {
   _type: "sanity.imageHotspot";
-  x: number;
-  y: number;
-  height: number;
-  width: number;
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
 };
 
 export type RichText = {
@@ -84,15 +84,15 @@ export type RichText = {
 
 export type Navigation = {
   _type: "navigation";
-  navItems: Array<{
+  navItems?: Array<{
     _key: string;
   } & NavItem>;
 };
 
 export type NavItem = {
   _type: "navItem";
-  title: string;
-  link: Link;
+  title?: string;
+  link?: Link;
   hideInNavigation?: boolean;
   hasSubPages?: boolean;
   navigation?: Navigation;
@@ -195,8 +195,8 @@ export type BlockContent = Array<{
 
 export type LinkItem = {
   _type: "linkItem";
-  linkText: string;
-  link: Link;
+  linkText?: string;
+  link?: Link;
 };
 
 export type LinkList = {
@@ -209,7 +209,7 @@ export type LinkList = {
 
 export type CustomImage = {
   _type: "customImage";
-  image: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -221,7 +221,7 @@ export type CustomImage = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  altText: string;
+  altText?: string;
   isImageFullWidth?: boolean;
 };
 
@@ -256,7 +256,6 @@ export type ContactForm = {
   eyebrow?: string;
   headingLine1?: string;
   headingLine2?: string;
-  headingLine3?: string;
   description?: string;
   features?: Array<{
     icon?: {
@@ -275,6 +274,28 @@ export type ContactForm = {
     _key: string;
   }>;
   bottomMicrocopy?: string;
+  namePlaceholder?: string;
+  companyPlaceholder?: string;
+  emailPlaceholder?: string;
+  projectPlaceholder?: string;
+  projectOptions?: Array<string>;
+  quantityPlaceholder?: string;
+  quantityOptions?: Array<string>;
+  messagePlaceholder?: string;
+  buttonText?: string;
+  footerImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  };
 };
 
 export type BetterProducts = {
@@ -515,8 +536,8 @@ export type Product = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   productCode?: string;
   shortDescription?: string;
   thumbnailImage?: {
@@ -531,7 +552,7 @@ export type Product = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  mainImage: {
+  mainImage?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -556,13 +577,13 @@ export type Product = {
     _type: "image";
     _key: string;
   }>;
-  productLine: {
+  productLine?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "productLine";
   };
-  productFamily: {
+  productFamily?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -633,7 +654,7 @@ export type Product = {
 
 export type Slug = {
   _type: "slug";
-  current: string;
+  current?: string;
   source?: string;
 };
 
@@ -643,8 +664,8 @@ export type ProductFamily = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -674,7 +695,7 @@ export type ProductFamily = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  productLine: {
+  productLine?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -726,9 +747,9 @@ export type FilterOption = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
-  filterType: "category" | "productType" | "genderFit" | "fabricDescription" | "construction" | "type" | "wire" | "padding" | "support" | "cupRange" | "fabric";
+  title?: string;
+  slug?: Slug;
+  filterType?: "category" | "productType" | "genderFit" | "fabricDescription" | "construction" | "type" | "wire" | "padding" | "support" | "cupRange" | "fabric";
   description?: string;
   sortOrder?: number;
   active?: boolean;
@@ -740,8 +761,8 @@ export type Catalogue = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -823,10 +844,10 @@ export type News = {
   _updatedAt: string;
   _rev: string;
   isNevNews?: boolean;
-  title: string;
-  slug: Slug;
-  thumbnail: CustomImage;
-  publishDate: string;
+  title?: string;
+  slug?: Slug;
+  thumbnail?: CustomImage;
+  publishDate?: string;
   pageBuilder?: Array<{
     _key: string;
   } & RichText | {
@@ -894,8 +915,8 @@ export type Page = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   blackBackground?: boolean;
   redirect?: string;
   pageBuilder?: Array<{
@@ -928,7 +949,9 @@ export type Page = {
     _key: string;
   } & PeopleProductsPlanet | {
     _key: string;
-  } & QualityProgress>;
+  } & QualityProgress | {
+    _key: string;
+  } & ClosingStatement>;
   seo?: SeoMetaFields;
 };
 
@@ -976,7 +999,7 @@ export type Settings = {
   _rev: string;
   logo?: CustomImage;
   copyrightText?: string;
-  title: string;
+  title?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -987,7 +1010,7 @@ export type Settings = {
     style?: "normal";
     listItem?: never;
     markDefs?: Array<{
-      href: string;
+      href?: string;
       _type: "link";
       _key: string;
     }>;
@@ -1144,8 +1167,8 @@ export type ProductLine = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -1243,8 +1266,8 @@ export type ProductBanner = {
 
 export type HreflangEntry = {
   _type: "hreflangEntry";
-  locale: string;
-  url: string;
+  locale?: string;
+  url?: string;
 };
 
 export type Twitter = {
@@ -1440,7 +1463,7 @@ export type SanityAssistOutputField = {
 
 export type SanityAssistInstructionContext = {
   _type: "sanity.assist.instruction.context";
-  reference: {
+  reference?: {
     _ref: string;
     _type: "reference";
     _weak?: boolean;
@@ -1473,7 +1496,7 @@ export type AssistInstructionContext = {
 
 export type SanityAssistInstructionUserInput = {
   _type: "sanity.assist.instruction.userInput";
-  message: string;
+  message?: string;
   description?: string;
 };
 
@@ -1546,9 +1569,9 @@ export type SanityImagePalette = {
 
 export type SanityImageDimensions = {
   _type: "sanity.imageDimensions";
-  height: number;
-  width: number;
-  aspectRatio: number;
+  height?: number;
+  width?: number;
+  aspectRatio?: number;
 };
 
 export type SanityImageMetadata = {
@@ -1634,7 +1657,7 @@ export type SettingsQueryResult = {
   _rev: string;
   logo?: CustomImage;
   copyrightText?: string;
-  title: string;
+  title?: string;
   description?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -1645,7 +1668,7 @@ export type SettingsQueryResult = {
     style?: "normal";
     listItem?: never;
     markDefs?: Array<{
-      href: string;
+      href?: string;
       _type: "link";
       _key: string;
     }>;
@@ -1678,7 +1701,7 @@ export type GetPageQueryResult = {
   _id: string;
   _type: "page";
   name: null;
-  slug: Slug;
+  slug: Slug | null;
   blackBackground: boolean | null;
   heading: null;
   subheading: null;
@@ -1758,18 +1781,23 @@ export type GetPageQueryResult = {
     categories: Array<{
       id?: string;
       categoryReference: {
-        title: string;
-        slug: string;
+        title: string | null;
+        slug: string | null;
       } | null;
       _key: string;
     }> | null;
+  } | {
+    _key: string;
+    _type: "closingStatement";
+    eyebrow?: string;
+    headline?: string;
+    paragraph?: string;
   } | {
     _key: string;
     _type: "contactForm";
     eyebrow?: string;
     headingLine1?: string;
     headingLine2?: string;
-    headingLine3?: string;
     description?: string;
     features: Array<{
       icon: string | null;
@@ -1777,6 +1805,28 @@ export type GetPageQueryResult = {
       _key: string;
     }> | null;
     bottomMicrocopy?: string;
+    namePlaceholder?: string;
+    companyPlaceholder?: string;
+    emailPlaceholder?: string;
+    projectPlaceholder?: string;
+    projectOptions?: Array<string>;
+    quantityPlaceholder?: string;
+    quantityOptions?: Array<string>;
+    messagePlaceholder?: string;
+    buttonText?: string;
+    footerImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      _type: "image";
+    };
   } | {
     _key: string;
     _type: "footerBlock";
@@ -2102,9 +2152,9 @@ export type GetNewsDetailQueryResult = {
   _id: string;
   _type: "news";
   name: null;
-  slug: Slug;
+  slug: Slug | null;
   blackBackground: null;
-  thumbnail: CustomImage;
+  thumbnail: CustomImage | null;
   seo: SeoMetaFields | null;
   pageBuilder: Array<{
     asset?: {
@@ -2133,8 +2183,8 @@ export type CatalogueQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -2153,32 +2203,32 @@ export type CatalogueQueryResult = {
     _type: "image";
   };
   productLines: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
     eyebrow: string | null;
     thumbnailImage: null;
     description: string | null;
     heroImage: string | null;
   }> | null;
   filterCategory: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterProductType: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterGenderFit: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterFabricDescription: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterConstruction: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   seo?: Seo;
 } | null;
@@ -2186,8 +2236,8 @@ export type CatalogueQueryResult = {
 // Query: *[_type == "productLine"] | order(title asc) {    _id,    title,    slug,    thumbnailImage,    eyebrow,    "heroImage": heroImage.asset->url  }
 export type AllProductLinesQueryResult = Array<{
   _id: string;
-  title: string;
-  slug: Slug;
+  title: string | null;
+  slug: Slug | null;
   thumbnailImage: null;
   eyebrow: string | null;
   heroImage: string | null;
@@ -2200,8 +2250,8 @@ export type ProductLineBySlugQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -2221,8 +2271,8 @@ export type ProductLineBySlugQueryResult = {
   };
   productFamilies: Array<{
     _id: string;
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
     thumbnailImage: {
       asset?: {
         _ref: string;
@@ -2240,24 +2290,24 @@ export type ProductLineBySlugQueryResult = {
     heroImage: string | null;
   }>;
   filterType: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterWire: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterPadding: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterSupport: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   filterFabric: Array<{
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   }> | null;
   seo?: Seo;
 } | null;
@@ -2269,8 +2319,8 @@ export type ProductFamilyBySlugQueryResult = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  title: string;
-  slug: Slug;
+  title?: string;
+  slug?: Slug;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -2301,33 +2351,33 @@ export type ProductFamilyBySlugQueryResult = {
     _type: "image";
   };
   productLine: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
     filterType: Array<{
-      title: string;
-      slug: Slug;
+      title: string | null;
+      slug: Slug | null;
     }> | null;
     filterWire: Array<{
-      title: string;
-      slug: Slug;
+      title: string | null;
+      slug: Slug | null;
     }> | null;
     filterPadding: Array<{
-      title: string;
-      slug: Slug;
+      title: string | null;
+      slug: Slug | null;
     }> | null;
     filterSupport: Array<{
-      title: string;
-      slug: Slug;
+      title: string | null;
+      slug: Slug | null;
     }> | null;
     filterFabric: Array<{
-      title: string;
-      slug: Slug;
+      title: string | null;
+      slug: Slug | null;
     }> | null;
-  };
+  } | null;
   products: Array<{
     _id: string;
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
     productCode: string | null;
     mainImage: string | null;
   }> | null;
@@ -2367,92 +2417,92 @@ export type ProductFamilyBySlugQueryResult = {
 // Query: *[_type == "product"     && productFamily->slug.current == $familySlug    && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    shortDescription,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug}  }
 export type ProductsByFamilyQueryResult = Array<{
   _id: string;
-  title: string;
-  slug: Slug;
+  title: string | null;
+  slug: Slug | null;
   thumbnailImage: string | null;
   productCode: string | null;
   shortDescription: string | null;
   mainImage: string | null;
   productFamily: {
-    slug: Slug;
-  };
+    slug: Slug | null;
+  } | null;
   productLine: {
-    slug: Slug;
-  };
+    slug: Slug | null;
+  } | null;
   category: null;
   productType: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   wire: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   padding: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   support: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
 }>;
 // Variable: productsByLineQuery
 // Query: *[_type == "product" && productLine->slug.current == $lineSlug] | order(title asc) {    _id,    title,    slug,    productCode,    shortDescription,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug}  }
 export type ProductsByLineQueryResult = Array<{
   _id: string;
-  title: string;
-  slug: Slug;
+  title: string | null;
+  slug: Slug | null;
   productCode: string | null;
   shortDescription: string | null;
   mainImage: string | null;
   productFamily: {
-    slug: Slug;
-  };
+    slug: Slug | null;
+  } | null;
   productLine: {
-    slug: Slug;
-  };
+    slug: Slug | null;
+  } | null;
   category: null;
   productType: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   wire: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   padding: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   support: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
 }>;
 // Variable: filteredProductsQuery
 // Query: *[_type == "product"     && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    wire->{title, slug},    support->{title, slug}  }
 export type FilteredProductsQueryResult = Array<{
   _id: string;
-  title: string;
-  slug: Slug;
+  title: string | null;
+  slug: Slug | null;
   thumbnailImage: string | null;
   productCode: string | null;
   mainImage: string | null;
   productFamily: {
-    slug: Slug;
-  };
+    slug: Slug | null;
+  } | null;
   productLine: {
-    slug: Slug;
-  };
+    slug: Slug | null;
+  } | null;
   category: null;
   wire: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
   support: {
-    title: string;
-    slug: Slug;
+    title: string | null;
+    slug: Slug | null;
   } | null;
 }>;
 // Variable: headerQuery
