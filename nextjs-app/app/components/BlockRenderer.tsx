@@ -9,7 +9,11 @@ import OurProcess from "@/app/components/OurProcess"
 import OurImpact from "@/app/components/OurImpact"
 import OurCommitment from "@/app/components/OurCommitment"
 import BetterProducts from "@/app/components/BetterProducts"
+import ProductBanner from "@/app/components/ProductBanner"
 import ContactForm from "@/app/components/ContactForm"
+import CategoryIndex from "./CategoryIndex";
+import OurStory from "./OurStory";
+import CategoryBlock from "./CategoryBlock";
 
 type BlocksType = {
   [key: string]: React.FC<any>;
@@ -36,7 +40,11 @@ const Blocks: BlocksType = {
   ourImpact: OurImpact,
   ourCommitment: OurCommitment,
   betterProducts: BetterProducts,
-  contactForm: ContactForm
+  productBanner: ProductBanner,
+  contactForm: ContactForm,
+  categoryIndex : CategoryIndex,
+  ourStory : OurStory,
+  categoryBlock : CategoryBlock
 };
 
 /**

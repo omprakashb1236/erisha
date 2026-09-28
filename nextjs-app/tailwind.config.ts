@@ -12,6 +12,10 @@ export default {
       boxShadow: {
         layer: "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
       },
+      screens: {
+        "2xl2": "1700px",
+        "3xl": "1920px",
+      },
       colors: {
         black: "#0d0e12",
         white: "#fff",

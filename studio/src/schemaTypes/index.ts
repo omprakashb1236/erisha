@@ -1,4 +1,8 @@
-﻿import news from './documents/news'
+﻿import { productBanner } from './objects/productBanner'
+import { categoryIndex } from './objects/categoryIndex'
+import { ourStory } from './objects/ourStory'
+import { categoryBlock } from './objects/categoryBlock'
+import news from './documents/news'
 import { page } from './documents/page'
 import { catalogue } from './documents/catalogue'
 import { productLine } from './documents/productLine'
@@ -36,6 +40,10 @@ import { contactForm } from './objects/contactForm'
 import { footerBlock } from './objects/footerBlock'
 
 export const schemaTypes = [
+  productBanner,
+  categoryIndex,
+  ourStory,
+  categoryBlock,
   // Singletons
   settings,
   homeHero,
@@ -75,4 +83,5 @@ export const schemaTypes = [
   iframe,
   seo,
 ]
+
 

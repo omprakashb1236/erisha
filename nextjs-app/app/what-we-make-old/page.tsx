@@ -41,7 +41,7 @@ export default async function Page() {
       <main className="w-full">
         <ProductBanner
           imageAlign="right"
-          imageInsideContainer={true}
+          imageInsideContainer={false}
           backgroundColor="#F9F2EA"
         />
         <CategoryIndex />

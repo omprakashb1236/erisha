@@ -13,19 +13,17 @@ const postFields = /* groq */ `
   "author": author->{firstName, lastName, picture},
 `;
 
-const linkReference = /* groq */ `
-  _type == "link" => {
-    "page": page->slug.current,
-    "post": post->slug.current,
-    "car": car->slug.current,
-  }
-`;
+
 
 const linkFields = /* groq */ `
   link {
       ...,
-      ${linkReference}
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
       }
+  }
 `;
 
 export const getPageQuery = defineQuery(`
@@ -42,155 +40,14 @@ export const getPageQuery = defineQuery(`
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {
-        ${linkFields},
-      },
-      _type == "carModelComponent" => {
-        carModels[]{
-          ...,
-          exploreLink {
-            text,
-            link -> {
-              _id,
-              title,
-              "slug": slug.current
-            },
-            externalLink{
-              type,
-              linkType,
-              openInNewTab,
-              href,
-              path,
-              "car": car->{
-                _id,
-                title,
-                "slug": slug.current
-              },
-              "page": page->{
-                _id,
-                title,
-                "slug": slug.current
-              }
-            }
-          },
-            getQuoteLink{
-              text,
-              quoteLink{
-                type,
-                linkType,
-                openInNewTab,
-                href,
-                path,
-                "car": car->{
-                  _id,
-                  title,
-                  "slug": slug.current
-                },
-                "page": page->{
-                  _id,
-                  title,
-                  "slug": slug.current
-                }
-              } 
-            },
-            testDriveLink{
-              text,
-              drivelink{
-                type,
-                linkType,
-                openInNewTab,
-                href,
-                path,
-                "car": car->{
-                  _id,
-                  title,
-                  "slug": slug.current
-                },
-                "page": page->{
-                  _id,
-                  title,
-                  "slug": slug.current
-                }
-              } 
-            }
-        }
-      },
-       _type == "contactFormSection" => {
-          ...,
-          form{
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-            }
-          }
-      },
-      _type == "optOutForm" => {
-          
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-            }
-      },
-      _type == "brochureDownloadFormSection" => {
-          ...,
-          form{
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-            }
-          }
-      },
-      _type == "requestQuoteForm" => {
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-            }
-      },
-      _type == "fleetContactFormSection" => {
-          ...,
-          form{
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-            }
-          }
-      },
-      _type == "serviceBookingForm" => {
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-          }
-      },
-      _type == "customerLookup" => {
-          ...,
-          form{
-          ...,
-          termsAndConditionLink -> {
-              _id,
-              title,
-              "slug": slug.current
-          }
-}
-      },      _type == "bannerCarousel" => {
-        slides[]{
-          ...,
-          link -> {
-              _id,
-              title,
-              "slug": slug.current
-            }
-        }
+        link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  },
       },
       _type == "homeHero" => {
         ...,
@@ -198,11 +55,25 @@ export const getPageQuery = defineQuery(`
         "thumbnailImage": thumbnailImage.asset->url,
         primaryCta {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         },
         secondaryCta {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "manufacturingPartnership" => {
@@ -210,7 +81,14 @@ export const getPageQuery = defineQuery(`
         "blueprintImage": blueprintImage.asset->url,
         buttonText {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "ourProcess" => {
@@ -225,7 +103,14 @@ export const getPageQuery = defineQuery(`
         },
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "ourImpact" => {
@@ -235,7 +120,14 @@ export const getPageQuery = defineQuery(`
         "brandLogos": brandLogos[].asset->url,
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "ourCommitment" => {
@@ -250,10 +142,57 @@ export const getPageQuery = defineQuery(`
         },
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
-      _type == "betterProducts" => {
+      _type == "productBanner" => {
+          ...,
+          "image": image.asset->url,
+          ctaButton {
+            ...,
+            link {
+              ...,
+              _type == "link" => {
+                "page": page->slug.current,
+                "post": post->slug.current,
+                "car": car->slug.current,
+              }
+            }
+          }
+        },
+        _type == "categoryBlock" => {
+          ...,
+          "image": image.asset->url,
+          ctaButton {
+            ...,
+            link {
+              ...,
+              _type == "link" => {
+                "page": page->slug.current,
+                "post": post->slug.current,
+                "car": car->slug.current,
+              }
+            }
+          }
+        },
+        _type == "categoryIndex" => {
+          ...,
+          categories[]{
+            ...,
+            categoryReference->{
+              title,
+              "slug": slug.current
+            }
+          }
+        },
+        _type == "betterProducts" => {
         ...,
         "rightImage": rightImage.asset->url,
         features[]{
@@ -262,7 +201,14 @@ export const getPageQuery = defineQuery(`
         },
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "contactForm" => {
@@ -278,14 +224,29 @@ export const getPageQuery = defineQuery(`
           ...,
           links[]{
             ...,
-            ${linkFields}
+            link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
           }
         },
         bottomLinks[]{
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
-      }      _type == "thankyouRichText" => {
+      },
+      _type == "thankyouRichText" => {
         ...,
         callToActionButton{
         ...,
@@ -299,7 +260,11 @@ export const getPageQuery = defineQuery(`
           ...,
           markDefs[]{
             ...,
-            ${linkReference}
+            _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
           }
         }
       },
@@ -316,11 +281,25 @@ export const getPageQuery = defineQuery(`
           ...,
           exploreButton {
             ...,
-          ${linkFields},
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  },
         },
         bookButton {
             ...,
-          ${linkFields},
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  },
         }
       },
       _type == "appointmentError" => {
@@ -363,7 +342,14 @@ export const getNewsDetailQuery = defineQuery(`
     "pageBuilder": pageBuilder[]{
       ...,
       _type == "callToAction" => {
-        ${linkFields},
+        link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  },
       },
       _type == "carModelComponent" => {
         carModels[]{
@@ -383,7 +369,11 @@ export const getNewsDetailQuery = defineQuery(`
           ...,
           markDefs[]{
             ...,
-            ${linkReference}
+            _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
           }
         }
       },
@@ -405,7 +395,14 @@ export const getHomePageQuery = () => {
         ...,
         _type == "callToAction" => {
           ...,
-          ${linkFields},
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  },
         },
         _type == "listCars" => {
         cars[]{
@@ -435,11 +432,25 @@ export const getHomePageQuery = () => {
         "thumbnailImage": thumbnailImage.asset->url,
         primaryCta {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         },
         secondaryCta {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "manufacturingPartnership" => {
@@ -447,7 +458,14 @@ export const getHomePageQuery = () => {
         "blueprintImage": blueprintImage.asset->url,
         buttonText {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "ourProcess" => {
@@ -462,7 +480,14 @@ export const getHomePageQuery = () => {
         },
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "ourImpact" => {
@@ -472,7 +497,14 @@ export const getHomePageQuery = () => {
         "brandLogos": brandLogos[].asset->url,
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "ourCommitment" => {
@@ -487,10 +519,21 @@ export const getHomePageQuery = () => {
         },
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
-      _type == "betterProducts" => {
+      _type == "productBanner" => {
+          ...,
+          "image": image.asset->url
+        },
+        _type == "betterProducts" => {
         ...,
         "rightImage": rightImage.asset->url,
         features[]{
@@ -499,7 +542,14 @@ export const getHomePageQuery = () => {
         },
         ctaButton {
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       },
       _type == "contactForm" => {
@@ -515,12 +565,26 @@ export const getHomePageQuery = () => {
           ...,
           links[]{
             ...,
-            ${linkFields}
+            link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
           }
         },
         bottomLinks[]{
           ...,
-          ${linkFields}
+          link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
         }
       }      },
     }
@@ -678,15 +742,36 @@ export const headerQuery = defineQuery(`*[_type == "fragment" && type == "Header
     "logoSubtext": logoSubtext.asset->url,
     primaryNavigationLeft[]{
       ...,
-      ${linkFields}
+      link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
     },
     primaryNavigationRight[]{
       ...,
-      ${linkFields}
+      link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
     },
     ctaButton {
       ...,
-      ${linkFields}
+      link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
     }
   }
 }`);
@@ -698,12 +783,26 @@ export const footerQuery = defineQuery(`*[_type == "fragment" && type == "Footer
       ...,
       links[]{
         ...,
-        ${linkFields}
+        link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
       }
     },
     bottomLinks[]{
       ...,
-      ${linkFields}
+      link {
+      ...,
+      _type == "link" => {
+        "page": page->slug.current,
+        "post": post->slug.current,
+        "car": car->slug.current,
+      }
+  }
     }
   }
 }`);

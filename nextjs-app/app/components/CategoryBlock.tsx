@@ -1,13 +1,13 @@
 import Image from "next/image";
-import type { ProductBanner } from "@/sanity.types";
-type ProductBannerProps = Partial<ProductBanner> & {
-  block?: ProductBanner;
+import type { CategoryBlock } from "@/sanity.types";
+type CategoryBlockProps = Partial<CategoryBlock> & {
+  block?: CategoryBlock;
   imageSrc?: string;
 };
 
 import Button from "./Button";
 
-export default function ProductBanner({
+export default function CategoryBlock({
   block,
   eyebrow: propEyebrow,
   headlineLine1: propHeadlineLine1,
@@ -18,7 +18,7 @@ export default function ProductBanner({
   imageInsideContainer: propImageInsideContainer,
   imageAlign: propImageAlign,
   backgroundColor: propBackgroundColor
-}: ProductBannerProps) {
+}: CategoryBlockProps) {
   const eyebrow = propEyebrow ?? block?.eyebrow ?? "SUSTAINABILITY";
   const headlineLine1 = propHeadlineLine1 ?? block?.headlineLine1 ?? "Better products.";
   const headlineLine2 = propHeadlineLine2 ?? block?.headlineLine2 ?? "A brighter tomorrow.";
@@ -34,7 +34,7 @@ export default function ProductBanner({
 
   return (
     <section
-      className="w-full relative overflow-hidden pt-[80px] lg:pt-[245px] pb-[80px] lg:pb-[150px] min-h-[950px]"
+      className="w-full relative overflow-hidden pt-[70px] pb-[80px] min-h-[560px]"
       style={{ backgroundColor }}
     >
       <div className="w-full container relative z-10 flex flex-col lg:flex-row">
@@ -47,30 +47,30 @@ export default function ProductBanner({
           </p>
           <div className="w-[44px] h-px bg-[#b86e58] mb-[28px]" />
 
-          <h2 className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1]' : 'text-[#1b2845]'} font-playfair  text-4xl lg:text-[67px] leading-[1.1] lg:leading-[70px] mb-[25px]`}>
+          <h2 className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1]' : 'text-[#1b2845]'} font-playfair  text-4xl lg:text-[53px] leading-[1.1] lg:leading-[58px] mb-[25px]`}>
             {headlineLine1 && <span className="block">{headlineLine1}</span>}
             {headlineLine2 && <span className="block">{headlineLine2}</span>}
           </h2>
-{subhead && 
-          <p className="font-playfair font-extrabold italic text-[#b86e58] text-[24px] lg:text-[33px] leading-[1.3] lg:leading-[42px] mb-[14px] lg:max-w-[610px]">
-            {subhead}
-          </p>}
+          {subhead &&
+            <p className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1]' : 'text-[#b86e58]'} font-playfair font-extrabold italic text-[24px] lg:text-[33px] leading-[1.3] lg:leading-[42px] mb-[14px] lg:max-w-[610px]`}>
+              {subhead}
+            </p>}
 
-          <p className="text-[#4a505e] text-[14px] lg:text-[15.5px] leading-[1.6] lg:leading-[26px] mb-[50px] lg:max-w-[585px]">
+          <p className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1C7]' : 'text-[#4a505e]'} text-[14px] lg:text-[15.5px] leading-[1.6] lg:leading-[26px] lg:mb-[60px] mb-[50px] lg:max-w-[585px]`}>
             {paragraph}
           </p>
 
           {block?.captionItem?.map((item) => (
             <div
               key={item._key}
-              className="text-[#1b2845] mb-[40px] text-[9.5px] font-medium tracking-[2.1px] leading-[16px] uppercase whitespace-pre-wrap lg:max-w-[640px]"
+              className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1C7]' : 'text-[#1b2845]'}  mb-[40px] text-[9.5px] font-medium tracking-[2.1px] leading-[16px] uppercase whitespace-pre-wrap lg:max-w-[640px]`}
             >
               {item.title && <p>{item.title}</p>}
               {item.text && <p>{item.text}</p>}
             </div>
           ))}
 
-          {ctaButton && (
+          {ctaButton && ctaButton?.buttonText && (
             <div>
               <Button
                 href={ctaButton.link?.linkType === 'page' && (ctaButton.link?.page?.slug || (typeof ctaButton.link?.page === 'string' && ctaButton.link?.page))
@@ -79,7 +79,7 @@ export default function ProductBanner({
                 className="w-full max-w-[190px] h-[48px] rounded-[24px]"
                 icon={<span className="text-[18px]">→</span>}
               >
-                {ctaButton.buttonText || "Explore Capabilities"}
+                {ctaButton.buttonText || ""}
               </Button>
             </div>
           )}
@@ -89,7 +89,7 @@ export default function ProductBanner({
         {/* We use an absolute div to place the image under/beside the text. 
             If it bleeds out (imageInsideContainer=false), it stretches 100vw but is cropped by the section's overflow-hidden. */}
         <div
-          className={`hidden lg:block absolute top-[-55px] h-[650px] z-10 ${imageAlign === "right"
+          className={`hidden lg:block absolute top-[-10px] h-[520px] z-10 ${imageAlign === "right"
             ? (imageInsideContainer ? 'left-[800px] w-[550px]' : 'left-[800px] xl:w-[45%] 2xl2:w-[60%] 3xl:w-[70%] w-[50%]')
             : (imageInsideContainer ? 'left-[0px] w-[550px]' : 'right-[800px] w-[70%]')
             }`}

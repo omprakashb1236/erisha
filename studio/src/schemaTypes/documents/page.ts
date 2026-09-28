@@ -60,8 +60,12 @@ export const page = defineType({
         { type: 'ourImpact' },
         { type: 'ourCommitment' },
         { type: 'betterProducts' },
+          { type: 'productBanner' },
+          { type: 'categoryIndex' },
           { type: 'contactForm' },
           { type: 'footerBlock' },
+          {type : 'ourStory'},
+          {type : 'categoryBlock'},
       ],
 
       options: {
@@ -97,4 +101,5 @@ export const page = defineType({
     },
   },
 });
+
 
