@@ -43,16 +43,32 @@ export default async function ProductLinePage({
 
   // Extract active filter state from URL Search Params
   const categorySlug = typeof resolvedSearchParams.category === "string" ? resolvedSearchParams.category : undefined;
+  const typeSlug = typeof resolvedSearchParams.type === "string" ? resolvedSearchParams.type : undefined;
   const wireSlug = typeof resolvedSearchParams.wire === "string" ? resolvedSearchParams.wire : undefined;
+  const paddingSlug = typeof resolvedSearchParams.padding === "string" ? resolvedSearchParams.padding : undefined;
   const supportSlug = typeof resolvedSearchParams.support === "string" ? resolvedSearchParams.support : undefined;
+  const fabricSlug = typeof resolvedSearchParams.fabric === "string" ? resolvedSearchParams.fabric : undefined;
+
+  // Filter product families based on search params
+  const filteredFamilies = (productLine.productFamilies || []).filter((family: any) => {
+    if (typeSlug && family.productType?.slug?.current !== typeSlug) return false;
+    if (wireSlug && family.wire?.slug?.current !== wireSlug) return false;
+    if (paddingSlug && family.padding?.slug?.current !== paddingSlug) return false;
+    if (supportSlug && family.support?.slug?.current !== supportSlug) return false;
+    if (fabricSlug && family.fabric?.slug?.current !== fabricSlug) return false;
+    return true;
+  });
 
   // Query products matching these filters (you'll need to expand filteredProductsQuery if adding more filters)
   const filteredProducts = await sanityFetchCustom({
     query: filteredProductsQuery,
     params: {
       categorySlug: categorySlug || null,
+      typeSlug: typeSlug || null,
       wireSlug: wireSlug || null,
+      paddingSlug: paddingSlug || null,
       supportSlug: supportSlug || null,
+      fabricSlug: fabricSlug || null,
     },
     tags: ["product"]
   });
@@ -68,6 +84,9 @@ export default async function ProductLinePage({
   if (productLine.filterSupport?.length) {
     filterGroups.push({ label: "Support", paramName: "support", options: productLine.filterSupport });
   }
+  if (productLine.filterPadding?.length) {
+      filterGroups.push({ label: "Padding", paramName: "padding", options: productLine.filterPadding });
+    }
 
   return (
     <>
@@ -129,9 +148,9 @@ export default async function ProductLinePage({
             </p>
             <div className="w-full h-px bg-[#d2bfaf]/50 mb-[40px] lg:mb-[50px]" />
 
-            {productLine.productFamilies && productLine.productFamilies.length > 0 ? (
+            {filteredFamilies && filteredFamilies.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[40px] lg:gap-y-[60px]">
-                {productLine.productFamilies.map((family: any) => (
+                {filteredFamilies.map((family: any) => (
                   <ProductFamilyCard
                     key={family._id || family.slug?.current}
                     family={family}

@@ -90,14 +90,14 @@ export const productFamily = defineType({
       group: 'relationships',
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
+    /*defineField({
       name: 'products',
       title: 'Products',
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'product' }] }],
       group: 'relationships',
       description: 'The individual products belonging to this family.',
-    }),
+    }),*/
     // Product Family Attributes (Actual values for the products in this family)
     defineField({
       name: 'attrWire',

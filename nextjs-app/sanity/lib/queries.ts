@@ -1,4 +1,4 @@
-﻿import { defineQuery, groq } from "next-sanity";
+import { defineQuery, groq } from "next-sanity";
 
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
@@ -749,11 +749,12 @@ export const productLineBySlugQuery = defineQuery(`
       thumbnailImage,
       eyebrow,
       description,
-      "wire": attrWire->{title},
-      "padding": attrPadding->{title},
-      "support": attrSupport->{title},
-      "cupRange": attrCupRange->{title},
-      "fabric": attrFabric->{title},
+      "productType": attrType->{title, slug},
+      "wire": attrWire->{title, slug},
+      "padding": attrPadding->{title, slug},
+      "support": attrSupport->{title, slug},
+      "cupRange": attrCupRange->{title, slug},
+      "fabric": attrFabric->{title, slug},
       "heroImage": heroImage.asset->url
     },
     "filterType": filterType[]->{title, slug},
@@ -798,8 +799,11 @@ export const productsByFamilyQuery = defineQuery(`
   *[_type == "product" 
     && productFamily->slug.current == $familySlug
     && (!defined($categorySlug) || category->slug.current == $categorySlug)
+    && (!defined($typeSlug) || productType->slug.current == $typeSlug)
     && (!defined($wireSlug) || wire->slug.current == $wireSlug)
+    && (!defined($paddingSlug) || padding->slug.current == $paddingSlug)
     && (!defined($supportSlug) || support->slug.current == $supportSlug)
+    && (!defined($fabricSlug) || fabric->slug.current == $fabricSlug)
   ] | order(title asc) {
     _id,
     title,
@@ -812,7 +816,8 @@ export const productsByFamilyQuery = defineQuery(`
     productType->{title, slug},
     wire->{title, slug},
     padding->{title, slug},
-    support->{title, slug}
+    support->{title, slug},
+    fabric->{title, slug}
   }
 `)
 
@@ -837,8 +842,11 @@ export const productsByLineQuery = defineQuery(`
 export const filteredProductsQuery = defineQuery(`
   *[_type == "product" 
     && (!defined($categorySlug) || category->slug.current == $categorySlug)
+    && (!defined($typeSlug) || productType->slug.current == $typeSlug)
     && (!defined($wireSlug) || wire->slug.current == $wireSlug)
+    && (!defined($paddingSlug) || padding->slug.current == $paddingSlug)
     && (!defined($supportSlug) || support->slug.current == $supportSlug)
+    && (!defined($fabricSlug) || fabric->slug.current == $fabricSlug)
   ] | order(title asc) {
     _id,
     title,
@@ -847,8 +855,11 @@ export const filteredProductsQuery = defineQuery(`
     productCode,
     "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},
     category->{title, slug},
+    productType->{title, slug},
     wire->{title, slug},
-    support->{title, slug}
+    padding->{title, slug},
+    support->{title, slug},
+    fabric->{title, slug}
   }
 `)
 

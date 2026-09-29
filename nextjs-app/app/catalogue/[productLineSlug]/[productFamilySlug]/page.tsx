@@ -31,8 +31,11 @@ export default async function ProductFamilyPage({
 
   // Extract active filter state from URL Search Params
   const categorySlug = typeof resolvedSearchParams.category === "string" ? resolvedSearchParams.category : undefined;
+  const typeSlug = typeof resolvedSearchParams.type === "string" ? resolvedSearchParams.type : undefined;
   const wireSlug = typeof resolvedSearchParams.wire === "string" ? resolvedSearchParams.wire : undefined;
+  const paddingSlug = typeof resolvedSearchParams.padding === "string" ? resolvedSearchParams.padding : undefined;
   const supportSlug = typeof resolvedSearchParams.support === "string" ? resolvedSearchParams.support : undefined;
+  const fabricSlug = typeof resolvedSearchParams.fabric === "string" ? resolvedSearchParams.fabric : undefined;
 
   // Fetch Products explicitly in this family with filters applied
   const products = await sanityFetchCustom({
@@ -40,8 +43,11 @@ export default async function ProductFamilyPage({
     params: {
       familySlug: productFamilySlug,
       categorySlug: categorySlug || null,
+      typeSlug: typeSlug || null,
       wireSlug: wireSlug || null,
+      paddingSlug: paddingSlug || null,
       supportSlug: supportSlug || null,
+      fabricSlug: fabricSlug || null,
     },
     tags: ["product"]
   });
@@ -68,6 +74,9 @@ export default async function ProductFamilyPage({
     }
     if (parentLine.filterSupport?.length) {
       filterGroups.push({ label: "Support", paramName: "support", options: parentLine.filterSupport });
+    }
+    if (parentLine.filterPadding?.length) {
+      filterGroups.push({ label: "Padding", paramName: "padding", options: parentLine.filterPadding });
     }
   }
 
