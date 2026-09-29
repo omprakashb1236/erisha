@@ -745,6 +745,7 @@ export const productLineBySlugQuery = defineQuery(`
       _id,
       title,
       slug,
+      productCode,
       thumbnailImage,
       eyebrow,
       description,

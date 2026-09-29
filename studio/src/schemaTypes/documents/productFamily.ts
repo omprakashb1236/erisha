@@ -29,6 +29,12 @@ export const productFamily = defineType({
       group: 'general',
       validation: (Rule) => Rule.required(),
     }),
+     defineField({
+      name: 'productCode',
+      title: 'Product Family / SKU',
+      type: 'string',
+      group: 'general',
+    }),
     defineField({
       name: 'eyebrow',
       title: 'Eyebrow',
