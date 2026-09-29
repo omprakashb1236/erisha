@@ -530,6 +530,96 @@ export type ManufacturingPartnership = {
   blueprintMicrocopy?: Array<string>;
 };
 
+export type PrivateLabel = {
+  _type: "privateLabel";
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  eyebrow?: string;
+  headingLine1?: string;
+  quote?: string;
+  description?: string;
+  capabilities?: Array<{
+    title?: string;
+    description?: string;
+    _key: string;
+  }>;
+};
+
+export type BuiltAroundYourBrand = {
+  _type: "builtAroundYourBrand";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  description?: string;
+  features?: Array<{
+    title?: string;
+    description?: string;
+    _key: string;
+  }>;
+  bottomCaption?: string;
+};
+
+export type CoreCapabilities = {
+  _type: "coreCapabilities";
+  eyebrow?: string;
+  heading?: string;
+  description?: string;
+  quote?: string;
+  capabilities?: Array<{
+    number?: string;
+    title?: string;
+    description?: string;
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    _key: string;
+  }>;
+};
+
+export type WhatWeMake = {
+  _type: "whatWeMake";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  description?: string;
+  cta?: CallToAction;
+  productLinesCategories?: Array<{
+    productLine?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "productLine";
+    };
+    productFamilies?: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "productFamily";
+    }>;
+    _key: string;
+  }>;
+};
+
 export type Product = {
   _id: string;
   _type: "product";
@@ -951,7 +1041,15 @@ export type Page = {
     _key: string;
   } & QualityProgress | {
     _key: string;
-  } & ClosingStatement>;
+  } & ClosingStatement | {
+    _key: string;
+  } & WhatWeMake | {
+    _key: string;
+  } & CoreCapabilities | {
+    _key: string;
+  } & BuiltAroundYourBrand | {
+    _key: string;
+  } & PrivateLabel>;
   seo?: SeoMetaFields;
 };
 
@@ -1644,7 +1742,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Seo | Iframe | NewsList | ImageComponent | SanityImageCrop | SanityImageHotspot | RichText | Navigation | NavItem | Link | SideKickSection | Footer | Header | BlockContent | LinkItem | LinkList | CustomImage | CallToAction | FooterBlock | ContactForm | BetterProducts | OurCommitment | OurImpact | OurProcess | ManufacturingPartnership | Product | Slug | ProductFamily | FilterOption | Catalogue | Fragment | News | SeoMetaFields | Page | HomeHero | Settings | CategoryBlock | ClosingStatement | QualityProgress | PeopleProductsPlanet | JourneyOverview | OurStory | CategoryIndex | ProductLine | ProductBanner | HreflangEntry | Twitter | OpenGraph | MetaTag | MetaAttribute | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Seo | Iframe | NewsList | ImageComponent | SanityImageCrop | SanityImageHotspot | RichText | Navigation | NavItem | Link | SideKickSection | Footer | Header | BlockContent | LinkItem | LinkList | CustomImage | CallToAction | FooterBlock | ContactForm | BetterProducts | OurCommitment | OurImpact | OurProcess | ManufacturingPartnership | PrivateLabel | BuiltAroundYourBrand | CoreCapabilities | WhatWeMake | Product | Slug | ProductFamily | FilterOption | Catalogue | Fragment | News | SeoMetaFields | Page | HomeHero | Settings | CategoryBlock | ClosingStatement | QualityProgress | PeopleProductsPlanet | JourneyOverview | OurStory | CategoryIndex | ProductLine | ProductBanner | HreflangEntry | Twitter | OpenGraph | MetaTag | MetaAttribute | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -1696,7 +1794,7 @@ export type SettingsQueryResult = {
   youtubeLink?: string;
 } | null;
 // Variable: getPageQuery
-// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    blackBackground,    heading,    subheading,    seo,    redirect,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  },      },      _type == "homeHero" => {        ...,        "backgroundImage": backgroundImage.asset->url,        "thumbnailImage": thumbnailImage.asset->url,        primaryCta {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        },        secondaryCta {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "manufacturingPartnership" => {        ...,        "blueprintImage": blueprintImage.asset->url,        buttonText {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "ourProcess" => {        ...,        processSteps[]{          ...,          "img": img.asset->url        },        footerValues[]{          ...,          "icon": icon.asset->url        },        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "ourImpact" => {        ...,        "mapImage": mapImage.asset->url,        "rightImage": rightImage.asset->url,        "brandLogos": brandLogos[].asset->url,        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "ourCommitment" => {        ...,        features[]{          ...,          "icon": icon.asset->url        },        gallery[]{          ...,          "image": image.asset->url        },        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "productBanner" => {          ...,          "image": image.asset->url,          ctaButton {            ...,            link {              ...,              _type == "link" => {                "page": page->slug.current,                "post": post->slug.current,                "car": car->slug.current,              }            }          }        },        _type == "categoryBlock" => {          ...,          "image": image.asset->url,          ctaButton {            ...,            link {              ...,              _type == "link" => {                "page": page->slug.current,                "post": post->slug.current,                "car": car->slug.current,              }            }          }        },        _type == "categoryIndex" => {          ...,          categories[]{            ...,            categoryReference->{              title,              "slug": slug.current            }          }        },        _type == "qualityProgress" => {          ...,          photos[]{            ...,            "image": image.asset->url          }        },        _type == "betterProducts" => {        ...,        "rightImage": rightImage.asset->url,        features[]{          ...,          "icon": icon.asset->url        },        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "contactForm" => {        ...,        features[]{          ...,          "icon": icon.asset->url        }      },      _type == "footerBlock" => {        ...,        linkColumns[]{          ...,          links[]{            ...,            link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }          }        },        bottomLinks[]{          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "thankyouRichText" => {        ...,        callToActionButton{        ...,        link { _type, linkType, openInNewTab, href, path, "page": page->{ _id, title, "slug": slug.current } },         }      },            _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }          }        }      },      _type == "heroVideoComponent" => {        video {          asset-> {            playbackId,            assetId,            filename          }        }      },      _type == "appointmentBooked" => {          ...,          exploreButton {            ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  },        },        bookButton {            ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  },        }      },      _type == "appointmentError" => {          ...,          tryAgainLink -> {              _id,              title,              "slug": slug.current            }      },      _type == "customerDetails" => {          ...,          restartButtonLink -> {              _id,              title,              "slug": slug.current            }      },      _type == "imagesAndVideosSection" => {        ...,        modelGalleryList[]{          ...,        }      }    }  }
+// Query: *[_type == 'page' && slug.current == $slug][0]{    _id,    _type,    name,    slug,    blackBackground,    heading,    subheading,    seo,    redirect,    "pageBuilder": pageBuilder[]{      ...,      _type == "callToAction" => {        link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  },      },      _type == "coreCapabilities" => {        ...,        capabilities[]{          ...,          "image": image.asset->url        }      },      _type == "privateLabel" => {        ...,        "image": image.asset->url      },      _type == "whatWeMake" => {        ...,        cta {          ...,          link {            ...,            _type == "link" => {              "page": page->slug.current,              "post": post->slug.current,              "car": car->slug.current            }          }        },        productLinesCategories[]{          ...,          productLine->{            title,            eyebrow,            mainHeading,            subtitle,            description,            bottomTags,            "heroImage": heroImage.asset->url          },          productFamilies[]->{            title,            eyebrow,            mainHeading,            subtitle,            description,            bottomTags,            "slug": slug.current,            "productLineSlug": productLine->slug.current,            "thumbnailImage": thumbnailImage.asset->url,            "heroImage": heroImage.asset->url          }        }      },      _type == "homeHero" => {        ...,        "backgroundImage": backgroundImage.asset->url,        "thumbnailImage": thumbnailImage.asset->url,        primaryCta {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        },        secondaryCta {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "manufacturingPartnership" => {        ...,        "blueprintImage": blueprintImage.asset->url,        buttonText {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "ourProcess" => {        ...,        processSteps[]{          ...,          "img": img.asset->url        },        footerValues[]{          ...,          "icon": icon.asset->url        },        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "ourImpact" => {        ...,        "mapImage": mapImage.asset->url,        "rightImage": rightImage.asset->url,        "brandLogos": brandLogos[].asset->url,        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "ourCommitment" => {        ...,        features[]{          ...,          "icon": icon.asset->url        },        gallery[]{          ...,          "image": image.asset->url        },        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "productBanner" => {          ...,          "image": image.asset->url,          ctaButton {            ...,            link {              ...,              _type == "link" => {                "page": page->slug.current,                "post": post->slug.current,                "car": car->slug.current,              }            }          }        },        _type == "categoryBlock" => {          ...,          "image": image.asset->url,          ctaButton {            ...,            link {              ...,              _type == "link" => {                "page": page->slug.current,                "post": post->slug.current,                "car": car->slug.current,              }            }          }        },        _type == "categoryIndex" => {          ...,          categories[]{            ...,            categoryReference->{              title,              "slug": slug.current            }          }        },        _type == "qualityProgress" => {          ...,          photos[]{            ...,            "image": image.asset->url          }        },        _type == "betterProducts" => {        ...,        "rightImage": rightImage.asset->url,        features[]{          ...,          "icon": icon.asset->url        },        ctaButton {          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "contactForm" => {        ...,        features[]{          ...,          "icon": icon.asset->url        }      },      _type == "footerBlock" => {        ...,        linkColumns[]{          ...,          links[]{            ...,            link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }          }        },        bottomLinks[]{          ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  }        }      },      _type == "thankyouRichText" => {        ...,        callToActionButton{        ...,        link { _type, linkType, openInNewTab, href, path, "page": page->{ _id, title, "slug": slug.current } },         }      },            _type == "infoSection" => {        content[]{          ...,          markDefs[]{            ...,            _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }          }        }      },      _type == "heroVideoComponent" => {        video {          asset-> {            playbackId,            assetId,            filename          }        }      },      _type == "appointmentBooked" => {          ...,          exploreButton {            ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  },        },        bookButton {            ...,          link {      ...,      _type == "link" => {        "page": page->slug.current,        "post": post->slug.current,        "car": car->slug.current,      }  },        }      },      _type == "appointmentError" => {          ...,          tryAgainLink -> {              _id,              title,              "slug": slug.current            }      },      _type == "customerDetails" => {          ...,          restartButtonLink -> {              _id,              title,              "slug": slug.current            }      },      _type == "imagesAndVideosSection" => {        ...,        modelGalleryList[]{          ...,        }      }    }  }
 export type GetPageQueryResult = {
   _id: string;
   _type: "page";
@@ -1740,6 +1838,19 @@ export type GetPageQueryResult = {
     footerBannerSubtitle?: string;
     footerBannerCenterMicrocopy?: Array<string>;
     footerBannerRightMicrocopy?: Array<string>;
+  } | {
+    _key: string;
+    _type: "builtAroundYourBrand";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    description?: string;
+    features?: Array<{
+      title?: string;
+      description?: string;
+      _key: string;
+    }>;
+    bottomCaption?: string;
   } | {
     _key: string;
     _type: "categoryBlock";
@@ -1827,6 +1938,20 @@ export type GetPageQueryResult = {
       alt?: string;
       _type: "image";
     };
+  } | {
+    _key: string;
+    _type: "coreCapabilities";
+    eyebrow?: string;
+    heading?: string;
+    description?: string;
+    quote?: string;
+    capabilities: Array<{
+      number?: string;
+      title?: string;
+      description?: string;
+      image: string | null;
+      _key: string;
+    }> | null;
   } | {
     _key: string;
     _type: "footerBlock";
@@ -2093,6 +2218,19 @@ export type GetPageQueryResult = {
     quote?: string;
   } | {
     _key: string;
+    _type: "privateLabel";
+    image: string | null;
+    eyebrow?: string;
+    headingLine1?: string;
+    quote?: string;
+    description?: string;
+    capabilities?: Array<{
+      title?: string;
+      description?: string;
+      _key: string;
+    }>;
+  } | {
+    _key: string;
     _type: "productBanner";
     eyebrow?: string;
     headlineLine1?: string;
@@ -2142,6 +2280,51 @@ export type GetPageQueryResult = {
     photos: Array<{
       image: string | null;
       caption?: string;
+      _key: string;
+    }> | null;
+  } | {
+    _key: string;
+    _type: "whatWeMake";
+    eyebrow?: string;
+    headingLine1?: string;
+    headingLine2?: string;
+    description?: string;
+    cta: {
+      _type: "callToAction";
+      buttonText?: string;
+      link: {
+        _type: "link";
+        linkType?: "href" | "page" | "path";
+        href?: string;
+        page: string | null;
+        path?: string;
+        openInNewTab?: boolean;
+        post: null;
+        car: null;
+      } | null;
+    } | null;
+    productLinesCategories: Array<{
+      productLine: {
+        title: string | null;
+        eyebrow: string | null;
+        mainHeading: string | null;
+        subtitle: string | null;
+        description: string | null;
+        bottomTags: string | null;
+        heroImage: string | null;
+      } | null;
+      productFamilies: Array<{
+        title: string | null;
+        eyebrow: string | null;
+        mainHeading: string | null;
+        subtitle: string | null;
+        description: string | null;
+        bottomTags: string | null;
+        slug: string | null;
+        productLineSlug: string | null;
+        thumbnailImage: string | null;
+        heroImage: string | null;
+      }> | null;
       _key: string;
     }> | null;
   }> | null;
@@ -2613,7 +2796,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"settings\"][0]": SettingsQueryResult;
-    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    blackBackground,\n    heading,\n    subheading,\n    seo,\n    redirect,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n      },\n      _type == \"homeHero\" => {\n        ...,\n        \"backgroundImage\": backgroundImage.asset->url,\n        \"thumbnailImage\": thumbnailImage.asset->url,\n        primaryCta {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        },\n        secondaryCta {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"manufacturingPartnership\" => {\n        ...,\n        \"blueprintImage\": blueprintImage.asset->url,\n        buttonText {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourProcess\" => {\n        ...,\n        processSteps[]{\n          ...,\n          \"img\": img.asset->url\n        },\n        footerValues[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourImpact\" => {\n        ...,\n        \"mapImage\": mapImage.asset->url,\n        \"rightImage\": rightImage.asset->url,\n        \"brandLogos\": brandLogos[].asset->url,\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourCommitment\" => {\n        ...,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        gallery[]{\n          ...,\n          \"image\": image.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"productBanner\" => {\n          ...,\n          \"image\": image.asset->url,\n          ctaButton {\n            ...,\n            link {\n              ...,\n              _type == \"link\" => {\n                \"page\": page->slug.current,\n                \"post\": post->slug.current,\n                \"car\": car->slug.current,\n              }\n            }\n          }\n        },\n        _type == \"categoryBlock\" => {\n          ...,\n          \"image\": image.asset->url,\n          ctaButton {\n            ...,\n            link {\n              ...,\n              _type == \"link\" => {\n                \"page\": page->slug.current,\n                \"post\": post->slug.current,\n                \"car\": car->slug.current,\n              }\n            }\n          }\n        },\n        _type == \"categoryIndex\" => {\n          ...,\n          categories[]{\n            ...,\n            categoryReference->{\n              title,\n              \"slug\": slug.current\n            }\n          }\n        },\n        _type == \"qualityProgress\" => {\n          ...,\n          photos[]{\n            ...,\n            \"image\": image.asset->url\n          }\n        },\n        _type == \"betterProducts\" => {\n        ...,\n        \"rightImage\": rightImage.asset->url,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"contactForm\" => {\n        ...,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        }\n      },\n      _type == \"footerBlock\" => {\n        ...,\n        linkColumns[]{\n          ...,\n          links[]{\n            ...,\n            link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n          }\n        },\n        bottomLinks[]{\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"thankyouRichText\" => {\n        ...,\n        callToActionButton{\n        ...,\n        link { _type, linkType, openInNewTab, href, path, \"page\": page->{ _id, title, \"slug\": slug.current } },\n         }\n      },\n\n      \n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n          }\n        }\n      },\n      _type == \"heroVideoComponent\" => {\n        video {\n          asset-> {\n            playbackId,\n            assetId,\n            filename\n          }\n        }\n      },\n      _type == \"appointmentBooked\" => {\n          ...,\n          exploreButton {\n            ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n        },\n        bookButton {\n            ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n        }\n      },\n      _type == \"appointmentError\" => {\n          ...,\n          tryAgainLink -> {\n              _id,\n              title,\n              \"slug\": slug.current\n            }\n      },\n      _type == \"customerDetails\" => {\n          ...,\n          restartButtonLink -> {\n              _id,\n              title,\n              \"slug\": slug.current\n            }\n      },\n      _type == \"imagesAndVideosSection\" => {\n        ...,\n        modelGalleryList[]{\n          ...,\n        }\n      }\n    }\n  }\n": GetPageQueryResult;
+    "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    blackBackground,\n    heading,\n    subheading,\n    seo,\n    redirect,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n      },\n      _type == \"coreCapabilities\" => {\n        ...,\n        capabilities[]{\n          ...,\n          \"image\": image.asset->url\n        }\n      },\n      _type == \"privateLabel\" => {\n        ...,\n        \"image\": image.asset->url\n      },\n      _type == \"whatWeMake\" => {\n        ...,\n        cta {\n          ...,\n          link {\n            ...,\n            _type == \"link\" => {\n              \"page\": page->slug.current,\n              \"post\": post->slug.current,\n              \"car\": car->slug.current\n            }\n          }\n        },\n        productLinesCategories[]{\n          ...,\n          productLine->{\n            title,\n            eyebrow,\n            mainHeading,\n            subtitle,\n            description,\n            bottomTags,\n            \"heroImage\": heroImage.asset->url\n          },\n          productFamilies[]->{\n            title,\n            eyebrow,\n            mainHeading,\n            subtitle,\n            description,\n            bottomTags,\n            \"slug\": slug.current,\n            \"productLineSlug\": productLine->slug.current,\n            \"thumbnailImage\": thumbnailImage.asset->url,\n            \"heroImage\": heroImage.asset->url\n          }\n        }\n      },\n      _type == \"homeHero\" => {\n        ...,\n        \"backgroundImage\": backgroundImage.asset->url,\n        \"thumbnailImage\": thumbnailImage.asset->url,\n        primaryCta {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        },\n        secondaryCta {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"manufacturingPartnership\" => {\n        ...,\n        \"blueprintImage\": blueprintImage.asset->url,\n        buttonText {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourProcess\" => {\n        ...,\n        processSteps[]{\n          ...,\n          \"img\": img.asset->url\n        },\n        footerValues[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourImpact\" => {\n        ...,\n        \"mapImage\": mapImage.asset->url,\n        \"rightImage\": rightImage.asset->url,\n        \"brandLogos\": brandLogos[].asset->url,\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourCommitment\" => {\n        ...,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        gallery[]{\n          ...,\n          \"image\": image.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"productBanner\" => {\n          ...,\n          \"image\": image.asset->url,\n          ctaButton {\n            ...,\n            link {\n              ...,\n              _type == \"link\" => {\n                \"page\": page->slug.current,\n                \"post\": post->slug.current,\n                \"car\": car->slug.current,\n              }\n            }\n          }\n        },\n        _type == \"categoryBlock\" => {\n          ...,\n          \"image\": image.asset->url,\n          ctaButton {\n            ...,\n            link {\n              ...,\n              _type == \"link\" => {\n                \"page\": page->slug.current,\n                \"post\": post->slug.current,\n                \"car\": car->slug.current,\n              }\n            }\n          }\n        },\n        _type == \"categoryIndex\" => {\n          ...,\n          categories[]{\n            ...,\n            categoryReference->{\n              title,\n              \"slug\": slug.current\n            }\n          }\n        },\n        _type == \"qualityProgress\" => {\n          ...,\n          photos[]{\n            ...,\n            \"image\": image.asset->url\n          }\n        },\n        _type == \"betterProducts\" => {\n        ...,\n        \"rightImage\": rightImage.asset->url,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"contactForm\" => {\n        ...,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        }\n      },\n      _type == \"footerBlock\" => {\n        ...,\n        linkColumns[]{\n          ...,\n          links[]{\n            ...,\n            link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n          }\n        },\n        bottomLinks[]{\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"thankyouRichText\" => {\n        ...,\n        callToActionButton{\n        ...,\n        link { _type, linkType, openInNewTab, href, path, \"page\": page->{ _id, title, \"slug\": slug.current } },\n         }\n      },\n\n      \n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n          }\n        }\n      },\n      _type == \"heroVideoComponent\" => {\n        video {\n          asset-> {\n            playbackId,\n            assetId,\n            filename\n          }\n        }\n      },\n      _type == \"appointmentBooked\" => {\n          ...,\n          exploreButton {\n            ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n        },\n        bookButton {\n            ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n        }\n      },\n      _type == \"appointmentError\" => {\n          ...,\n          tryAgainLink -> {\n              _id,\n              title,\n              \"slug\": slug.current\n            }\n      },\n      _type == \"customerDetails\" => {\n          ...,\n          restartButtonLink -> {\n              _id,\n              title,\n              \"slug\": slug.current\n            }\n      },\n      _type == \"imagesAndVideosSection\" => {\n        ...,\n        modelGalleryList[]{\n          ...,\n        }\n      }\n    }\n  }\n": GetPageQueryResult;
     "\n  *[_type == 'news' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    blackBackground,\n    thumbnail,\n    seo,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n      },\n      _type == \"carModelComponent\" => {\n        carModels[]{\n          ...,\n          exploreLink {\n          text,\n          link -> {\n              _id,\n              title,\n              \"slug\": slug.current\n          }\n        }\n        }\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n          }\n        }\n      },\n    },\n  }\n": GetNewsDetailQueryResult;
     "\n  *[_type == \"catalogue\"][0] {\n    ...,\n    \"productLines\": productLines[]->{\n      title,\n      slug,\n      eyebrow,\n      thumbnailImage,\n      description,\n      \"heroImage\": heroImage.asset->url\n    },\n    \"filterCategory\": filterCategory[]->{title, slug},\n    \"filterProductType\": filterProductType[]->{title, slug},\n    \"filterGenderFit\": filterGenderFit[]->{title, slug},\n    \"filterFabricDescription\": filterFabricDescription[]->{title, slug},\n    \"filterConstruction\": filterConstruction[]->{title, slug}\n  }\n": CatalogueQueryResult;
     "\n  *[_type == \"productLine\"] | order(title asc) {\n    _id,\n    title,\n    slug,\n    thumbnailImage,\n    eyebrow,\n    \"heroImage\": heroImage.asset->url\n  }\n": AllProductLinesQueryResult;

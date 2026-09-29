@@ -71,6 +71,9 @@ export const page = defineType({
           {type : 'qualityProgress'},
           {type : 'closingStatement'},
           {type : 'whatWeMake'},
+          {type : 'coreCapabilities'},
+          {type : 'builtAroundYourBrand'},
+          {type : 'privateLabel'},
       ],
 
       options: {

@@ -49,6 +49,17 @@ export const getPageQuery = defineQuery(`
       }
   },
       },
+      _type == "coreCapabilities" => {
+        ...,
+        capabilities[]{
+          ...,
+          "image": image.asset->url
+        }
+      },
+      _type == "privateLabel" => {
+        ...,
+        "image": image.asset->url
+      },
       _type == "whatWeMake" => {
         ...,
         cta {
@@ -470,6 +481,17 @@ export const getHomePageQuery = () => {
               "slug": slug.current
             }
         }
+      },
+      _type == "coreCapabilities" => {
+        ...,
+        capabilities[]{
+          ...,
+          "image": image.asset->url
+        }
+      },
+      _type == "privateLabel" => {
+        ...,
+        "image": image.asset->url
       },
       _type == "whatWeMake" => {
         ...,

@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 
 import { dataAttr } from "@/sanity/lib/utils";
 import Cta from "@/app/components/Cta";
@@ -19,6 +19,9 @@ import QualityProgress from "./QualityProgress";
 import ClosingStatement from "./ClosingStatement";
 import CategoryBlock from "./CategoryBlock";
 import WhatWeMake from "./WhatWeMake";
+import CoreCapabilities from "./CoreCapabilities";
+import BuiltAroundYourBrand from "./BuiltAroundYourBrand";
+import PrivateLabel from "./PrivateLabel";
 
 type BlocksType = {
   [key: string]: React.FC<any>;
@@ -54,7 +57,10 @@ const Blocks: BlocksType = {
   peopleProductsPlanet : PeopleProductsPlanet,
   qualityProgress : QualityProgress,
   closingStatement : ClosingStatement,
-  whatWeMake : WhatWeMake
+  whatWeMake : WhatWeMake,
+  coreCapabilities: CoreCapabilities,
+  builtAroundYourBrand: BuiltAroundYourBrand,
+  privateLabel: PrivateLabel
 };
 
 /**

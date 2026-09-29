@@ -43,6 +43,9 @@ import { betterProducts } from './objects/betterProducts'
 import { contactForm } from './objects/contactForm'
 import { footerBlock } from './objects/footerBlock'
 import { whatWeMake } from './objects/whatWeMake'
+import { coreCapabilities } from './objects/coreCapabilities'
+import { builtAroundYourBrand } from './objects/builtAroundYourBrand'
+import { privateLabel } from './objects/privateLabel'
 
 export const schemaTypes = [
   productBanner,
@@ -69,6 +72,9 @@ export const schemaTypes = [
   
   // Objects
   whatWeMake,
+  coreCapabilities,
+  builtAroundYourBrand,
+  privateLabel,
   manufacturingPartnership,
   ourProcess,
   ourImpact,

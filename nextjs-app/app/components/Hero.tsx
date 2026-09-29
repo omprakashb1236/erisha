@@ -113,7 +113,7 @@ export default function Hero({ block }: HomeheroProps) {
         </div>
 
         {/* Microcopy Text Right (Just in case it wasn't baked into banner) */}
-        <div className="absolute left-[1362px] top-[183px]">
+        <div className="absolute right-[30px] top-[183px]">
           <div className="text-[#122c52] text-[9.5px] font-medium tracking-[2.375px] leading-[1.7]">
             <p>IDEAS</p>
             <p>INTO</p>
