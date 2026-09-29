@@ -51,10 +51,10 @@ export default function ProductBanner({
             {headlineLine1 && <span className="block">{headlineLine1}</span>}
             {headlineLine2 && <span className="block">{headlineLine2}</span>}
           </h2>
-{subhead && 
-          <p className="font-playfair font-extrabold italic text-[#b86e58] text-[24px] lg:text-[33px] leading-[1.3] lg:leading-[42px] mb-[14px] lg:max-w-[610px]">
-            {subhead}
-          </p>}
+          {subhead &&
+            <p className="font-playfair font-extrabold italic text-[#b86e58] text-[24px] lg:text-[33px] leading-[1.3] lg:leading-[42px] mb-[14px] lg:max-w-[610px]">
+              {subhead}
+            </p>}
 
           <p className="text-[#4a505e] text-[14px] lg:text-[15.5px] leading-[1.6] lg:leading-[26px] mb-[50px] lg:max-w-[585px]">
             {paragraph}

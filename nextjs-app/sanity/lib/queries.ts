@@ -1,4 +1,4 @@
-import { defineQuery, groq } from "next-sanity";
+﻿import { defineQuery, groq } from "next-sanity";
 
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
@@ -729,6 +729,9 @@ export const allProductLinesQuery = defineQuery(`
     title,
     slug,
     thumbnailImage,
+    heroImage,
+    categoryTagline,
+    subtitle,
     eyebrow,
     "heroImage": heroImage.asset->url
   }

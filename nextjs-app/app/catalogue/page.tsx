@@ -12,15 +12,15 @@ import Footer from "../components/Footer";
 export default async function CataloguePage() {
 
   const [headerData, footerData] = await Promise.all([
-      sanityFetchCustom({
-        query: headerQuery,
-        tags: ["fragment"],
-      }),
-      sanityFetchCustom({
-        query: footerQuery,
-        tags: ["fragment"],
-      })
-    ]);
+    sanityFetchCustom({
+      query: headerQuery,
+      tags: ["fragment"],
+    }),
+    sanityFetchCustom({
+      query: footerQuery,
+      tags: ["fragment"],
+    })
+  ]);
 
   const catalogue = await sanityFetchCustom({ query: catalogueQuery, tags: ["catalogue"] });
   const allProductLines = await sanityFetchCustom({ query: allProductLinesQuery, tags: ["productLine"] });
@@ -53,22 +53,23 @@ export default async function CataloguePage() {
   if (catalogue?.filterConstruction?.length) {
     filterGroups.push({ label: "Construction", paramName: "construction", options: catalogue.filterConstruction });
   }
+  console.log(allProductLines)
 
   return (
     <>
-      <Header fragment={headerData?.header}/>
-      
+      <Header fragment={headerData?.header} />
+
 
       <main className="w-full min-h-screen bg-[#f9f2ea] overflow-hidden">
-        
+
         {/* Catalogue Hero Section */}
         <CatalogueHero catalogue={catalogue} />
 
         {/* Catalogue Header section (similar to CatalogueControls top part) */}
-        <section className="w-full py-[40px] lg:pt-[58px] lg:pb-[100px]">
+        <section className="w-full py-[40px] lg:pt-[58px] lg:pb-[60px]">
           <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col">
 
-            <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-10 lg:gap-8 mb-[40px] lg:mb-[75px]">
+            <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-10 lg:gap-20 mb-[40px]">
 
               <div className="flex flex-col w-full lg:w-[480px] shrink-0">
                 <h1 className="font-playfair text-[#1b2845] text-4xl lg:text-[48px] leading-[1.1] lg:leading-[52px] mb-4 lg:mb-[13px]">
@@ -80,8 +81,8 @@ export default async function CataloguePage() {
               </div>
 
               {/* Product Lines Quick Tabs */}
-              <div className="flex w-full lg:w-auto overflow-x-auto no-scrollbar lg:mt-[14px]">
-                <div className="flex items-center gap-6 lg:gap-[6px] whitespace-nowrap">
+              <div className="flex w-full lg:w-auto lg:mt-[14px]">
+                <div className="flex items-center  gap-x-[6px] gap-y-4 flex-wrap">
                   <div className="relative cursor-pointer flex flex-col w-auto lg:w-[132px] shrink-0">
                     <p className="text-[10px] lg:text-[9.8px] font-medium tracking-[1px] leading-[16px] uppercase pb-[9px] text-[#b86e58]">
                       ALL
@@ -124,11 +125,15 @@ export default async function CataloguePage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-[40px] lg:gap-y-[60px] gap-x-6 lg:gap-x-8">
               {allProductLines?.map((line: any, idx: number) => {
                 const numStr = String(idx + 1).padStart(2, "0");
-                const thumbnailImage = line.thumbnailImage ? urlForImage(line.thumbnailImage)?.url() : null;
+                const thumbnailImage = urlForImage(line.thumbnailImage)?.url() || line.heroImage;
 
                 return (
-                  <Link key={line.slug?.current} href={`/catalogue/${line.slug?.current}`} className="flex flex-col group">
-                    <div className="w-full aspect-[4/5] relative bg-[#f3ebe2] rounded-[24px] overflow-hidden mb-6">
+                  <Link
+                    href={`/catalogue/${line.slug?.current}`}
+                    key={line.slug?.current}
+                    className="bg-[#fefaf6] border border-[#d2bfaf] rounded-[26px] overflow-hidden flex flex-col relative w-full h-[445px] transition-transform hover:-translate-y-1 hover:shadow-lg cursor-pointer group"
+                  >
+                    <div className="relative w-full h-[282px] shrink-0 bg-[#f3ebe2]">
                       {thumbnailImage && (
                         <Image
                           src={thumbnailImage}
@@ -138,10 +143,35 @@ export default async function CataloguePage() {
                         />
                       )}
                     </div>
-                    <p className="text-[#1b2845] text-[10px] lg:text-[10.5px] font-medium tracking-[1.2px] leading-[18px] uppercase group-hover:text-[#b86e58] transition-colors">
-                      <span className="mr-3">{numStr}</span>
-                      <span>{line.title}</span>
-                    </p>
+
+                    {/* Family Info */}
+                    <div className="flex flex-col px-[19px] pt-[22px] pb-[16px] flex-grow relative">
+                      {/* Title */}
+                      <h3 className="font-playfair text-[#1b2845] text-[21px] leading-[26px] mb-[8px] line-clamp-1">
+                        {line.title}
+                      </h3>
+                      {/* Eyebrow */}
+                      <p className="text-[#b86e58] text-[8.7px] font-medium tracking-[1.35px] leading-[15px] uppercase mb-[12px]">
+                        {line.categoryTagline || "PRODUCT FAMILY"}
+                      </p>
+
+                      {/* Description and Add Icon aligned at bottom */}
+                      <div className="flex items-center justify-between">
+                        <p className="text-[#4a505e] text-[10.2px] leading-[16px] pr-4 line-clamp-2">
+                          {line.subtitle || "Explore all styles"}
+                        </p>
+                        <span className="text-[#1b2845] text-[17px] font-medium leading-[20px] shrink-0">
+                          <Image
+                            src="/images/arrowRight.svg"
+                            alt={line.title}
+                            width={24}
+                            height={24}
+                            className="object-contain group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </span>
+                      </div>
+
+                    </div>
                   </Link>
                 );
               })}

@@ -46,7 +46,6 @@ export default function PrivateLabelComp({ block }: PrivateLabelProps) {
           {/* Headline */}
           <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[52px] leading-[1.1] lg:leading-[57px] mb-[29px] max-w-[600px]">
             <span className="block">{block?.headingLine1 || "Made for your brand,"}</span>
-            <span className="block">{block?.headingLine2 || "not ours."}</span>
           </h2>
           
           {/* Pull Quote */}

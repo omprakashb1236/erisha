@@ -1270,8 +1270,21 @@ export type ProductLine = {
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
+  categoryTagline?: string;
   description?: string;
   bottomTags?: string;
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   heroImage?: {
     asset?: {
       _ref: string;
@@ -2389,7 +2402,18 @@ export type CatalogueQueryResult = {
     title: string | null;
     slug: Slug | null;
     eyebrow: string | null;
-    thumbnailImage: null;
+    thumbnailImage: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    } | null;
     description: string | null;
     heroImage: string | null;
   }> | null;
@@ -2416,14 +2440,27 @@ export type CatalogueQueryResult = {
   seo?: Seo;
 } | null;
 // Variable: allProductLinesQuery
-// Query: *[_type == "productLine"] | order(title asc) {    _id,    title,    slug,    thumbnailImage,    eyebrow,    "heroImage": heroImage.asset->url  }
+// Query: *[_type == "productLine"] | order(title asc) {    _id,    title,    slug,    thumbnailImage,    heroImage,    categoryTagline,    subtitle,    eyebrow,    "heroImage": heroImage.asset->url  }
 export type AllProductLinesQueryResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
-  thumbnailImage: null;
-  eyebrow: string | null;
+  thumbnailImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  } | null;
   heroImage: string | null;
+  categoryTagline: string | null;
+  subtitle: string | null;
+  eyebrow: string | null;
 }>;
 // Variable: productLineBySlugQuery
 // Query: *[_type == "productLine" && slug.current == $slug][0] {    ...,    "productFamilies": *[_type == "productFamily" && references(^._id)] {      _id,      title,      slug,      thumbnailImage,      eyebrow,      description,      "heroImage": heroImage.asset->url    },    "filterType": filterType[]->{title, slug},    "filterWire": filterWire[]->{title, slug},    "filterPadding": filterPadding[]->{title, slug},    "filterSupport": filterSupport[]->{title, slug},    "filterFabric": filterFabric[]->{title, slug}  }
@@ -2438,8 +2475,21 @@ export type ProductLineBySlugQueryResult = {
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
+  categoryTagline?: string;
   description?: string;
   bottomTags?: string;
+  thumbnailImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
   heroImage?: {
     asset?: {
       _ref: string;
@@ -2799,7 +2849,7 @@ declare module "@sanity/client" {
     "\n  *[_type == 'page' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    blackBackground,\n    heading,\n    subheading,\n    seo,\n    redirect,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n      },\n      _type == \"coreCapabilities\" => {\n        ...,\n        capabilities[]{\n          ...,\n          \"image\": image.asset->url\n        }\n      },\n      _type == \"privateLabel\" => {\n        ...,\n        \"image\": image.asset->url\n      },\n      _type == \"whatWeMake\" => {\n        ...,\n        cta {\n          ...,\n          link {\n            ...,\n            _type == \"link\" => {\n              \"page\": page->slug.current,\n              \"post\": post->slug.current,\n              \"car\": car->slug.current\n            }\n          }\n        },\n        productLinesCategories[]{\n          ...,\n          productLine->{\n            title,\n            eyebrow,\n            mainHeading,\n            subtitle,\n            description,\n            bottomTags,\n            \"heroImage\": heroImage.asset->url\n          },\n          productFamilies[]->{\n            title,\n            eyebrow,\n            mainHeading,\n            subtitle,\n            description,\n            bottomTags,\n            \"slug\": slug.current,\n            \"productLineSlug\": productLine->slug.current,\n            \"thumbnailImage\": thumbnailImage.asset->url,\n            \"heroImage\": heroImage.asset->url\n          }\n        }\n      },\n      _type == \"homeHero\" => {\n        ...,\n        \"backgroundImage\": backgroundImage.asset->url,\n        \"thumbnailImage\": thumbnailImage.asset->url,\n        primaryCta {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        },\n        secondaryCta {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"manufacturingPartnership\" => {\n        ...,\n        \"blueprintImage\": blueprintImage.asset->url,\n        buttonText {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourProcess\" => {\n        ...,\n        processSteps[]{\n          ...,\n          \"img\": img.asset->url\n        },\n        footerValues[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourImpact\" => {\n        ...,\n        \"mapImage\": mapImage.asset->url,\n        \"rightImage\": rightImage.asset->url,\n        \"brandLogos\": brandLogos[].asset->url,\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"ourCommitment\" => {\n        ...,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        gallery[]{\n          ...,\n          \"image\": image.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"productBanner\" => {\n          ...,\n          \"image\": image.asset->url,\n          ctaButton {\n            ...,\n            link {\n              ...,\n              _type == \"link\" => {\n                \"page\": page->slug.current,\n                \"post\": post->slug.current,\n                \"car\": car->slug.current,\n              }\n            }\n          }\n        },\n        _type == \"categoryBlock\" => {\n          ...,\n          \"image\": image.asset->url,\n          ctaButton {\n            ...,\n            link {\n              ...,\n              _type == \"link\" => {\n                \"page\": page->slug.current,\n                \"post\": post->slug.current,\n                \"car\": car->slug.current,\n              }\n            }\n          }\n        },\n        _type == \"categoryIndex\" => {\n          ...,\n          categories[]{\n            ...,\n            categoryReference->{\n              title,\n              \"slug\": slug.current\n            }\n          }\n        },\n        _type == \"qualityProgress\" => {\n          ...,\n          photos[]{\n            ...,\n            \"image\": image.asset->url\n          }\n        },\n        _type == \"betterProducts\" => {\n        ...,\n        \"rightImage\": rightImage.asset->url,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        },\n        ctaButton {\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"contactForm\" => {\n        ...,\n        features[]{\n          ...,\n          \"icon\": icon.asset->url\n        }\n      },\n      _type == \"footerBlock\" => {\n        ...,\n        linkColumns[]{\n          ...,\n          links[]{\n            ...,\n            link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n          }\n        },\n        bottomLinks[]{\n          ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n        }\n      },\n      _type == \"thankyouRichText\" => {\n        ...,\n        callToActionButton{\n        ...,\n        link { _type, linkType, openInNewTab, href, path, \"page\": page->{ _id, title, \"slug\": slug.current } },\n         }\n      },\n\n      \n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n          }\n        }\n      },\n      _type == \"heroVideoComponent\" => {\n        video {\n          asset-> {\n            playbackId,\n            assetId,\n            filename\n          }\n        }\n      },\n      _type == \"appointmentBooked\" => {\n          ...,\n          exploreButton {\n            ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n        },\n        bookButton {\n            ...,\n          link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n        }\n      },\n      _type == \"appointmentError\" => {\n          ...,\n          tryAgainLink -> {\n              _id,\n              title,\n              \"slug\": slug.current\n            }\n      },\n      _type == \"customerDetails\" => {\n          ...,\n          restartButtonLink -> {\n              _id,\n              title,\n              \"slug\": slug.current\n            }\n      },\n      _type == \"imagesAndVideosSection\" => {\n        ...,\n        modelGalleryList[]{\n          ...,\n        }\n      }\n    }\n  }\n": GetPageQueryResult;
     "\n  *[_type == 'news' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    blackBackground,\n    thumbnail,\n    seo,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n      },\n      _type == \"carModelComponent\" => {\n        carModels[]{\n          ...,\n          exploreLink {\n          text,\n          link -> {\n              _id,\n              title,\n              \"slug\": slug.current\n          }\n        }\n        }\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n          }\n        }\n      },\n    },\n  }\n": GetNewsDetailQueryResult;
     "\n  *[_type == \"catalogue\"][0] {\n    ...,\n    \"productLines\": productLines[]->{\n      title,\n      slug,\n      eyebrow,\n      thumbnailImage,\n      description,\n      \"heroImage\": heroImage.asset->url\n    },\n    \"filterCategory\": filterCategory[]->{title, slug},\n    \"filterProductType\": filterProductType[]->{title, slug},\n    \"filterGenderFit\": filterGenderFit[]->{title, slug},\n    \"filterFabricDescription\": filterFabricDescription[]->{title, slug},\n    \"filterConstruction\": filterConstruction[]->{title, slug}\n  }\n": CatalogueQueryResult;
-    "\n  *[_type == \"productLine\"] | order(title asc) {\n    _id,\n    title,\n    slug,\n    thumbnailImage,\n    eyebrow,\n    \"heroImage\": heroImage.asset->url\n  }\n": AllProductLinesQueryResult;
+    "\n  *[_type == \"productLine\"] | order(title asc) {\n    _id,\n    title,\n    slug,\n    thumbnailImage,\n    heroImage,\n    categoryTagline,\n    subtitle,\n    eyebrow,\n    \"heroImage\": heroImage.asset->url\n  }\n": AllProductLinesQueryResult;
     "\n  *[_type == \"productLine\" && slug.current == $slug][0] {\n    ...,\n    \"productFamilies\": *[_type == \"productFamily\" && references(^._id)] {\n      _id,\n      title,\n      slug,\n      thumbnailImage,\n      eyebrow,\n      description,\n      \"heroImage\": heroImage.asset->url\n    },\n    \"filterType\": filterType[]->{title, slug},\n    \"filterWire\": filterWire[]->{title, slug},\n    \"filterPadding\": filterPadding[]->{title, slug},\n    \"filterSupport\": filterSupport[]->{title, slug},\n    \"filterFabric\": filterFabric[]->{title, slug}\n  }\n": ProductLineBySlugQueryResult;
     "\n  *[_type == \"productFamily\" && slug.current == $slug][0] {\n    ...,\n    \"productLine\": productLine->{\n      title,\n      slug,\n      \"filterType\": filterType[]->{title, slug},\n      \"filterWire\": filterWire[]->{title, slug},\n      \"filterPadding\": filterPadding[]->{title, slug},\n      \"filterSupport\": filterSupport[]->{title, slug},\n      \"filterFabric\": filterFabric[]->{title, slug}\n    },\n    \"products\": products[]->{\n      _id,\n      title,\n      slug,\n      productCode,\n      \"mainImage\": mainImage.asset->url\n    }\n  }\n": ProductFamilyBySlugQueryResult;
     "\n  *[_type == \"product\" \n    && productFamily->slug.current == $familySlug\n    && (!defined($categorySlug) || category->slug.current == $categorySlug)\n    && (!defined($wireSlug) || wire->slug.current == $wireSlug)\n    && (!defined($supportSlug) || support->slug.current == $supportSlug)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    \"thumbnailImage\": thumbnailImage.asset->url,\n    productCode,\n    shortDescription,\n    \"mainImage\": mainImage.asset->url, \"productFamily\": productFamily->{slug}, \"productLine\": productLine->{slug},\n    category->{title, slug},\n    productType->{title, slug},\n    wire->{title, slug},\n    padding->{title, slug},\n    support->{title, slug}\n  }\n": ProductsByFamilyQueryResult;

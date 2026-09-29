@@ -50,6 +50,12 @@ export const productLine = defineType({
       group: 'general',
     }),
     defineField({
+      name: 'categoryTagline',
+      title: 'Category Tagline',
+      type: 'string',
+      group: 'general',
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
@@ -61,6 +67,13 @@ export const productLine = defineType({
       type: 'string',
       description: 'Used for the small uppercase tags at the bottom of the hero (e.g. PRIVATE LABEL / DEVELOPMENT).',
       group: 'general',
+    }),
+    defineField({
+      name: 'thumbnailImage',
+      title: 'Thumbnail Image',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'media',
     }),
     defineField({
       name: 'heroImage',

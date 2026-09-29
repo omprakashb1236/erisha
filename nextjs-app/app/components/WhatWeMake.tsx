@@ -127,8 +127,8 @@ export default function WhatWeMake({ block: data }: any) {
                           <h3 className="absolute left-[23px] top-[434px] text-[#122c52] text-[25px] tracking-[-0.35px] font-didot">
                             {card.title}
                           </h3>
-                          <p className="absolute hidden left-[23px] top-[485px] text-[#4a505e] text-[13.5px] leading-[19px] whitespace-pre-line">
-                            {card.desc || card.description}
+                          <p className="absolute left-[23px] top-[485px] text-[#4a505e] text-[13.5px] leading-[19px] whitespace-pre-line">
+                            {card.subtitle || card.description}
                           </p>
                           <span className="absolute left-[231px] top-[519px] text-[#122c52] text-[25px] group-hover:translate-x-1 transition-transform">
                             →
