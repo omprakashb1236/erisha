@@ -69,8 +69,6 @@ export default async function ProductLinePage({
     filterGroups.push({ label: "Support", paramName: "support", options: productLine.filterSupport });
   }
 
-  console.log(productLine)
-
   return (
     <>
       <Header fragment={headerData?.header} />
@@ -132,7 +130,7 @@ export default async function ProductLinePage({
             <div className="w-full h-px bg-[#d2bfaf]/50 mb-[40px] lg:mb-[50px]" />
 
             {productLine.productFamilies && productLine.productFamilies.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[40px] lg:gap-y-[85px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[40px] lg:gap-y-[60px]">
                 {productLine.productFamilies.map((family: any) => (
                   <ProductFamilyCard
                     key={family._id || family.slug?.current}

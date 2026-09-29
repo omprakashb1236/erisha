@@ -749,6 +749,11 @@ export const productLineBySlugQuery = defineQuery(`
       thumbnailImage,
       eyebrow,
       description,
+      "wire": attrWire->{title},
+      "padding": attrPadding->{title},
+      "support": attrSupport->{title},
+      "cupRange": attrCupRange->{title},
+      "fabric": attrFabric->{title},
       "heroImage": heroImage.asset->url
     },
     "filterType": filterType[]->{title, slug},
@@ -763,6 +768,12 @@ export const productLineBySlugQuery = defineQuery(`
 export const productFamilyBySlugQuery = defineQuery(`
   *[_type == "productFamily" && slug.current == $slug][0] {
     ...,
+    "productType": attrType->{title, slug},
+    "wire": attrWire->{title, slug},
+    "padding": attrPadding->{title, slug},
+    "support": attrSupport->{title, slug},
+    "cupRange": attrCupRange->{title, slug},
+    "fabric": attrFabric->{title, slug},
     "productLine": productLine->{
       title,
       slug,

@@ -48,15 +48,15 @@ export default function ProductFamilyCard({ family, lineSlug }: ProductFamilyCar
         </p>
 
         {/* Title */}
-        <h3 className="font-playfair text-[#1b2845] text-[21px] leading-[26px] mb-[8px] line-clamp-1">
+        <h3 className="font-playfair text-[#1b2845] text-[22px] leading-[26px] mb-[8px] line-clamp-1">
           {family.title}
         </h3>
 
 
         {/* Description and Add Icon aligned at bottom */}
-        <div className="mt-auto flex items-center justify-between">
-          <p className="text-[#4a505e] text-[10.2px] leading-[16px] pr-4 line-clamp-2">
-            {family.description || "Explore all styles"}
+        <div className="flex items-center justify-between">
+          <p className="text-[#4A505E] font-dm uppercase font-medium text-[9px] leading-[14px] pr-4">
+            {family.wire.title} . {family.support.title} . {family.cupRange.title} . {family.fabric.title}
           </p>
           <span className="text-[#1b2845] text-[17px] font-medium leading-[20px] shrink-0">
             <Image
