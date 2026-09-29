@@ -1,4 +1,4 @@
-﻿import { productBanner } from './objects/productBanner'
+import { productBanner } from './objects/productBanner'
 import { categoryIndex } from './objects/categoryIndex'
 import { ourStory } from './objects/ourStory'
 import { journeyOverview } from './objects/journeyOverview'
@@ -42,6 +42,7 @@ import { ourCommitment } from './objects/ourCommitment'
 import { betterProducts } from './objects/betterProducts'
 import { contactForm } from './objects/contactForm'
 import { footerBlock } from './objects/footerBlock'
+import { whatWeMake } from './objects/whatWeMake'
 
 export const schemaTypes = [
   productBanner,
@@ -67,6 +68,7 @@ export const schemaTypes = [
   filterOption,
   
   // Objects
+  whatWeMake,
   manufacturingPartnership,
   ourProcess,
   ourImpact,

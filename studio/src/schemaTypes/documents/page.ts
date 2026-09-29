@@ -70,6 +70,7 @@ export const page = defineType({
           {type : 'peopleProductsPlanet'},
           {type : 'qualityProgress'},
           {type : 'closingStatement'},
+          {type : 'whatWeMake'},
       ],
 
       options: {

@@ -18,6 +18,7 @@ import PeopleProductsPlanet from "./PeopleProductsPlanet";
 import QualityProgress from "./QualityProgress";
 import ClosingStatement from "./ClosingStatement";
 import CategoryBlock from "./CategoryBlock";
+import WhatWeMake from "./WhatWeMake";
 
 type BlocksType = {
   [key: string]: React.FC<any>;
@@ -52,7 +53,8 @@ const Blocks: BlocksType = {
   journeyOverview : JourneyOverview,
   peopleProductsPlanet : PeopleProductsPlanet,
   qualityProgress : QualityProgress,
-  closingStatement : ClosingStatement
+  closingStatement : ClosingStatement,
+  whatWeMake : WhatWeMake
 };
 
 /**

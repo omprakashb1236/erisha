@@ -1,4 +1,4 @@
-﻿import { defineQuery, groq } from "next-sanity";
+import { defineQuery, groq } from "next-sanity";
 
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
@@ -48,6 +48,44 @@ export const getPageQuery = defineQuery(`
         "car": car->slug.current,
       }
   },
+      },
+      _type == "whatWeMake" => {
+        ...,
+        cta {
+          ...,
+          link {
+            ...,
+            _type == "link" => {
+              "page": page->slug.current,
+              "post": post->slug.current,
+              "car": car->slug.current
+            }
+          }
+        },
+        productLinesCategories[]{
+          ...,
+          productLine->{
+            title,
+            eyebrow,
+            mainHeading,
+            subtitle,
+            description,
+            bottomTags,
+            "heroImage": heroImage.asset->url
+          },
+          productFamilies[]->{
+            title,
+            eyebrow,
+            mainHeading,
+            subtitle,
+            description,
+            bottomTags,
+            "slug": slug.current,
+            "productLineSlug": productLine->slug.current,
+            "thumbnailImage": thumbnailImage.asset->url,
+            "heroImage": heroImage.asset->url
+          }
+        }
       },
       _type == "homeHero" => {
         ...,
@@ -431,6 +469,44 @@ export const getHomePageQuery = () => {
               title,
               "slug": slug.current
             }
+        }
+      },
+      _type == "whatWeMake" => {
+        ...,
+        cta {
+          ...,
+          link {
+            ...,
+            _type == "link" => {
+              "page": page->slug.current,
+              "post": post->slug.current,
+              "car": car->slug.current
+            }
+          }
+        },
+        productLinesCategories[]{
+          ...,
+          productLine->{
+            title,
+            eyebrow,
+            mainHeading,
+            subtitle,
+            description,
+            bottomTags,
+            "heroImage": heroImage.asset->url
+          },
+          productFamilies[]->{
+            title,
+            eyebrow,
+            mainHeading,
+            subtitle,
+            description,
+            bottomTags,
+            "slug": slug.current,
+            "productLineSlug": productLine->slug.current,
+            "thumbnailImage": thumbnailImage.asset->url,
+            "heroImage": heroImage.asset->url
+          }
         }
       },
       _type == "homeHero" => {
