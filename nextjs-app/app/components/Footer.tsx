@@ -46,9 +46,9 @@ export default function Footer({ fragment: block }: FooterProps) {
     <section className="relative w-full bg-[#f9f6f1]">
       {/* Footer Section */}
       <footer className="bg-[#162433] text-[#f9f6f1]">
-        <div className="w-full container mx-auto py-16 lg:py-[60px] flex flex-col gap-12 lg:gap-16">
+        <div className="w-full container mx-auto py-10 lg:py-[60px] flex flex-col gap-8 lg:gap-16">
           
-          <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8 lg:items-start border-b border-[rgba(249,246,241,0.25)] lg:border-none pb-8 lg:pb-0 px-6 lg:px-0">
+          <div className="flex flex-col lg:flex-row justify-between gap-8 lg:items-start border-b border-[rgba(249,246,241,0.25)] lg:border-none pb-8 lg:pb-0 px-0">
             {/* Logo Area */}
             <div className="flex flex-col gap-2 max-w-[300px]">
               <p className="font-playfair text-[35px] leading-none">{title}</p>

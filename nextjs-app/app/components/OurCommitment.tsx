@@ -131,12 +131,11 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
             ))}
           </div>
 
-          <div className="flex flex-col max-w-[260px] lg:w-[260px]">
+          <div className="flex flex-col max-w-full lg:w-[260px]">
             <div className="w-[42px] h-px bg-[#b89e8f]/55 mb-6" />
             <div className="font-playfair leading-none text-[39px] text-[#1b2845] mb-2">
               <p>{rightCTAHeadingLine1}</p>
-              <p>{rightCTAHeadingLine2}</p>
-              <p className="font-extrabold italic text-[33px]">{rightCTAHeadingLine3}</p>
+              <p className="font-extrabold italic text-[33px]">{rightCTAHeadingLine2}</p>
             </div>
             <div className="text-[#4a505e] text-[13.5px] leading-[20px] mb-4">
               <p>{rightCTADescription}</p>

@@ -49,7 +49,7 @@ export default function BetterProducts({ block }: BetterProductsProps) {
       <div className="w-full container mx-auto flex flex-col lg:flex-row relative">
 
         {/* Mobile/Flex Content Area */}
-        <div className="flex flex-col px-6 lg:px-[84px] py-12 lg:py-[100px] z-20 w-full lg:w-1/2 flex-1">
+        <div className="flex flex-col px-0 lg:px-[84px] py-12 lg:py-[100px] z-20 w-full lg:w-1/2 flex-1">
           <div className="flex flex-col max-w-[580px]">
             <p className="text-[#9c5b49] text-[11px] font-medium tracking-[3.3px] leading-[16px] mb-4">{eyebrow}</p>
             <div className="w-[48px] h-px bg-[#9c5b49]/45 mb-[22px]" />
@@ -89,7 +89,7 @@ export default function BetterProducts({ block }: BetterProductsProps) {
           <Button
             href={ctaLink}
             variant="light"
-            className="w-full sm:w-[280px] h-[52px] !border-[#9c5b49]/65 !text-[#1b2845] !justify-between !px-7 mt-[120px] !text-[11.5px] tracking-[2.8px]"
+            className="w-full sm:w-[280px] h-[52px] !border-[#9c5b49]/65 !text-[#1b2845] !justify-between !px-7 md:mt-[120px] mt-10 !text-[11.5px] tracking-[2.8px]"
             icon={<span className="text-[18px]">→</span>}
           >
             {ctaText}

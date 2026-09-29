@@ -54,9 +54,9 @@ export default function Header({ fragment }: HeaderProps) {
   };
 
   return (
-    <header className="w-full relative md:absolute z-50 h-[132px]">
+    <header className="w-full relative md:absolute z-50 md:h-[132px] h-[80px]">
       {/* Background Top Band */}
-      <div className="absolute top-0 left-0 w-full h-[132px] bg-[#f9f4eebd] -z-20" />
+      <div className="absolute top-0 left-0 w-full md:h-[132px] h-[80px] bg-[#f9f4eebd] -z-20" />
 
       {/* Logo Patch Background */}
       <div className="hidden absolute top-[132px] left-1/2 -translate-x-1/2 w-[285px] h-[94px] bg-[#f9f4ee] -z-20" />
@@ -102,7 +102,7 @@ export default function Header({ fragment }: HeaderProps) {
             className="w-[70px] h-[120px] object-contain bg-[#F8F3EC]"
             priority
           />
-          <div className="flex flex-col items-center gap-[5px] mt-1">
+          <div className="md:flex hidden flex-col items-center gap-[5px] mt-1">
             <Image 
               src={logoTextUrl} 
               alt="ERISHA" 
