@@ -47,6 +47,7 @@ import { coreCapabilities } from './objects/coreCapabilities'
 import { builtAroundYourBrand } from './objects/builtAroundYourBrand'
 import { privateLabel } from './objects/privateLabel'
 import { developmentFocus } from './objects/developmentFocus'
+import { footerCta } from './objects/footerCta'
 
 export const schemaTypes = [
   productBanner,
@@ -77,6 +78,7 @@ export const schemaTypes = [
   builtAroundYourBrand,
   privateLabel,
   developmentFocus,
+  footerCta,
   manufacturingPartnership,
   ourProcess,
   ourImpact,

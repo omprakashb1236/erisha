@@ -12,19 +12,21 @@ import DevelopmentFocus from "@/app/components/catalogue/DevelopmentFocus";
 import { Metadata } from "next";
 
 type Props = {
-  params: Promise<{ locale: string; slug: string }>;
+  params: Promise<{ productLineSlug: string }>;
 };
 
 export async function generateMetadata(props: Props): Promise<Metadata> {
+  const { productLineSlug } = await props.params;
 
   const page = await sanityFetchCustom({
     query: productLineBySlugQuery,
+    params: { slug: productLineSlug },
     tags: [`productLine`],
   });
 
   return {
     title: page?.seo?.metaTitle || "E R I S H A I N T E R N A T I O N A L",
-    description: page?.heading || "Erisha International offers premium lingerie and intimate apparel, blending elegant design, comfort, quality fabrics, and thoughtful craftsmanship.",
+    description: page?.seo?.metaDescription || "Erisha International offers premium lingerie and intimate apparel.",
   } satisfies Metadata;
 }
 

@@ -17,7 +17,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
             .filter('_type == "page"')
         ),
 
-      S.listItem()
+      /*S.listItem()
         .title("News")
         .schemaType('news')
         .icon(UlistIcon)
@@ -27,7 +27,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
             .title('All News')
             .schemaType('news')
             .filter('_type == "news"')
-        ),
+        ),*/
 
       S.listItem()
         .title("Header/Footer/SideKick")
@@ -45,7 +45,7 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
 
       // E-COMMERCE SECTION
       S.listItem()
-        .title("E-Commerce Catalogue")
+        .title("Catalogue")
         .icon(BookIcon)
         .child(
           S.list()

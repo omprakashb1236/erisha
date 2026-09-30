@@ -74,6 +74,7 @@ export const page = defineType({
           {type : 'coreCapabilities'},
           {type : 'builtAroundYourBrand'},
           {type : 'privateLabel'},
+          {type : 'footerCta'},
       ],
 
       options: {

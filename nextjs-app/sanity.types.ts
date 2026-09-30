@@ -530,6 +530,27 @@ export type ManufacturingPartnership = {
   blueprintMicrocopy?: Array<string>;
 };
 
+export type FooterCta = {
+  _type: "footerCta";
+  ctaEyebrow?: string;
+  ctaHeading?: string;
+  ctaDescription?: string;
+  ctaButtonText?: string;
+  ctaButtonLink?: string;
+};
+
+export type DevelopmentFocus = {
+  _type: "developmentFocus";
+  eyebrow?: string;
+  headingLine1?: string;
+  headingLine2?: string;
+  features?: Array<{
+    title?: string;
+    description?: string;
+    _key: string;
+  }>;
+};
+
 export type PrivateLabel = {
   _type: "privateLabel";
   image?: {
@@ -756,6 +777,7 @@ export type ProductFamily = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  productCode?: string;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -791,13 +813,6 @@ export type ProductFamily = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "productLine";
   };
-  products?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
-    _key: string;
-    [internalGroqTypeReferenceTo]?: "product";
-  }>;
   attrWire?: {
     _ref: string;
     _type: "reference";
@@ -828,7 +843,50 @@ export type ProductFamily = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "filterOption";
   };
-  seo?: Seo;
+  developmentFocus?: DevelopmentFocus;
+  seo?: SeoMetaFields;
+};
+
+export type SeoMetaFields = {
+  _type: "seoMetaFields";
+  metaTitle?: string;
+  metaDescription?: string;
+  focusKeyword?: string;
+  seoKeywords?: Array<string>;
+  nofollowAttributes?: boolean;
+  robotsMeta?: Array<string>;
+  openGraph?: OpenGraph;
+  twitter?: Twitter;
+  hreflang?: Array<{
+    _key: string;
+  } & HreflangEntry>;
+  additionalMetaTags?: Array<{
+    _key: string;
+  } & MetaTag>;
+  schemaOrg?: {
+    schemaType?: "Article" | "Product" | "FAQPage" | "LocalBusiness" | "Event" | "Organization" | "WebPage" | "VideoObject" | "Recipe" | "Person" | "Course" | "JobPosting" | "BreadcrumbList" | "SoftwareApplication";
+    name?: string;
+    description?: string;
+    url?: string;
+    author?: string;
+    datePublished?: string;
+    dateModified?: string;
+    price?: string;
+    priceCurrency?: string;
+    availability?: "InStock" | "OutOfStock" | "PreOrder" | "Discontinued";
+    ratingValue?: string;
+    ratingCount?: string;
+    startDate?: string;
+    endDate?: string;
+    location?: string;
+    faqItems?: Array<{
+      question?: string;
+      answer?: string;
+      _key: string;
+    }>;
+  };
+  seoStatus?: string;
+  seoReviewNotes?: string;
 };
 
 export type FilterOption = {
@@ -912,7 +970,14 @@ export type Catalogue = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "filterOption";
   }>;
-  seo?: Seo;
+  centerText?: string;
+  ctaEyebrow?: string;
+  ctaHeadingLine1?: string;
+  ctaHeadingLine2?: string;
+  ctaDescription?: string;
+  ctaButtonText?: string;
+  ctaButtonLink?: string;
+  seo?: SeoMetaFields;
 };
 
 export type Fragment = {
@@ -955,48 +1020,6 @@ export type News = {
   }>;
   seo?: SeoMetaFields;
   highlight?: boolean;
-};
-
-export type SeoMetaFields = {
-  _type: "seoMetaFields";
-  metaTitle?: string;
-  metaDescription?: string;
-  focusKeyword?: string;
-  seoKeywords?: Array<string>;
-  nofollowAttributes?: boolean;
-  robotsMeta?: Array<string>;
-  openGraph?: OpenGraph;
-  twitter?: Twitter;
-  hreflang?: Array<{
-    _key: string;
-  } & HreflangEntry>;
-  additionalMetaTags?: Array<{
-    _key: string;
-  } & MetaTag>;
-  schemaOrg?: {
-    schemaType?: "Article" | "Product" | "FAQPage" | "LocalBusiness" | "Event" | "Organization" | "WebPage" | "VideoObject" | "Recipe" | "Person" | "Course" | "JobPosting" | "BreadcrumbList" | "SoftwareApplication";
-    name?: string;
-    description?: string;
-    url?: string;
-    author?: string;
-    datePublished?: string;
-    dateModified?: string;
-    price?: string;
-    priceCurrency?: string;
-    availability?: "InStock" | "OutOfStock" | "PreOrder" | "Discontinued";
-    ratingValue?: string;
-    ratingCount?: string;
-    startDate?: string;
-    endDate?: string;
-    location?: string;
-    faqItems?: Array<{
-      question?: string;
-      answer?: string;
-      _key: string;
-    }>;
-  };
-  seoStatus?: string;
-  seoReviewNotes?: string;
 };
 
 export type Page = {
@@ -1049,7 +1072,9 @@ export type Page = {
     _key: string;
   } & BuiltAroundYourBrand | {
     _key: string;
-  } & PrivateLabel>;
+  } & PrivateLabel | {
+    _key: string;
+  } & FooterCta>;
   seo?: SeoMetaFields;
 };
 
@@ -1339,6 +1364,7 @@ export type ProductLine = {
     _key: string;
     [internalGroqTypeReferenceTo]?: "filterOption";
   }>;
+  developmentFocus?: DevelopmentFocus;
   seo?: Seo;
 };
 
@@ -1755,7 +1781,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Seo | Iframe | NewsList | ImageComponent | SanityImageCrop | SanityImageHotspot | RichText | Navigation | NavItem | Link | SideKickSection | Footer | Header | BlockContent | LinkItem | LinkList | CustomImage | CallToAction | FooterBlock | ContactForm | BetterProducts | OurCommitment | OurImpact | OurProcess | ManufacturingPartnership | PrivateLabel | BuiltAroundYourBrand | CoreCapabilities | WhatWeMake | Product | Slug | ProductFamily | FilterOption | Catalogue | Fragment | News | SeoMetaFields | Page | HomeHero | Settings | CategoryBlock | ClosingStatement | QualityProgress | PeopleProductsPlanet | JourneyOverview | OurStory | CategoryIndex | ProductLine | ProductBanner | HreflangEntry | Twitter | OpenGraph | MetaTag | MetaAttribute | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Seo | Iframe | NewsList | ImageComponent | SanityImageCrop | SanityImageHotspot | RichText | Navigation | NavItem | Link | SideKickSection | Footer | Header | BlockContent | LinkItem | LinkList | CustomImage | CallToAction | FooterBlock | ContactForm | BetterProducts | OurCommitment | OurImpact | OurProcess | ManufacturingPartnership | FooterCta | DevelopmentFocus | PrivateLabel | BuiltAroundYourBrand | CoreCapabilities | WhatWeMake | Product | Slug | ProductFamily | SeoMetaFields | FilterOption | Catalogue | Fragment | News | Page | HomeHero | Settings | CategoryBlock | ClosingStatement | QualityProgress | PeopleProductsPlanet | JourneyOverview | OurStory | CategoryIndex | ProductLine | ProductBanner | HreflangEntry | Twitter | OpenGraph | MetaTag | MetaAttribute | MuxVideo | MuxVideoAsset | MuxAssetData | MuxStaticRenditions | MuxStaticRenditionFile | MuxPlaybackId | MuxTrack | MediaTag | SanityAssistInstructionTask | SanityAssistTaskStatus | SanityAssistSchemaTypeAnnotations | SanityAssistOutputType | SanityAssistOutputField | SanityAssistInstructionContext | AssistInstructionContext | SanityAssistInstructionUserInput | SanityAssistInstructionPrompt | SanityAssistInstructionFieldRef | SanityAssistInstruction | SanityAssistSchemaTypeField | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/lib/queries.ts
 // Variable: settingsQuery
@@ -2008,6 +2034,14 @@ export type GetPageQueryResult = {
       } | null;
     }> | null;
     copyright?: string;
+  } | {
+    _key: string;
+    _type: "footerCta";
+    ctaEyebrow?: string;
+    ctaHeading?: string;
+    ctaDescription?: string;
+    ctaButtonText?: string;
+    ctaButtonLink?: string;
   } | {
     _key: string;
     _type: "homeHero";
@@ -2437,7 +2471,14 @@ export type CatalogueQueryResult = {
     title: string | null;
     slug: Slug | null;
   }> | null;
-  seo?: Seo;
+  centerText?: string;
+  ctaEyebrow?: string;
+  ctaHeadingLine1?: string;
+  ctaHeadingLine2?: string;
+  ctaDescription?: string;
+  ctaButtonText?: string;
+  ctaButtonLink?: string;
+  seo?: SeoMetaFields;
 } | null;
 // Variable: allProductLinesQuery
 // Query: *[_type == "productLine"] | order(title asc) {    _id,    title,    slug,    thumbnailImage,    heroImage,    categoryTagline,    subtitle,    eyebrow,    "heroImage": heroImage.asset->url  }
@@ -2463,7 +2504,7 @@ export type AllProductLinesQueryResult = Array<{
   eyebrow: string | null;
 }>;
 // Variable: productLineBySlugQuery
-// Query: *[_type == "productLine" && slug.current == $slug][0] {    ...,    "productFamilies": *[_type == "productFamily" && references(^._id)] {      _id,      title,      slug,      productCode,      thumbnailImage,      eyebrow,      description,      productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug},      "heroImage": heroImage.asset->url    },    "filterType": filterType[]->{title, slug},    "filterWire": filterWire[]->{title, slug},    "filterPadding": filterPadding[]->{title, slug},    "filterSupport": filterSupport[]->{title, slug},    "filterFabric": filterFabric[]->{title, slug}  }
+// Query: *[_type == "productLine" && slug.current == $slug][0] {    ...,    "productFamilies": *[_type == "productFamily" && references(^._id)] {      _id,      title,      slug,      productCode,      thumbnailImage,      eyebrow,      description,      "productType": attrType->{title, slug},      "wire": attrWire->{title, slug},      "padding": attrPadding->{title, slug},      "support": attrSupport->{title, slug},      "cupRange": attrCupRange->{title, slug},      "fabric": attrFabric->{title, slug},      "heroImage": heroImage.asset->url    },    "filterType": filterType[]->{title, slug},    "filterWire": filterWire[]->{title, slug},    "filterPadding": filterPadding[]->{title, slug},    "filterSupport": filterSupport[]->{title, slug},    "filterFabric": filterFabric[]->{title, slug}  }
 export type ProductLineBySlugQueryResult = {
   _id: string;
   _type: "productLine";
@@ -2506,7 +2547,7 @@ export type ProductLineBySlugQueryResult = {
     _id: string;
     title: string | null;
     slug: Slug | null;
-    productCode: null;
+    productCode: string | null;
     thumbnailImage: {
       asset?: {
         _ref: string;
@@ -2522,9 +2563,26 @@ export type ProductLineBySlugQueryResult = {
     eyebrow: string | null;
     description: string | null;
     productType: null;
-    wire: null;
-    padding: null;
-    support: null;
+    wire: {
+      title: string | null;
+      slug: Slug | null;
+    } | null;
+    padding: {
+      title: string | null;
+      slug: Slug | null;
+    } | null;
+    support: {
+      title: string | null;
+      slug: Slug | null;
+    } | null;
+    cupRange: {
+      title: string | null;
+      slug: Slug | null;
+    } | null;
+    fabric: {
+      title: string | null;
+      slug: Slug | null;
+    } | null;
     heroImage: string | null;
   }>;
   filterType: Array<{
@@ -2547,10 +2605,11 @@ export type ProductLineBySlugQueryResult = {
     title: string | null;
     slug: Slug | null;
   }> | null;
+  developmentFocus?: DevelopmentFocus;
   seo?: Seo;
 } | null;
 // Variable: productFamilyBySlugQuery
-// Query: *[_type == "productFamily" && slug.current == $slug][0] {    ...,    "productLine": productLine->{      title,      slug,      "filterType": filterType[]->{title, slug},      "filterWire": filterWire[]->{title, slug},      "filterPadding": filterPadding[]->{title, slug},      "filterSupport": filterSupport[]->{title, slug},      "filterFabric": filterFabric[]->{title, slug}    },    "products": products[]->{      _id,      title,      slug,      productCode,      "mainImage": mainImage.asset->url    }  }
+// Query: *[_type == "productFamily" && slug.current == $slug][0] {    ...,    "productType": attrType->{title, slug},    "wire": attrWire->{title, slug},    "padding": attrPadding->{title, slug},    "support": attrSupport->{title, slug},    "cupRange": attrCupRange->{title, slug},    "fabric": attrFabric->{title, slug},    "productLine": productLine->{      title,      slug,      "filterType": filterType[]->{title, slug},      "filterWire": filterWire[]->{title, slug},      "filterPadding": filterPadding[]->{title, slug},      "filterSupport": filterSupport[]->{title, slug},      "filterFabric": filterFabric[]->{title, slug}    },    "products": products[]->{      _id,      title,      slug,      productCode,      "mainImage": mainImage.asset->url    }  }
 export type ProductFamilyBySlugQueryResult = {
   _id: string;
   _type: "productFamily";
@@ -2559,6 +2618,7 @@ export type ProductFamilyBySlugQueryResult = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  productCode?: string;
   eyebrow?: string;
   mainHeading?: string;
   subtitle?: string;
@@ -2612,13 +2672,6 @@ export type ProductFamilyBySlugQueryResult = {
       slug: Slug | null;
     }> | null;
   } | null;
-  products: Array<{
-    _id: string;
-    title: string | null;
-    slug: Slug | null;
-    productCode: string | null;
-    mainImage: string | null;
-  }> | null;
   attrWire?: {
     _ref: string;
     _type: "reference";
@@ -2649,10 +2702,33 @@ export type ProductFamilyBySlugQueryResult = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "filterOption";
   };
-  seo?: Seo;
+  developmentFocus?: DevelopmentFocus;
+  seo?: SeoMetaFields;
+  productType: null;
+  wire: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  padding: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  support: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  cupRange: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  fabric: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  products: null;
 } | null;
 // Variable: productsByFamilyQuery
-// Query: *[_type == "product"     && productFamily->slug.current == $familySlug    && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    shortDescription,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug}  }
+// Query: *[_type == "product"     && productFamily->slug.current == $familySlug    && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($typeSlug) || productType->slug.current == $typeSlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($paddingSlug) || padding->slug.current == $paddingSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)    && (!defined($fabricSlug) || fabric->slug.current == $fabricSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    shortDescription,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug},    fabric->{title, slug}  }
 export type ProductsByFamilyQueryResult = Array<{
   _id: string;
   title: string | null;
@@ -2681,6 +2757,10 @@ export type ProductsByFamilyQueryResult = Array<{
     slug: Slug | null;
   } | null;
   support: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  fabric: {
     title: string | null;
     slug: Slug | null;
   } | null;
@@ -2719,7 +2799,7 @@ export type ProductsByLineQueryResult = Array<{
   } | null;
 }>;
 // Variable: filteredProductsQuery
-// Query: *[_type == "product"     && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    wire->{title, slug},    support->{title, slug}  }
+// Query: *[_type == "product"     && (!defined($categorySlug) || category->slug.current == $categorySlug)    && (!defined($typeSlug) || productType->slug.current == $typeSlug)    && (!defined($wireSlug) || wire->slug.current == $wireSlug)    && (!defined($paddingSlug) || padding->slug.current == $paddingSlug)    && (!defined($supportSlug) || support->slug.current == $supportSlug)    && (!defined($fabricSlug) || fabric->slug.current == $fabricSlug)  ] | order(title asc) {    _id,    title,    slug,    "thumbnailImage": thumbnailImage.asset->url,    productCode,    "mainImage": mainImage.asset->url, "productFamily": productFamily->{slug}, "productLine": productLine->{slug},    category->{title, slug},    productType->{title, slug},    wire->{title, slug},    padding->{title, slug},    support->{title, slug},    fabric->{title, slug}  }
 export type FilteredProductsQueryResult = Array<{
   _id: string;
   title: string | null;
@@ -2734,11 +2814,23 @@ export type FilteredProductsQueryResult = Array<{
     slug: Slug | null;
   } | null;
   category: null;
+  productType: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
   wire: {
     title: string | null;
     slug: Slug | null;
   } | null;
+  padding: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
   support: {
+    title: string | null;
+    slug: Slug | null;
+  } | null;
+  fabric: {
     title: string | null;
     slug: Slug | null;
   } | null;
@@ -2855,11 +2947,11 @@ declare module "@sanity/client" {
     "\n  *[_type == 'news' && slug.current == $slug][0]{\n    _id,\n    _type,\n    name,\n    slug,\n    blackBackground,\n    thumbnail,\n    seo,\n    \"pageBuilder\": pageBuilder[]{\n      ...,\n      _type == \"callToAction\" => {\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  },\n      },\n      _type == \"carModelComponent\" => {\n        carModels[]{\n          ...,\n          exploreLink {\n          text,\n          link -> {\n              _id,\n              title,\n              \"slug\": slug.current\n          }\n        }\n        }\n      },\n      _type == \"infoSection\" => {\n        content[]{\n          ...,\n          markDefs[]{\n            ...,\n            _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n          }\n        }\n      },\n    },\n  }\n": GetNewsDetailQueryResult;
     "\n  *[_type == \"catalogue\"][0] {\n    ...,\n    \"productLines\": productLines[]->{\n      title,\n      slug,\n      eyebrow,\n      thumbnailImage,\n      description,\n      \"heroImage\": heroImage.asset->url\n    },\n    \"filterCategory\": filterCategory[]->{title, slug},\n    \"filterProductType\": filterProductType[]->{title, slug},\n    \"filterGenderFit\": filterGenderFit[]->{title, slug},\n    \"filterFabricDescription\": filterFabricDescription[]->{title, slug},\n    \"filterConstruction\": filterConstruction[]->{title, slug}\n  }\n": CatalogueQueryResult;
     "\n  *[_type == \"productLine\"] | order(title asc) {\n    _id,\n    title,\n    slug,\n    thumbnailImage,\n    heroImage,\n    categoryTagline,\n    subtitle,\n    eyebrow,\n    \"heroImage\": heroImage.asset->url\n  }\n": AllProductLinesQueryResult;
-    "\n  *[_type == \"productLine\" && slug.current == $slug][0] {\n    ...,\n    \"productFamilies\": *[_type == \"productFamily\" && references(^._id)] {\n      _id,\n      title,\n      slug,\n      productCode,\n      thumbnailImage,\n      eyebrow,\n      description,\n      productType->{title, slug},\n    wire->{title, slug},\n    padding->{title, slug},\n    support->{title, slug},\n      \"heroImage\": heroImage.asset->url\n    },\n    \"filterType\": filterType[]->{title, slug},\n    \"filterWire\": filterWire[]->{title, slug},\n    \"filterPadding\": filterPadding[]->{title, slug},\n    \"filterSupport\": filterSupport[]->{title, slug},\n    \"filterFabric\": filterFabric[]->{title, slug}\n  }\n": ProductLineBySlugQueryResult;
-    "\n  *[_type == \"productFamily\" && slug.current == $slug][0] {\n    ...,\n    \"productLine\": productLine->{\n      title,\n      slug,\n      \"filterType\": filterType[]->{title, slug},\n      \"filterWire\": filterWire[]->{title, slug},\n      \"filterPadding\": filterPadding[]->{title, slug},\n      \"filterSupport\": filterSupport[]->{title, slug},\n      \"filterFabric\": filterFabric[]->{title, slug}\n    },\n    \"products\": products[]->{\n      _id,\n      title,\n      slug,\n      productCode,\n      \"mainImage\": mainImage.asset->url\n    }\n  }\n": ProductFamilyBySlugQueryResult;
-    "\n  *[_type == \"product\" \n    && productFamily->slug.current == $familySlug\n    && (!defined($categorySlug) || category->slug.current == $categorySlug)\n    && (!defined($wireSlug) || wire->slug.current == $wireSlug)\n    && (!defined($supportSlug) || support->slug.current == $supportSlug)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    \"thumbnailImage\": thumbnailImage.asset->url,\n    productCode,\n    shortDescription,\n    \"mainImage\": mainImage.asset->url, \"productFamily\": productFamily->{slug}, \"productLine\": productLine->{slug},\n    category->{title, slug},\n    productType->{title, slug},\n    wire->{title, slug},\n    padding->{title, slug},\n    support->{title, slug}\n  }\n": ProductsByFamilyQueryResult;
+    "\n  *[_type == \"productLine\" && slug.current == $slug][0] {\n    ...,\n    \"productFamilies\": *[_type == \"productFamily\" && references(^._id)] {\n      _id,\n      title,\n      slug,\n      productCode,\n      thumbnailImage,\n      eyebrow,\n      description,\n      \"productType\": attrType->{title, slug},\n      \"wire\": attrWire->{title, slug},\n      \"padding\": attrPadding->{title, slug},\n      \"support\": attrSupport->{title, slug},\n      \"cupRange\": attrCupRange->{title, slug},\n      \"fabric\": attrFabric->{title, slug},\n      \"heroImage\": heroImage.asset->url\n    },\n    \"filterType\": filterType[]->{title, slug},\n    \"filterWire\": filterWire[]->{title, slug},\n    \"filterPadding\": filterPadding[]->{title, slug},\n    \"filterSupport\": filterSupport[]->{title, slug},\n    \"filterFabric\": filterFabric[]->{title, slug}\n  }\n": ProductLineBySlugQueryResult;
+    "\n  *[_type == \"productFamily\" && slug.current == $slug][0] {\n    ...,\n    \"productType\": attrType->{title, slug},\n    \"wire\": attrWire->{title, slug},\n    \"padding\": attrPadding->{title, slug},\n    \"support\": attrSupport->{title, slug},\n    \"cupRange\": attrCupRange->{title, slug},\n    \"fabric\": attrFabric->{title, slug},\n    \"productLine\": productLine->{\n      title,\n      slug,\n      \"filterType\": filterType[]->{title, slug},\n      \"filterWire\": filterWire[]->{title, slug},\n      \"filterPadding\": filterPadding[]->{title, slug},\n      \"filterSupport\": filterSupport[]->{title, slug},\n      \"filterFabric\": filterFabric[]->{title, slug}\n    },\n    \"products\": products[]->{\n      _id,\n      title,\n      slug,\n      productCode,\n      \"mainImage\": mainImage.asset->url\n    }\n  }\n": ProductFamilyBySlugQueryResult;
+    "\n  *[_type == \"product\" \n    && productFamily->slug.current == $familySlug\n    && (!defined($categorySlug) || category->slug.current == $categorySlug)\n    && (!defined($typeSlug) || productType->slug.current == $typeSlug)\n    && (!defined($wireSlug) || wire->slug.current == $wireSlug)\n    && (!defined($paddingSlug) || padding->slug.current == $paddingSlug)\n    && (!defined($supportSlug) || support->slug.current == $supportSlug)\n    && (!defined($fabricSlug) || fabric->slug.current == $fabricSlug)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    \"thumbnailImage\": thumbnailImage.asset->url,\n    productCode,\n    shortDescription,\n    \"mainImage\": mainImage.asset->url, \"productFamily\": productFamily->{slug}, \"productLine\": productLine->{slug},\n    category->{title, slug},\n    productType->{title, slug},\n    wire->{title, slug},\n    padding->{title, slug},\n    support->{title, slug},\n    fabric->{title, slug}\n  }\n": ProductsByFamilyQueryResult;
     "\n  *[_type == \"product\" && productLine->slug.current == $lineSlug] | order(title asc) {\n    _id,\n    title,\n    slug,\n    productCode,\n    shortDescription,\n    \"mainImage\": mainImage.asset->url, \"productFamily\": productFamily->{slug}, \"productLine\": productLine->{slug},\n    category->{title, slug},\n    productType->{title, slug},\n    wire->{title, slug},\n    padding->{title, slug},\n    support->{title, slug}\n  }\n": ProductsByLineQueryResult;
-    "\n  *[_type == \"product\" \n    && (!defined($categorySlug) || category->slug.current == $categorySlug)\n    && (!defined($wireSlug) || wire->slug.current == $wireSlug)\n    && (!defined($supportSlug) || support->slug.current == $supportSlug)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    \"thumbnailImage\": thumbnailImage.asset->url,\n    productCode,\n    \"mainImage\": mainImage.asset->url, \"productFamily\": productFamily->{slug}, \"productLine\": productLine->{slug},\n    category->{title, slug},\n    wire->{title, slug},\n    support->{title, slug}\n  }\n": FilteredProductsQueryResult;
+    "\n  *[_type == \"product\" \n    && (!defined($categorySlug) || category->slug.current == $categorySlug)\n    && (!defined($typeSlug) || productType->slug.current == $typeSlug)\n    && (!defined($wireSlug) || wire->slug.current == $wireSlug)\n    && (!defined($paddingSlug) || padding->slug.current == $paddingSlug)\n    && (!defined($supportSlug) || support->slug.current == $supportSlug)\n    && (!defined($fabricSlug) || fabric->slug.current == $fabricSlug)\n  ] | order(title asc) {\n    _id,\n    title,\n    slug,\n    \"thumbnailImage\": thumbnailImage.asset->url,\n    productCode,\n    \"mainImage\": mainImage.asset->url, \"productFamily\": productFamily->{slug}, \"productLine\": productLine->{slug},\n    category->{title, slug},\n    productType->{title, slug},\n    wire->{title, slug},\n    padding->{title, slug},\n    support->{title, slug},\n    fabric->{title, slug}\n  }\n": FilteredProductsQueryResult;
     "*[_type == \"fragment\" && type == \"Header\"][0]{\n  header {\n    ...,\n    \"logo\": logo.asset->url,\n    \"logoText\": logoText.asset->url,\n    \"logoSubtext\": logoSubtext.asset->url,\n    primaryNavigationLeft[]{\n      ...,\n      link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n    },\n    primaryNavigationRight[]{\n      ...,\n      link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n    },\n    ctaButton {\n      ...,\n      link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n    }\n  }\n}": HeaderQueryResult;
     "*[_type == \"fragment\" && type == \"Footer\"][0]{\n  footer {\n    ...,\n    linkColumns[]{\n      ...,\n      links[]{\n        ...,\n        link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n      }\n    },\n    bottomLinks[]{\n      ...,\n      link {\n      ...,\n      _type == \"link\" => {\n        \"page\": page->slug.current,\n        \"post\": post->slug.current,\n        \"car\": car->slug.current,\n      }\n  }\n    }\n  }\n}": FooterQueryResult;
   }

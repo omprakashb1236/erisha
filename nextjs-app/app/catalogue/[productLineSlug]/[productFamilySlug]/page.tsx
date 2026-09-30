@@ -8,6 +8,7 @@ import Header from "@/app/components/Header";
 import ProductBanner from "@/app/components/ProductBanner";
 import Footer from "@/app/components/Footer";
 import { Metadata } from "next";
+import DevelopmentFocus from "@/app/components/catalogue/DevelopmentFocus";
 
 export async function generateMetadata({
   params,
@@ -207,7 +208,7 @@ export default async function ProductFamilyPage({
 
           </div>
         </section>
-
+        <DevelopmentFocus data={productFamily.developmentFocus || {}} />
 
       </main>
       <Footer fragment={footerData?.footer} />
