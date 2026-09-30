@@ -34,7 +34,7 @@ export default function ProductBanner({
 
   return (
     <section
-      className="w-full relative overflow-hidden pt-[80px] lg:pt-[245px] pb-[80px] lg:pb-[150px] min-h-[950px]"
+      className="w-full relative overflow-hidden pt-[30px] lg:pt-[245px] pb-[0px] lg:pb-[150px] md:min-h-[950px]"
       style={{ backgroundColor }}
     >
       <div className="w-full container relative z-10 flex flex-col lg:flex-row">
@@ -56,7 +56,7 @@ export default function ProductBanner({
               {subhead}
             </p>}
 
-          <p className="text-[#4a505e] text-[14px] lg:text-[15.5px] leading-[1.6] lg:leading-[26px] mb-[50px] lg:max-w-[585px]">
+          <p className="text-[#4a505e] text-[14px] lg:text-[15.5px] leading-[1.6] lg:leading-[26px] mb-8 lg:mb-[50px] lg:max-w-[585px]">
             {paragraph}
           </p>
 

@@ -34,7 +34,7 @@ export default function CategoryBlock({
 
   return (
     <section
-      className="w-full relative overflow-hidden pt-[70px] pb-[80px] min-h-[560px]"
+      className="w-full relative overflow-hidden pt-10 md:pt-[70px] pb-0 md:pb-[80px] min-h-[560px]"
       style={{ backgroundColor }}
     >
       <div className="w-full container relative z-10 flex flex-col lg:flex-row">
@@ -60,12 +60,16 @@ export default function CategoryBlock({
             {paragraph}
           </p>
 
+          {(block?.captionItem?.length ?? 0) > 0 && (
+            <div className="bg-[#D2BFAF] h-[1px] mb-6 w-full" />
+          )}
+
           {block?.captionItem?.map((item) => (
             <div
               key={item._key}
-              className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1C7]' : 'text-[#1b2845]'}  mb-[40px] text-[9.5px] font-medium tracking-[2.1px] leading-[16px] uppercase whitespace-pre-wrap lg:max-w-[640px]`}
+              className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1C7]' : 'text-[#1b2845]'}  mb-[25px] text-[9.5px] font-medium tracking-[2.1px] leading-[16px] uppercase whitespace-pre-wrap lg:max-w-[640px]`}
             >
-              {item.title && <p>{item.title}</p>}
+              {item.title && <p className="text-[#B86E58] mb-3 uppercase font-medium">{item.title}</p>}
               {item.text && <p>{item.text}</p>}
             </div>
           ))}
@@ -95,7 +99,7 @@ export default function CategoryBlock({
             }`}
         >
           <Image src={imageSrc} alt="Banner Graphic" fill className="object-cover" />
-          {block?.imageCaptionItems && <p className="text-[#1b2845] absolute bottom-[-40px] text-[9.5px] font-medium tracking-[2.1px] leading-[16px] uppercase whitespace-pre-wrap lg:max-w-[640px]">
+          {block?.imageCaptionItems && <p className={`${backgroundColor === '#1B2845' ? 'text-[#F9F6F1]' : 'text-[#1b2845]'} absolute bottom-[-40px] text-[9.5px] font-medium tracking-[2.1px] leading-[16px] uppercase whitespace-pre-wrap lg:max-w-[640px]`}>
             {block?.imageCaptionItems}
           </p>
           }

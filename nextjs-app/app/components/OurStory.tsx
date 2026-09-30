@@ -16,11 +16,11 @@ export default function OurStory({ block }: { block?: OurStoryType }) {
   ];
 
   return (
-    <section className="w-full bg-[#f9f2ea] overflow-hidden py-[80px] lg:py-[100px]">
+    <section className="w-full bg-[#f9f2ea] overflow-hidden py-[40px] lg:py-[100px]">
       <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col">
         
         {/* Top Content Row */}
-        <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-12 lg:gap-16">
+        <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-8 lg:gap-16">
           
           {/* Left Block */}
           <div className="flex flex-col w-full lg:w-[560px]">
@@ -57,7 +57,7 @@ export default function OurStory({ block }: { block?: OurStoryType }) {
 
         {/* Bottom Timeline Section */}
         {timelineItems.length > 0 && (
-          <div className="flex flex-col mt-[80px] lg:mt-[100px]">
+          <div className="flex flex-col mt-[40px] lg:mt-[100px]">
             {/* Full Width Divider */}
             <div className="w-full h-px bg-[#d2bfaf]/50 mb-[40px] lg:mb-[52px]" />
             

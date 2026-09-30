@@ -25,18 +25,18 @@ export default function PeopleProductsPlanet({ block }: { block?: PeopleProducts
   const quote = block?.quote ?? "“Exceptional products should also make a positive difference.”";
 
   return (
-    <section className="w-full bg-[#f9f2ea] overflow-hidden py-[80px] lg:pt-[70px] lg:pb-[100px]">
+    <section className="w-full bg-[#f9f2ea] overflow-hidden py-[40px] lg:pt-[70px] lg:pb-[100px]">
       <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col">
         
         {/* Top Split Area */}
-        <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-16 lg:gap-8 relative z-10">
+        <div className="flex flex-col lg:flex-row lg:justify-between items-start gap-8 relative z-10">
           
           {/* Left Intro */}
           <div className="flex flex-col w-full lg:w-[560px] shrink-0">
             <p className="text-[#b86e58] text-[10px] lg:text-[10.5px] font-medium tracking-[2px] lg:tracking-[2.9px] leading-[17px] uppercase mb-[14px]">
               {eyebrow}
             </p>
-            <div className="w-[44px] h-px bg-[#b86e58]/52 mb-[28px]" />
+            <div className="w-[44px] h-px bg-[#b86e58]/52 md:mb-[28px] mb-4" />
             
             <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[55px] leading-[1.1] lg:leading-[60px] mb-[40px] lg:mb-[50px]">
               {headlineLine1 && <span className="block">{headlineLine1}</span>}
