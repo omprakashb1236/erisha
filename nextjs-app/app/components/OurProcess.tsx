@@ -75,8 +75,8 @@ export default function OurProcess({ block }: { block?: any }) {
 
   const ctaText = block?.ctaButton?.buttonText || "{ctaText}";
   const linkObj = block?.ctaButton?.link as any;
-  const ctaLink = linkObj?.linkType === 'page' && linkObj?.page?.slug
-    ? `/${linkObj.page.slug}`
+  const ctaLink = linkObj?.linkType === 'page' && (linkObj?.page?.slug || (typeof linkObj?.page === 'string' ? linkObj?.page : null))
+    ? ((typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug) === 'home' ? '/' : `/${typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug}`)
     : linkObj?.linkType === 'path' && linkObj?.path
       ? linkObj.path
       : linkObj?.linkType === 'href' && linkObj?.href
@@ -124,7 +124,7 @@ export default function OurProcess({ block }: { block?: any }) {
 
         {/* Process Timeline */}
         <div className="lg:mt-8 relative z-20 overflow-x-auto custom-scrollbar pb-6 lg:pb-8">
-          <div className="hidden lg:block w-[100%] h-px bg-[#b88e78]/45 mb-12" />
+          <div className="hidden absolute top-[55px] lg:block w-[100%] h-px bg-[#b88e78]/45 mb-12" />
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-[25px] w-full min-w-max">
             {steps.map((step: any, idx: number) => (

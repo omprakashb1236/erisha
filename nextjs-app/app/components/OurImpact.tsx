@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Button from "./Button";
 
 import { useRef } from "react";
@@ -61,8 +62,8 @@ export default function OurImpact({ block }: { block?: any }) {
 
   const ctaText = block?.ctaButton?.buttonText || "";
   const linkObj = block?.ctaButton?.link as any;
-  const ctaLink = linkObj?.linkType === 'page' && linkObj?.page?.slug
-    ? `/${linkObj.page.slug}`
+  const ctaLink = linkObj?.linkType === 'page' && (linkObj?.page?.slug || (typeof linkObj?.page === 'string' ? linkObj?.page : null))
+    ? ((typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug) === 'home' ? '/' : `/${typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug}`)
     : linkObj?.linkType === 'path' && linkObj?.path
       ? linkObj.path
       : linkObj?.linkType === 'href' && linkObj?.href
@@ -80,7 +81,7 @@ export default function OurImpact({ block }: { block?: any }) {
       <div className="w-full container flex flex-col lg:flex-row">
 
         {/* LEFT COLUMN */}
-        <div className="w-full lg:w-[52%] flex flex-col pt-12 lg:pt-[100px] lg:pr-[60px] pb-12 lg:pb-[100px]">
+        <div className="w-full lg:w-[52%] flex flex-col pt-12 lg:pt-[100px] lg:pr-[60px] pb-12 lg:pb-[30px]">
 
           <div className="flex flex-col">
             <p className="gsap-animate text-[#b86e58] text-[10px] lg:text-[11px] font-bold tracking-[2px] lg:tracking-[3.4px] mb-[18px] uppercase">
@@ -124,11 +125,15 @@ export default function OurImpact({ block }: { block?: any }) {
               </p>
               <Button
                 href={ctaLink}
-                variant="light"
-                className="w-full max-w-[205px] h-[42px] !border-[#965745]/55 !text-[#0e1b30] !justify-between !px-5 text-[12px]"
-                icon={<span className="gsap-animate text-[18px]">→</span>}
+                variant="outline-square"
+                className="gsap-animate mt-0 max-w-max"
+                icon={
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#0e1b30" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                }
               >
-                {ctaText}
+                {ctaText || "Partner With Us"}
               </Button>
             </div>
           </div>
@@ -143,7 +148,7 @@ export default function OurImpact({ block }: { block?: any }) {
       </div>
 
       {/* Brands Strip */}
-      <div className="w-full pt-12 lg:pt-[80px] pb-12 lg:pb-[60px] relative z-10 border-t border-[#d2bfaf]/40">
+      <div className="w-full pt-[30px] pb-[30px] relative z-10 border-t border-[#d2bfaf]/40">
         <div className="w-full container mx-auto flex flex-col lg:flex-row items-center justify-between gap-10">
 
           <div className="flex flex-col items-center lg:items-start shrink-0">

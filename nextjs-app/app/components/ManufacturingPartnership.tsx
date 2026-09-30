@@ -54,15 +54,16 @@ export default function ManufacturingPartnership({
   const ctaText = block?.buttonText?.buttonText || "";
 
   const linkObj = block?.buttonText?.link as any;
+  const pageSlug = linkObj?.page?.slug || (typeof linkObj?.page === 'string' && linkObj?.page);
 
   const ctaLink =
-    linkObj?.linkType === "page" && linkObj?.page?.slug
-      ? `/${linkObj.page.slug}`
+    linkObj?.linkType === "page" && pageSlug
+      ? (pageSlug === 'home' ? '/' : `/${pageSlug}`)
       : linkObj?.linkType === "path" && linkObj?.path
         ? linkObj.path
         : linkObj?.linkType === "href" && linkObj?.href
           ? linkObj.href
-          : "/capabilities";
+          : "#";
 
   const defaultSteps = [
     {

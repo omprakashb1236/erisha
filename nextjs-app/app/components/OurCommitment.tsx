@@ -80,13 +80,13 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
 
   const ctaText = block?.ctaButton?.buttonText || 'Our Approach';
   const linkObj = block?.ctaButton?.link as any;
-  const ctaLink = linkObj?.linkType === 'page' && linkObj?.page?.slug
-    ? `/${linkObj.page.slug}`
+  const ctaLink = linkObj?.linkType === 'page' && (linkObj?.page?.slug || (typeof linkObj?.page === 'string' ? linkObj?.page : null))
+    ? ((typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug) === 'home' ? '/' : `/${typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug}`)
     : linkObj?.linkType === 'path' && linkObj?.path
       ? linkObj.path
       : linkObj?.linkType === 'href' && linkObj?.href
         ? linkObj.href
-        : '/sustainability';
+        : '#';
 
   // @ts-ignore
   const rightGraphicText = block?.rightGraphicText || ['DETAILS', 'MAKE A', 'DIFFERENCE'];
@@ -180,13 +180,18 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
             <div className="text-[#4a505e] text-[13.5px] leading-[20px] mb-4">
               <p>{rightCTADescription}</p>
             </div>
+
             <Button
               href={ctaLink}
-              variant="light"
-              className="w-[180px] h-[42px] !border-[#965745]/60 !text-[#1b2845] !justify-between !px-[22px]"
-              icon={<span className="gsap-animate text-[20px]">→</span>}
+              variant="outline-square"
+              className="gsap-animate mt-0 max-w-max"
+              icon={
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#0e1b30" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              }
             >
-              {ctaText}
+              {ctaText || ""}
             </Button>
           </div>
 

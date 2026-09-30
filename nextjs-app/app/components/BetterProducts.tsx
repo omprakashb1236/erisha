@@ -1,6 +1,6 @@
 "use client";
 
-﻿import Image from "next/image";
+import Image from "next/image";
 import Button from "./Button";
 import React from 'react';
 import type { BetterProducts } from '@/sanity.types';
@@ -71,21 +71,21 @@ export default function BetterProducts({ block }: BetterProductsProps) {
 
   const ctaText = block?.ctaButton?.buttonText || "OUR COMMITMENT";
   const linkObj = block?.ctaButton?.link as any;
-  const ctaLink = linkObj?.linkType === 'page' && linkObj?.page?.slug
-    ? `/${linkObj.page.slug}`
+  const ctaLink = linkObj?.linkType === 'page' && (linkObj?.page?.slug || (typeof linkObj?.page === 'string' ? linkObj?.page : null))
+    ? ((typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug) === 'home' ? '/' : `/${typeof linkObj?.page === 'string' ? linkObj?.page : linkObj?.page?.slug}`)
     : linkObj?.linkType === 'path' && linkObj?.path
       ? linkObj.path
       : linkObj?.linkType === 'href' && linkObj?.href
         ? linkObj.href
-        : '/commitment';
+        : '#';
 
   return (
     <section ref={containerRef as any} className="relative w-full bg-[#f9f6f1] overflow-hidden">
       {/* Right side image */}
-        <div className="relative w-full h-[500px] lg:h-auto lg:absolute lg:right-0 lg:top-0 lg:w-[46%] lg:bottom-0">
-          <Image src={rightImage} alt="" fill className="gsap-animate object-cover" />
-          <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-[180px] bg-gradient-to-r from-[#f9f6f1] to-transparent" />
-        </div>
+      <div className="relative w-full h-[500px] lg:h-auto lg:absolute lg:right-0 lg:top-0 lg:w-[46%] lg:bottom-0">
+        <Image src={rightImage} alt="" fill className="gsap-animate object-cover" />
+        <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-[180px] bg-gradient-to-r from-[#f9f6f1] to-transparent" />
+      </div>
       <div className="w-full container mx-auto flex flex-col lg:flex-row relative">
 
         {/* Mobile/Flex Content Area */}
@@ -126,13 +126,18 @@ export default function BetterProducts({ block }: BetterProductsProps) {
 
 
 
+
           <Button
             href={ctaLink}
-            variant="light"
-            className="w-full sm:w-[280px] h-[52px] !border-[#9c5b49]/65 !text-[#1b2845] !justify-between !px-7 md:mt-[120px] mt-10 !text-[11.5px] tracking-[2.8px]"
-            icon={<span className="gsap-animate text-[18px]">→</span>}
+            variant="outline-square"
+            className="gsap-animate mt-10 max-w-max"
+            icon={
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#0e1b30" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            }
           >
-            {ctaText}
+            {ctaText || ""}
           </Button>
         </div>
 
@@ -144,7 +149,7 @@ export default function BetterProducts({ block }: BetterProductsProps) {
           <div className="w-[48px] h-px bg-[#1b2845]/40 mt-4" />
         </div>
 
-        
+
 
       </div>
 

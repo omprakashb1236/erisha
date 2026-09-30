@@ -48,6 +48,41 @@ export const footer = defineType({
       ]
     }),
     defineField({
+      name: 'contactInfo',
+      title: 'Contact Info',
+      type: 'object',
+      group: 'footerInfo',
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string', initialValue: 'GET IN TOUCH' }),
+        defineField({ name: 'email', title: 'Email', type: 'string' }),
+        defineField({ name: 'phone', title: 'Phone', type: 'string' }),
+        defineField({ name: 'address', title: 'Address', type: 'string' })
+      ]
+    }),
+    defineField({
+      name: 'socialLinks',
+      title: 'Social Links',
+      type: 'array',
+      group: 'footerInfo',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({ name: 'platform', title: 'Platform', type: 'string', options: { list: ['linkedin', 'instagram', 'twitter', 'facebook'] } }),
+            defineField({ name: 'url', title: 'URL', type: 'url' })
+          ]
+        }
+      ]
+    }),
+    defineField({
+      name: 'rightText',
+      title: 'Right Side Text',
+      type: 'array',
+      of: [{ type: 'string' }],
+      group: 'footerInfo',
+      description: 'E.g. PEOPLE, PRODUCTS, A BRIGHTER TOMORROW'
+    }),
+    defineField({
       name: 'bottomLinks',
       title: 'Bottom Links',
       type: 'array',
@@ -57,9 +92,3 @@ export const footer = defineType({
     defineField({ name: 'copyright', title: 'Copyright Text', type: 'string', group: 'footerInfo' })
   ]
 })
-
-
-
-
-
-

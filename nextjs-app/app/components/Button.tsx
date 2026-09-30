@@ -3,7 +3,7 @@ import React from "react";
 
 interface ButtonProps {
   href: string;
-  variant?: "primary" | "secondary" | "header" | "light";
+  variant?: "primary" | "secondary" | "header" | "light" | "outline-square";
   children: React.ReactNode;
   icon?: React.ReactNode;
   className?: string;
@@ -27,6 +27,10 @@ export default function Button({ href, variant = "primary", children, icon, clas
     variantStyles = "bg-[#122c52] text-[#faf6f0] hover:bg-[#1a3d72]";
     sizeStyles = "h-[47px] text-[15.5px] px-6 rounded-[23.5px]";
     if (icon) sizeStyles = "h-[47px] text-[15.5px] px-6 rounded-[23.5px] gap-2";
+  } else if (variant === "outline-square") {
+    variantStyles = "bg-transparent border border-[#d2bfaf] text-[#0e1b30] hover:bg-[#f9f6f1] tracking-[0.5px] justify-between";
+    sizeStyles = "h-[46px] text-[13px] px-[28px] rounded-none";
+    if (icon) sizeStyles = "h-[46px] text-[13px] px-[28px] rounded-none gap-2";
   }
 
   return (
