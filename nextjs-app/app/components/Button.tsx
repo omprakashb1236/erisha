@@ -11,12 +11,12 @@ interface ButtonProps {
 
 export default function Button({ href, variant = "primary", children, icon, className = "" }: ButtonProps) {
   let baseStyles = "flex items-center justify-center font-medium transition-colors shrink-0 ";
-  let sizeStyles = "h-[39px] text-[12px] px-6 rounded-[19.5px]";
+  let sizeStyles = "md:h-[39px] h-[45px] text-[12px] px-6 rounded-[19.5px]";
   let variantStyles = "";
 
   if (variant === "primary") {
     variantStyles = "bg-[#1b2845] text-[#fefaf6] hover:bg-black";
-    if (icon) sizeStyles = "h-[39px] text-[12px] pl-6 pr-4 rounded-[19.5px] gap-2";
+    if (icon) sizeStyles = "md:h-[39px] h-[45px] text-[12px] pl-6 pr-4 rounded-[19.5px] gap-2";
   } else if (variant === "secondary") {
     variantStyles = "border border-[#d2bfaf] text-[#1b2845] hover:bg-[#d2bfaf]/20";
   } else if (variant === "light") {

@@ -177,7 +177,7 @@ export default function Hero({ block }: HomeheroProps) {
 
       </div>
       {/* Full Width Background Banner */}
-      <div className="hero-bg md:absolute inset-0 z-0 h-[105vh] md:h-auto -mt-[5vh] md:mt-0">
+      <div className="hero-bg md:absolute inset-0 z-0 h-auto -mt-[5vh] md:mt-0">
         <Image
           src={bgImage}
           alt="Erisha Hero Banner"
