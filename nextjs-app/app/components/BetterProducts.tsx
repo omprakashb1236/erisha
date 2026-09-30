@@ -1,7 +1,16 @@
+"use client";
+
 ﻿import Image from "next/image";
 import Button from "./Button";
 import React from 'react';
 import type { BetterProducts } from '@/sanity.types';
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type BetterProductsProps = {
   block?: BetterProducts;
@@ -9,6 +18,37 @@ type BetterProductsProps = {
 };
 
 export default function BetterProducts({ block }: BetterProductsProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    } else {
+      // Fallback
+      gsap.from(containerRef.current!.children, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const eyebrow = block?.eyebrow || "OUR COMMITMENT";
   const headingLine1 = block?.headingLine1 || "Better products.";
   const headingLine2 = block?.headingLine2 || "A brighter tomorrow.";
@@ -40,10 +80,10 @@ export default function BetterProducts({ block }: BetterProductsProps) {
         : '/commitment';
 
   return (
-    <section className="relative w-full bg-[#f9f6f1] overflow-hidden">
+    <section ref={containerRef as any} className="relative w-full bg-[#f9f6f1] overflow-hidden">
       {/* Right side image */}
         <div className="relative w-full h-[500px] lg:h-auto lg:absolute lg:right-0 lg:top-0 lg:w-[46%] lg:bottom-0">
-          <Image src={rightImage} alt="" fill className="object-cover" />
+          <Image src={rightImage} alt="" fill className="gsap-animate object-cover" />
           <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-[180px] bg-gradient-to-r from-[#f9f6f1] to-transparent" />
         </div>
       <div className="w-full container mx-auto flex flex-col lg:flex-row relative">
@@ -51,15 +91,15 @@ export default function BetterProducts({ block }: BetterProductsProps) {
         {/* Mobile/Flex Content Area */}
         <div className="flex flex-col px-0 lg:px-[84px] py-12 lg:py-[100px] z-20 w-full lg:w-1/2 flex-1">
           <div className="flex flex-col max-w-[580px]">
-            <p className="text-[#9c5b49] text-[11px] font-medium tracking-[3.3px] leading-[16px] mb-4">{eyebrow}</p>
+            <p className="gsap-animate text-[#9c5b49] text-[11px] font-medium tracking-[3.3px] leading-[16px] mb-4">{eyebrow}</p>
             <div className="w-[48px] h-px bg-[#9c5b49]/45 mb-[22px]" />
 
-            <h2 className="text-[#1b2845] font-playfair leading-none mb-[38px] text-5xl lg:text-[70px]">
+            <h2 className="gsap-animate text-[#1b2845] font-playfair leading-none mb-[38px] text-5xl lg:text-[70px]">
               <span className="block mb-2">{headingLine1}</span>
               <span className="block text-[#9c5b49] lg:text-[60px] font-extrabold italic">{headingLine2}</span>
             </h2>
 
-            <p className="text-[#505663] text-[15px] leading-[28px] lg:mt-0">
+            <p className="gsap-animate text-[#505663] text-[15px] leading-[28px] lg:mt-0">
               We are committed to responsible manufacturing, conscious choices and lasting partnerships — because exceptional lingerie should make a positive difference.
             </p>
           </div>
@@ -70,11 +110,11 @@ export default function BetterProducts({ block }: BetterProductsProps) {
                 <div className="flex flex-col gap-4 flex-1">
                   <div className="relative w-[82px] h-[82px] flex items-center justify-center">
                     <Image src="/better-disc.svg" alt="" fill />
-                    <Image src={feat.icon || "/better-icon1.svg"} alt="" width={42} height={42} className="relative z-10" />
+                    <Image src={feat.icon || "/better-icon1.svg"} alt="" width={42} height={42} className="gsap-animate relative z-10" />
                   </div>
                   <div>
-                    <p className="text-[#1b2845] text-[12px] font-medium tracking-[3.2px]">{feat.title}</p>
-                    <p className="text-[#505663] text-[15px] leading-[25px] mt-2 whitespace-pre-wrap">{feat.subtitle}</p>
+                    <p className="gsap-animate text-[#1b2845] text-[12px] font-medium tracking-[3.2px]">{feat.title}</p>
+                    <p className="gsap-animate text-[#505663] text-[15px] leading-[25px] mt-2 whitespace-pre-wrap">{feat.subtitle}</p>
                   </div>
                 </div>
                 {i < features.length - 1 && (
@@ -90,7 +130,7 @@ export default function BetterProducts({ block }: BetterProductsProps) {
             href={ctaLink}
             variant="light"
             className="w-full sm:w-[280px] h-[52px] !border-[#9c5b49]/65 !text-[#1b2845] !justify-between !px-7 md:mt-[120px] mt-10 !text-[11.5px] tracking-[2.8px]"
-            icon={<span className="text-[18px]">→</span>}
+            icon={<span className="gsap-animate text-[18px]">→</span>}
           >
             {ctaText}
           </Button>
@@ -113,8 +153,8 @@ export default function BetterProducts({ block }: BetterProductsProps) {
         <div className="w-full container mx-auto px-6 lg:px-[84px] py-12 lg:h-[163px] flex flex-col lg:flex-row gap-8 lg:gap-[60px] text-center lg:text-left items-center lg:justify-between">
 
           <div className="flex flex-col">
-            <p className="text-[#1b2845] text-[34px] font-playfair lg:leading-none">{footerBannerTitle}</p>
-            <p className="text-[#1b2845] text-[10px] font-medium tracking-[2.2px] lg:mt-2">{footerBannerSubtitle}</p>
+            <p className="gsap-animate text-[#1b2845] text-[34px] font-playfair lg:leading-none">{footerBannerTitle}</p>
+            <p className="gsap-animate text-[#1b2845] text-[10px] font-medium tracking-[2.2px] lg:mt-2">{footerBannerSubtitle}</p>
           </div>
 
           <div className="w-[70px] lg:w-px h-px lg:h-[70px] bg-[#baa192]/45 my-2 lg:my-0" />

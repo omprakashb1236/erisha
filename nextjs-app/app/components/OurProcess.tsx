@@ -1,10 +1,50 @@
+"use client";
+
 ﻿import React from 'react';
 import Image from "next/image";
 import Button from "./Button";
 
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 
 
 export default function OurProcess({ block }: { block?: any }) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    } else {
+      // Fallback
+      gsap.from(containerRef.current!.children, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const eyebrow = block?.eyebrow || "OUR PROCESS";
   const headingLine1 = block?.headingLine1 || "From an idea";
   const headingLine2 = block?.headingLine2 || "to ";
@@ -44,17 +84,17 @@ export default function OurProcess({ block }: { block?: any }) {
         : '/start-project';
 
   return (
-    <section className="relative w-full bg-[#f9f5ef] overflow-hidden">
+    <section ref={containerRef as any} className="relative w-full bg-[#f9f5ef] overflow-hidden">
 
       <div className="w-full container mx-auto flex flex-col pt-12 lg:pt-0 relative">
 
         {/* Intro */}
         <div className="flex flex-col  lg:pt-[47px] relative z-20">
 
-          <p className="text-[#965745] text-[11px] font-medium tracking-[3.2px] mb-4">{eyebrow}</p>
+          <p className="gsap-animate text-[#965745] text-[11px] font-medium tracking-[3.2px] mb-4">{eyebrow}</p>
           <div className="w-[48px] h-px bg-[#965745]/55 mb-8 lg:mb-6" />
 
-          <h2 className="text-[#1b2845] max-w-[500px] font-playfair leading-none mb-6 text-5xl lg:text-[72px]">
+          <h2 className="gsap-animate text-[#1b2845] max-w-[500px] font-playfair leading-none mb-6 text-5xl lg:text-[72px]">
 
             <span className="block">
               <span className="text-5xl lg:text-[72px]">{headingLine1}</span>{" "}
@@ -74,7 +114,7 @@ export default function OurProcess({ block }: { block?: any }) {
 
           {/* Desktop Decoratives in Intro */}
           <div className="hidden lg:block absolute left-[575px] top-[68px] w-[845px] h-[150px] -z-10">
-            <Image src="/process-loop.svg" alt="" fill className="object-cover" />
+            <Image src="/process-loop.svg" alt="" fill className="gsap-animate object-cover" />
           </div>
 
           <div className="hidden lg:block absolute left-[1218px] top-[145px] w-[160px] h-[160px]">
@@ -88,10 +128,10 @@ export default function OurProcess({ block }: { block?: any }) {
 
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-[25px] w-full min-w-max">
             {steps.map((step: any, idx: number) => (
-              <div key={idx} className="flex flex-col lg:w-[210px] relative">
+              <div key={idx} className="gsap-animate flex flex-col lg:w-[210px] relative">
 
                 <div className="flex items-center gap-4 lg:block">
-                  <p className="text-[#965745] text-[24px] font-playfair tracking-[-0.2px] leading-[32px] lg:mb-4">
+                  <p className="gsap-animate text-[#965745] text-[24px] font-playfair tracking-[-0.2px] leading-[32px] lg:mb-4">
                     {step.num}
                   </p>
 
@@ -99,7 +139,7 @@ export default function OurProcess({ block }: { block?: any }) {
                     <Image src="/process-node.svg" alt="" fill />
                   </div>
 
-                  <p className="text-[#1b2845] text-[11.5px] font-medium tracking-[2.2px] uppercase lg:mb-4">
+                  <p className="gsap-animate text-[#1b2845] text-[11.5px] font-medium tracking-[2.2px] uppercase lg:mb-4">
                     {step.title}
                   </p>
                 </div>
@@ -109,7 +149,7 @@ export default function OurProcess({ block }: { block?: any }) {
                 </div>
 
                 <div className="w-full lg:w-[198px] h-[210px] rounded-[11px] overflow-hidden relative">
-                  <Image src={step.img} alt={step.title} fill className="object-cover" />
+                  <Image src={step.img} alt={step.title} fill className="gsap-animate object-cover" />
                 </div>
               </div>
             ))}
@@ -135,7 +175,7 @@ export default function OurProcess({ block }: { block?: any }) {
               <React.Fragment key={i}>
                 <div className="flex items-center lg:flex-col gap-4 lg:w-[130px]">
                   <div className="w-[42px] h-[42px] relative shrink-0"><Image src={val.icon || "/footer-icon0.svg"} alt="" fill /></div>
-                  <p className="text-[#1b2845] text-[9.3px] font-medium tracking-[2.3px] leading-[17px] lg:text-center whitespace-pre-wrap">{val.title}</p>
+                  <p className="gsap-animate text-[#1b2845] text-[9.3px] font-medium tracking-[2.3px] leading-[17px] lg:text-center whitespace-pre-wrap">{val.title}</p>
                 </div>
                 {i < footerValues.length - 1 && (
                   <div className="hidden lg:block w-px h-[82px] bg-[#b88e78]/40 mx-[15px]" />
@@ -147,7 +187,7 @@ export default function OurProcess({ block }: { block?: any }) {
               href={ctaLink}
               variant="primary"
               className="w-full sm:w-auto lg:w-[220px] h-[50px] rounded-[25px] mt-6 sm:mt-0 lg:ml-[25px] !text-[12px] tracking-[0.6px]"
-              icon={<span className="text-[20px] font-normal leading-[22px] -mt-1 ml-2">→</span>}
+              icon={<span className="gsap-animate text-[20px] font-normal leading-[22px] -mt-1 ml-2">→</span>}
             >
               {ctaText}
             </Button>

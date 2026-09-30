@@ -11,6 +11,7 @@
     "typegen": "sanity typegen generate"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@mux/mux-video-react": "^0.24.3",
     "@reduxjs/toolkit": "^2.7.0",
     "@sanity/client": "^6.27.2",
@@ -27,6 +28,7 @@
     "csrf": "^3.1.0",
     "date-fns": "^3.6.0",
     "formik": "^2.4.6",
+    "gsap": "^3.15.0",
     "lucide-react": "^0.475.0",
     "next": "^16.0.10",
     "next-i18next": "^15.3.1",

@@ -9,12 +9,37 @@ import type { ContactForm as ContactFormType } from "@/sanity.types";
 import { urlForImage } from "@/sanity/lib/utils"
 import { submitContactForm } from "@/app/actions/submitContact"
 
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 type ContactFormProps = {
   block?: ContactFormType;
   index?: number;
 };
 
 export default function ContactForm({ block }: ContactFormProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const eyebrow = block?.eyebrow || "";
   const headingLine1 = block?.headingLine1 || "";
@@ -134,18 +159,18 @@ export default function ContactForm({ block }: ContactFormProps) {
   };
 
   return (
-    <section className="relative w-full bg-[#f9f6f1]">
+    <section ref={containerRef as any} className="relative w-full bg-[#f9f6f1]">
       <div className="w-full container mx-auto py-16 lg:py-[100px] flex flex-col lg:flex-row gap-16 lg:gap-[150px]">
         <div className="flex-1 flex flex-col">
-          <p className="text-[#a2614f] text-[12px] font-medium tracking-[3.1px] leading-[18px] mb-4">{eyebrow}</p>
+          <p className="gsap-animate text-[#a2614f] text-[12px] font-medium tracking-[3.1px] leading-[18px] mb-4">{eyebrow}</p>
           <div className="w-[45px] h-px bg-[#a2614f]/45 mb-8" />
 
-          <h2 className="text-[#162437] font-playfair leading-none mb-6 text-5xl lg:text-[68px]">
+          <h2 className="gsap-animate text-[#162437] font-playfair leading-none mb-6 text-5xl lg:text-[68px]">
             <span className="block mb-2">{headingLine1}</span>
             <span className="block text-[#a2614f] font-extrabold italic mb-1">{headingLine2}</span>
           </h2>
 
-          <p className="text-[#4d535e] text-[16px] leading-[26px] max-w-[520px] mb-12 lg:mb-16">
+          <p className="gsap-animate text-[#4d535e] text-[16px] leading-[26px] max-w-[520px] mb-12 lg:mb-16">
             {description}
           </p>
 
@@ -156,7 +181,7 @@ export default function ContactForm({ block }: ContactFormProps) {
                   <div className="w-[40px] h-[40px] relative shrink-0">
                     <Image src={typeof feat.icon === 'string' ? feat.icon : '/contact-discuss.svg'} alt="" fill />
                   </div>
-                  <p className="text-[#4d535e] text-[11.5px] font-medium tracking-[2.4px] leading-[18px] lg:text-center whitespace-pre-wrap">{feat.title}</p>
+                  <p className="gsap-animate text-[#4d535e] text-[11.5px] font-medium tracking-[2.4px] leading-[18px] lg:text-center whitespace-pre-wrap">{feat.title}</p>
                 </div>
                 {i < features.length - 1 && (
                   <div className="hidden lg:block w-px h-[92px] bg-[#b0a69c]/40" />
@@ -166,7 +191,7 @@ export default function ContactForm({ block }: ContactFormProps) {
           </div>
 
           <div className="hidden lg:block w-[44px] h-px bg-[#b0a69c]/55 mt-16" />
-          <p className="hidden lg:block text-[#4d535e] text-[10.8px] font-medium tracking-[3.2px] mt-4">
+          <p className="gsap-animate hidden lg:block text-[#4d535e] text-[10.8px] font-medium tracking-[3.2px] mt-4">
             {bottomMicrocopy}
           </p>
         </div>
@@ -182,21 +207,21 @@ export default function ContactForm({ block }: ContactFormProps) {
           <form onSubmit={formik.handleSubmit} className="flex flex-col gap-10 lg:gap-12 w-full max-w-[460px] lg:pr-[60px]">
             <div className="flex flex-col sm:flex-row gap-10">
               <div className="flex-1 relative border-b border-[#b0a69c]/70 pb-2">
-                <input type="text" name="name" placeholder={namePlaceholder} className="w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
+                <input type="text" name="name" placeholder={namePlaceholder} className="gsap-animate w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
                 {formik.touched.name && formik.errors.name ? <div className="text-red-500 text-[10px] absolute -bottom-5">{formik.errors.name}</div> : null}
               </div>
               <div className="flex-1 relative border-b border-[#b0a69c]/70 pb-2">
-                <input type="text" name="company" placeholder={companyPlaceholder} className="w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.company} />
+                <input type="text" name="company" placeholder={companyPlaceholder} className="gsap-animate w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.company} />
                 {formik.touched.company && formik.errors.company ? <div className="text-red-500 text-[10px] absolute -bottom-5">{formik.errors.company}</div> : null}
               </div>
             </div>
 
-            <div className="relative border-b border-[#b0a69c]/70 pb-2">
-              <input type="email" name="email" placeholder={emailPlaceholder} className="w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
+            <div className="gsap-animate relative border-b border-[#b0a69c]/70 pb-2">
+              <input type="email" name="email" placeholder={emailPlaceholder} className="gsap-animate w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.email} />
               {formik.touched.email && formik.errors.email ? <div className="text-red-500 text-[10px] absolute -bottom-5">{formik.errors.email}</div> : null}
             </div>
 
-            <div className="relative border-b border-[#b0a69c]/70 pb-2">
+            <div className="gsap-animate relative border-b border-[#b0a69c]/70 pb-2">
               <Select
                 name="project"
                 placeholder={projectPlaceholder}
@@ -210,7 +235,7 @@ export default function ContactForm({ block }: ContactFormProps) {
               {formik.touched.project && formik.errors.project ? <div className="text-red-500 text-[10px] absolute -bottom-5">{formik.errors.project as string}</div> : null}
             </div>
 
-            <div className="relative border-b border-[#b0a69c]/70 pb-2">
+            <div className="gsap-animate relative border-b border-[#b0a69c]/70 pb-2">
               <Select
                 name="quantity"
                 placeholder={quantityPlaceholder}
@@ -223,17 +248,17 @@ export default function ContactForm({ block }: ContactFormProps) {
               />
             </div>
 
-            <div className="relative flex items-start border-b border-[#b0a69c]/70 pb-2">
-              <textarea name="message" placeholder={messagePlaceholder} rows={3} className="w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e] resize-none pr-8" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.message} />
+            <div className="gsap-animate relative flex items-start border-b border-[#b0a69c]/70 pb-2">
+              <textarea name="message" placeholder={messagePlaceholder} rows={3} className="gsap-animate w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e] resize-none pr-8" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.message} />
               <span className="text-[rgba(77,83,94,0.65)] text-[18px] leading-none absolute right-0 bottom-2 pointer-events-none">⌟</span>
             </div>
 
             <div className="flex flex-col items-start mt-2">
-              <button type="submit" disabled={isSubmitting} className="w-full sm:w-[310px] h-[52px] bg-[#b77462] disabled:opacity-70 disabled:cursor-not-allowed text-[#f9f6f1] rounded-[26px] flex items-center justify-between px-7 hover:bg-[#a2614f] transition-colors">
+              <button type="submit" disabled={isSubmitting} className="gsap-animate w-full sm:w-[310px] h-[52px] bg-[#b77462] disabled:opacity-70 disabled:cursor-not-allowed text-[#f9f6f1] rounded-[26px] flex items-center justify-between px-7 hover:bg-[#a2614f] transition-colors">
                 <span className="text-[12px] font-medium font-sans">{isSubmitting ? 'Sending...' : buttonText}</span>
                 <span className="text-[18px]">↗</span>
               </button>
-              <p className="mt-[40px] text-[10.5px] text-[#4d535e]">
+              <p className="gsap-animate mt-[40px] text-[10.5px] text-[#4d535e]">
                 Prefer email? <a href="mailto:hello@erishainternational.com" className="text-[#a2614f] hover:underline">hello@erishainternational.com</a>
               </p>
             </div>
@@ -243,7 +268,7 @@ export default function ContactForm({ block }: ContactFormProps) {
       <div className="footerimage">
         {block?.footerImage?.alt &&
           <Image src={urlForImage(block?.footerImage)?.url() || ""}
-            alt={block?.footerImage?.alt} width={1456} height={393} className="object-cover w-full" />
+            alt={block?.footerImage?.alt} width={1456} height={393} className="gsap-animate object-cover w-full" />
         }
       </div>
     </section>

@@ -10,6 +10,11 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { urlForImage, linkResolver } from "@/sanity/lib/utils";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const defaultCategories = [
   { num: "01", name: "BRAS & BRALETTES", active: true },
@@ -25,6 +30,7 @@ const defaultCards = [
 ];
 
 export default function WhatWeMake({ block: data }: any) {
+  const containerRef = useRef<HTMLElement>(null);
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
   const paginationRef = useRef<HTMLDivElement>(null);
@@ -37,8 +43,24 @@ export default function WhatWeMake({ block: data }: any) {
   const activeCategory = productLinesCategories[activeTab];
   const activeFamilies = activeCategory?.productFamilies || [];
 
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 75%",
+      }
+    });
+
+    tl.from(".wwm-eyebrow", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" })
+      .from(".wwm-heading-line", { y: 30, opacity: 0, duration: 0.8, stagger: 0.15, ease: "power3.out" }, "-=0.4")
+      .from(".wwm-desc", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
+      .from(".wwm-btn", { y: 20, opacity: 0, duration: 0.6, ease: "power3.out" }, "-=0.4")
+      .from(".wwm-carousel", { opacity: 0, x: 50, duration: 0.8, ease: "power3.out" }, "-=0.6")
+      .from(".wwm-tabs", { y: 30, opacity: 0, duration: 0.8, stagger: 0.1, ease: "power3.out" }, "-=0.4");
+  }, { scope: containerRef });
+
   return (
-    <section className="relative w-full bg-[#f9f4ee] overflow-hidden">
+    <section ref={containerRef} className="relative w-full bg-[#f9f4ee] overflow-hidden">
       
       <div className="w-full container mx-auto min-h-screen lg:min-h-[900px] flex flex-col justify-between pt-12 pb-8">
         
@@ -47,31 +69,31 @@ export default function WhatWeMake({ block: data }: any) {
           
           {/* Left Text Box */}
           <div className="flex flex-col z-20 flex-1 max-w-[450px]">
-            <p className="text-[#b86e58] text-[10px] font-bold tracking-[1px] leading-[1.75] uppercase mb-4 lg:mb-12">
+            <p className="wwm-eyebrow text-[#b86e58] text-[10px] font-bold tracking-[1px] leading-[1.75] uppercase mb-4 lg:mb-12">
               {data?.eyebrow || "WHAT WE MAKE"}
             </p>
 
             <h2 className="text-[#1b2845] text-5xl lg:text-[60px] leading-tight lg:leading-none mb-6 lg:mb-11 font-playfair">
-              <span className="block mb-1 lg:mb-2">{data?.headingLine1 || "Designed"}</span>
-              <span className="block mb-1 lg:mb-2">{data?.headingLine2 || "across"}</span>
-              <span className="block font-extrabold italic text-[#965745] lg:text-[54px]">{data?.headingLine3 || "every category."}</span>
+              <span className="wwm-heading-line block mb-1 lg:mb-2">{data?.headingLine1 || "Designed"}</span>
+              <span className="wwm-heading-line block mb-1 lg:mb-2">{data?.headingLine2 || "across"}</span>
+              <span className="wwm-heading-line block font-extrabold italic text-[#965745] lg:text-[54px]">{data?.headingLine3 || "every category."}</span>
             </h2>
 
-            <div className="text-[#4a505e] text-[15px] lg:text-[14px] leading-[1.4] mb-8 max-w-[370px]">
+            <div className="wwm-desc text-[#4a505e] text-[15px] lg:text-[14px] leading-[1.4] mb-8 max-w-[370px]">
               <p>{data?.description || "Erisha develops intimatewear and soft apparel across women’s, men’s and gender-inclusive collections — from refined intimates essentials to everyday layers, sleepwear and lounge pieces, with thoughtful construction, fabric development and private-label manufacturing expertise."}</p>
             </div>
 
-            <Button 
+            <div className="wwm-btn"><Button 
               href={data?.cta?.link ? (linkResolver(data.cta.link) || "/categories") : "/categories"} 
               className="w-full sm:w-[255px]"
               icon={<Image src="/hero-arrow-right.svg" alt="" width={13} height={13} />}
             >
               {data?.cta?.buttonText || "Explore Product Categories"}
-            </Button>
+            </Button></div>
           </div>
 
           {/* Right Carousel Box */}
-          <div className="w-full lg:w-[895px] relative">
+          <div className="wwm-carousel w-full lg:w-[895px] relative">
             {activeFamilies.length === 0 ? (
               <div className="flex items-center justify-center w-full h-[578px] text-[#4a505e] text-lg font-medium bg-[#fcf8f3] border border-[#d2bfaf]/50 rounded-[15px]">
                 No product families exist for this category.
@@ -177,7 +199,7 @@ export default function WhatWeMake({ block: data }: any) {
             return (
               <div 
                 key={idx} 
-                className="flex flex-col gap-2 border-b border-[#ad9c8c]/20 lg:border-none pb-4 lg:pb-0 lg:pt-4 relative flex-1 cursor-pointer"
+                className="wwm-tabs flex flex-col gap-2 border-b border-[#ad9c8c]/20 lg:border-none pb-4 lg:pb-0 lg:pt-4 relative flex-1 cursor-pointer"
                 onClick={() => setActiveTab(idx)}
               >
                 <div className="hidden lg:block absolute left-0 top-0 w-px h-[58px] bg-[#ad9c8c]/30 -ml-4" />

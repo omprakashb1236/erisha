@@ -1,7 +1,16 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import Button from './Button';
 import type { OurCommitment } from '@/sanity.types';
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 type OurCommitmentProps = {
   block?: OurCommitment;
@@ -9,6 +18,37 @@ type OurCommitmentProps = {
 };
 
 export default function OurCommitment({ block }: OurCommitmentProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    } else {
+      // Fallback
+      gsap.from(containerRef.current!.children, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const eyebrow = block?.eyebrow || 'OUR COMMITMENT';
   const headingLine1 = block?.headingLine1 || 'Quality in';
   const headingLine2 = block?.headingLine2 || 'every detail.';
@@ -69,7 +109,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
   const footerBannerRightText = block?.footerBannerRightText || 'PEOPLE / PLANET / PROGRESS';
 
   return (
-    <section className="relative w-full overflow-hidden bg-[#f9f5ef]">
+    <section ref={containerRef as any} className="relative w-full overflow-hidden bg-[#f9f5ef]">
       {/* Main Content Area */}
       <div className="w-full container flex flex-col pt-12 lg:pt-[40px]">
 
@@ -77,15 +117,15 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
         <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
           {/* Left Intro */}
           <div className="flex flex-col lg:mt-8 flex-1 max-w-[500px]">
-            <p className="text-[#965745] text-[11px] font-medium tracking-[3.4px] leading-[16px] mb-4">{eyebrow}</p>
+            <p className="gsap-animate text-[#965745] text-[11px] font-medium tracking-[3.4px] leading-[16px] mb-4">{eyebrow}</p>
             <div className="w-[48px] h-px bg-[#965745]/55 mb-8" />
 
-            <h2 className="text-[#1b2845] font-playfair leading-none mb-6 text-5xl lg:text-[70px]">
+            <h2 className="gsap-animate text-[#1b2845] font-playfair leading-none mb-6 text-5xl lg:text-[70px]">
               <span className="block mb-2 lg:mb-0">{headingLine1}</span>
               <span className="block text-[#965745] text-5xl lg:text-[62px] font-extrabold italic">{headingLine2}</span>
             </h2>
 
-            <p className="text-[#4a505e] text-[15px] leading-[24px] lg:mt-16">
+            <p className="gsap-animate text-[#4a505e] text-[15px] leading-[24px] lg:mt-16">
               {description}
             </p>
           </div>
@@ -97,8 +137,8 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
                 <div className="flex gap-4 items-start sm:w-[45%] lg:w-auto lg:flex-col lg:items-center lg:flex-1">
                   <div className="w-[42px] h-[42px] relative shrink-0"><Image src={feat.icon || '/footer-icon0.svg'} alt="" fill /></div>
                   <div className="lg:text-center lg:mt-4">
-                    <p className="text-[#1b2845] text-[9.5px] font-medium tracking-[2.2px] leading-[16px] whitespace-pre-wrap">{feat.title}</p>
-                    <p className="text-[#4a505e] text-[12.5px] leading-[19px] mt-2 lg:mt-4 whitespace-pre-wrap">{feat.subtitle}</p>
+                    <p className="gsap-animate text-[#1b2845] text-[9.5px] font-medium tracking-[2.2px] leading-[16px] whitespace-pre-wrap">{feat.title}</p>
+                    <p className="gsap-animate text-[#4a505e] text-[12.5px] leading-[19px] mt-2 lg:mt-4 whitespace-pre-wrap">{feat.subtitle}</p>
                   </div>
                 </div>
                 {i < features.length - 1 && (
@@ -122,11 +162,11 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
 
           <div className="grid grid-cols-2 lg:flex lg:flex-row gap-4 lg:gap-6 flex-1 max-w-[885px]">
             {gallery.map((item: any, i: number) => (
-              <div key={i} className="flex flex-col gap-3 lg:gap-6 w-full lg:w-[204px]">
+              <div key={i} className="gsap-animate flex flex-col gap-3 lg:gap-6 w-full lg:w-[204px]">
                 <div className="relative w-full aspect-[2/3] lg:h-[293px] rounded-sm overflow-hidden">
-                  <Image src={item.image} alt="" fill className="object-cover" />
+                  <Image src={item.image} alt="" fill className="gsap-animate object-cover" />
                 </div>
-                <p className="text-[#1b2845] text-[9.5px] font-medium tracking-[2.2px] lg:pl-1">{item.caption}</p>
+                <p className="gsap-animate text-[#1b2845] text-[9.5px] font-medium tracking-[2.2px] lg:pl-1">{item.caption}</p>
               </div>
             ))}
           </div>
@@ -135,7 +175,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
             <div className="w-[42px] h-px bg-[#b89e8f]/55 mb-6" />
             <div className="font-playfair leading-none text-[39px] text-[#1b2845] mb-2">
               <p>{rightCTAHeadingLine1}</p>
-              <p className="font-extrabold italic text-[33px]">{rightCTAHeadingLine2}</p>
+              <p className="gsap-animate font-extrabold italic text-[33px]">{rightCTAHeadingLine2}</p>
             </div>
             <div className="text-[#4a505e] text-[13.5px] leading-[20px] mb-4">
               <p>{rightCTADescription}</p>
@@ -144,7 +184,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
               href={ctaLink}
               variant="light"
               className="w-[180px] h-[42px] !border-[#965745]/60 !text-[#1b2845] !justify-between !px-[22px]"
-              icon={<span className="text-[20px]">→</span>}
+              icon={<span className="gsap-animate text-[20px]">→</span>}
             >
               {ctaText}
             </Button>
@@ -156,7 +196,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
 
       {/* Decorative Right Graphic Desktop */}
       <div className="hidden xl:block absolute right-[20px] xl:right-0 top-[160px] w-[206px] h-[562px]">
-        <Image src="/commitment-detail.png" alt="" fill className="object-cover object-left" />
+        <Image src="/commitment-detail.png" alt="" fill className="gsap-animate object-cover object-left" />
         <div className="absolute right-[50px] top-[447px] text-[#faf6f2] text-[9.1px] font-medium tracking-[2.6px] leading-[18px]">
           {rightGraphicText.map((line: string, i: number) => <p key={i}>{line}</p>)}
         </div>
@@ -170,9 +210,9 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
           {metrics.map((metric: any, i: number) => (
             <React.Fragment key={i}>
               <div className="flex flex-col items-center border-t lg:border-none border-[#b89e8f]/35 pt-8 lg:pt-0">
-                <p className="text-[#1b2845] text-[42px] lg:text-[38px] font-playfair leading-[40px]">{metric.value}</p>
-                <p className="text-[#1b2845] text-[9.5px] font-medium tracking-[2.4px] mt-2 lg:mt-4">{metric.title}</p>
-                <p className="text-[#4a505e] text-[12px] mt-1 lg:mt-2">{metric.description}</p>
+                <p className="gsap-animate text-[#1b2845] text-[42px] lg:text-[38px] font-playfair leading-[40px]">{metric.value}</p>
+                <p className="gsap-animate text-[#1b2845] text-[9.5px] font-medium tracking-[2.4px] mt-2 lg:mt-4">{metric.title}</p>
+                <p className="gsap-animate text-[#4a505e] text-[12px] mt-1 lg:mt-2">{metric.description}</p>
               </div>
               {i < metrics.length - 1 && (
                 <div className="hidden lg:block w-px h-[82px] bg-[#b89e8f]/35" />
@@ -192,9 +232,9 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
       {/* Footer Banner */}
       <div className="bg-[#b17c71] w-full">
         <div className="w-full xl:max-w-[800px] m-auto py-8 lg:py-10 flex flex-col lg:flex-row gap-4 lg:gap-0 lg:justify-between items-center text-center">
-          <p className="text-[#faf6f2] text-[9.2px] font-medium tracking-[4px]">{footerBannerLeftText}</p>
+          <p className="gsap-animate text-[#faf6f2] text-[9.2px] font-medium tracking-[4px]">{footerBannerLeftText}</p>
           <div className="w-[44px] lg:w-px h-px lg:h-[44px] bg-[#faf6f2]/40" />
-          <p className="text-[#faf6f2] text-[9.2px] font-medium tracking-[4px]">{footerBannerRightText}</p>
+          <p className="gsap-animate text-[#faf6f2] text-[9.2px] font-medium tracking-[4px]">{footerBannerRightText}</p>
         </div>
       </div>
 

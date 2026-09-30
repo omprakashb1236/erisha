@@ -1,3 +1,5 @@
+"use client";
+
 import React from 'react';
 import Image from 'next/image';
 import Button from './Button';
@@ -5,11 +7,49 @@ import ContactForm from './ContactForm';
 // @ts-ignore
 import type { FooterBlock } from '@/sanity.types';
 
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 type FooterProps = {
   fragment?: any;
 };
 
 export default function Footer({ fragment: block }: FooterProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    } else {
+      // Fallback
+      gsap.from(containerRef.current!.children, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const title = block?.title || "E R I S H A";
   const subtitle = block?.subtitle || "I N T E R N A T I O N A L";
   const descriptionLines = block?.descriptionLines?.length ? block.descriptionLines : [
@@ -48,14 +88,14 @@ export default function Footer({ fragment: block }: FooterProps) {
       {block?.contactForm && <ContactForm block={block.contactForm} />}
       <section className="relative w-full bg-[#f9f6f1]">
         {/* Footer Section */}
-        <footer className="bg-[#162433] text-[#f9f6f1]">
+        <footer ref={containerRef} className="bg-[#162433] text-[#f9f6f1]">
         <div className="w-full container mx-auto py-10 lg:py-[60px] flex flex-col gap-8 lg:gap-16">
           
           <div className="flex flex-col lg:flex-row justify-between gap-8 lg:items-start border-b border-[rgba(249,246,241,0.25)] lg:border-none pb-8 lg:pb-0 px-0">
             {/* Logo Area */}
             <div className="flex flex-col gap-2 max-w-[300px]">
-              <p className="font-playfair text-[35px] leading-none">{title}</p>
-              <p className="text-[11px] text-[rgba(249,246,241,0.9)] font-medium tracking-[2.5px] mb-4">{subtitle}</p>
+              <p className="gsap-animate font-playfair text-[35px] leading-none">{title}</p>
+              <p className="gsap-animate text-[11px] text-[rgba(249,246,241,0.9)] font-medium tracking-[2.5px] mb-4">{subtitle}</p>
               <div className="text-[11.5px] text-[rgba(249,246,241,0.85)] leading-[20px]">
                 {descriptionLines.map((line: string, i: number) => <p key={i}>{line}</p>)}
               </div>
@@ -65,8 +105,8 @@ export default function Footer({ fragment: block }: FooterProps) {
             {/* Links Columns */}
             <div className="grid grid-cols-2 lg:flex lg:flex-row gap-8 lg:gap-0 lg:flex-1 lg:justify-end">
               {linkColumns.map((col: any, i: number) => (
-                <div key={i} className="flex flex-col gap-6 lg:w-[220px]">
-                  <p className="text-[11px] font-medium tracking-[2.2px]">{col.heading}</p>
+                <div key={i} className="gsap-animate flex flex-col gap-6 lg:w-[220px]">
+                  <p className="gsap-animate text-[11px] font-medium tracking-[2.2px]">{col.heading}</p>
                   <div className="flex flex-col gap-3 text-[11px] text-[rgba(249,246,241,0.88)]">
                     {col.links?.map((linkItem: any, j: number) => renderLink(linkItem, j))}
                   </div>
@@ -75,7 +115,7 @@ export default function Footer({ fragment: block }: FooterProps) {
              
 
               <div className="flex flex-col gap-6 col-span-2 lg:col-span-1 lg:w-[260px]">
-                <p className="text-[11px] font-medium tracking-[2.2px]">GET IN TOUCH</p>
+                <p className="gsap-animate text-[11px] font-medium tracking-[2.2px]">GET IN TOUCH</p>
                 <div className="flex flex-col gap-3 text-[11px] text-[rgba(249,246,241,0.88)] whitespace-pre-wrap">
                   <p>{`✉   hello@erishainternational.com`}</p>
                   <p>{`☎   +91 11 4167 0000`}</p>

@@ -1,12 +1,52 @@
+"use client";
+
 import Image from "next/image";
 import Button from "./Button";
 import type { ManufacturingPartnership } from "@/sanity.types";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 export default function ManufacturingPartnership({
   block,
 }: {
   block?: ManufacturingPartnership;
 }) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    } else {
+      // Fallback
+      gsap.from(containerRef.current!.children, {
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const eyebrow = block?.eyebrow || "";
   const headingLine1 = block?.headingLine1 || "More than";
   const headingLine2 = block?.headingLine2 || "production.";
@@ -76,25 +116,25 @@ export default function ManufacturingPartnership({
     (block?.blueprintImage as any) || "/garment-blueprint.png";
 
   return (
-    <section className="manufacturingPartnership w-full overflow-hidden bg-[#0d2844]">
+    <section ref={containerRef as any} className="manufacturingPartnership w-full overflow-hidden bg-[#0d2844]">
       <div className="container mx-auto w-full">
         <div className="grid grid-cols-1 gap-12 py-16 md:gap-16 md:py-20 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-12 lg:py-[84px] xl:grid-cols-[minmax(0,590px)_1px_minmax(0,1fr)] xl:gap-0 2xl:grid-cols-[minmax(0,590px)_1px_minmax(0,520px)_minmax(200px,230px)]">
           {/* Left Content */}
           <div className="flex min-w-0 flex-col xl:pr-10 2xl:pr-[40px]">
-            <p className="text-[10px] font-medium uppercase tracking-[2.5px] text-[#e5a191] sm:text-[11px] sm:tracking-[2.7px] xl:text-[12px] xl:tracking-[3px]">
+            <p className="gsap-animate text-[10px] font-medium uppercase tracking-[2.5px] text-[#e5a191] sm:text-[11px] sm:tracking-[2.7px] xl:text-[12px] xl:tracking-[3px]">
               {eyebrow}
             </p>
 
             <div className="mb-7 mt-5 h-[2px] w-[38px] bg-[#e5a191] sm:mb-8 sm:mt-6 sm:w-[42px]" />
 
-            <h2 className="font-playfair leading-[0.94] text-[#f7f1e9] text-[46px] sm:text-[54px] md:text-[60px] lg:text-[58px] xl:text-[68px] 2xl:text-[72px]">
+            <h2 className="gsap-animate font-playfair leading-[0.94] text-[#f7f1e9] text-[46px] sm:text-[54px] md:text-[60px] lg:text-[58px] xl:text-[68px] 2xl:text-[72px]">
               <span className="block">{headingLine1}</span>
               <span className="block text-[43px] font-extrabold italic sm:text-[51px] md:text-[57px] lg:text-[55px] xl:text-[62px] 2xl:text-[66px]">
                 {headingLine2}
               </span>
             </h2>
 
-            <p className="mt-10 max-w-[520px] text-[14px] leading-[24px] text-[#f7f1e9] sm:mt-12 sm:text-[15px] sm:leading-[26px] md:text-[16px] md:leading-[28px] xl:mt-auto xl:pt-[130px]">
+            <p className="gsap-animate mt-10 max-w-[520px] text-[14px] leading-[24px] text-[#f7f1e9] sm:mt-12 sm:text-[15px] sm:leading-[26px] md:text-[16px] md:leading-[28px] xl:mt-auto xl:pt-[130px]">
               {description}
             </p>
 
@@ -103,7 +143,7 @@ export default function ManufacturingPartnership({
                 href={ctaLink}
                 variant="light"
                 className="!h-[52px] !w-[280px] !rounded-[27px] !bg-[#f7f1e9] !px-7 !text-[#0d2844] sm:!h-[54px] sm:!w-[292px]"
-                icon={<span className="text-[22px] leading-[24px]">→</span>}
+                icon={<span className="gsap-animate text-[22px] leading-[24px]">→</span>}
               >
                 <span className="text-[13px] font-medium tracking-[0.2px]">
                   {ctaText}
@@ -118,7 +158,7 @@ export default function ManufacturingPartnership({
                   alt=""
                   width={28}
                   height={28}
-                  className="h-7 w-7 shrink-0"
+                  className="gsap-animate h-7 w-7 shrink-0"
                 />
 
                 <div className="text-[8px] font-medium leading-[13px] tracking-[2px] text-[rgba(247,241,233,0.88)]">
@@ -142,7 +182,7 @@ export default function ManufacturingPartnership({
                 return (
                   <div
                     key={idx}
-                    className="grid grid-cols-[48px_1px_minmax(0,1fr)] gap-x-4 sm:grid-cols-[55px_1px_minmax(0,1fr)] sm:gap-x-5 xl:grid-cols-[58px_1px_minmax(0,1fr)] xl:gap-x-[14px]"
+                    className="gsap-animate grid grid-cols-[48px_1px_minmax(0,1fr)] gap-x-4 sm:grid-cols-[55px_1px_minmax(0,1fr)] sm:gap-x-5 xl:grid-cols-[58px_1px_minmax(0,1fr)] xl:gap-x-[14px]"
                   >
                     <span className="font-playfair leading-none text-[#e5a191] text-[32px] sm:text-[35px] xl:text-[38px]">
                       {num}
@@ -151,11 +191,11 @@ export default function ManufacturingPartnership({
                     <span className="mt-1 h-[55px] w-px bg-[rgba(229,161,145,0.55)] sm:h-[60px] xl:h-[62px]" />
 
                     <div className="min-w-0">
-                      <h3 className="font-playfair text-[21px] leading-[26px] text-[#f7f1e9] sm:text-[22px] sm:leading-[27px] xl:text-[24px] xl:leading-[28px]">
+                      <h3 className="gsap-animate font-playfair text-[21px] leading-[26px] text-[#f7f1e9] sm:text-[22px] sm:leading-[27px] xl:text-[24px] xl:leading-[28px]">
                         {step.title}
                       </h3>
 
-                      <p className="mt-2 whitespace-pre-line text-[13.5px] leading-[21px] text-[#f7f1e9] sm:text-[14px] sm:leading-[22px] xl:text-[14.5px]">
+                      <p className="gsap-animate mt-2 whitespace-pre-line text-[13.5px] leading-[21px] text-[#f7f1e9] sm:text-[14px] sm:leading-[22px] xl:text-[14.5px]">
                         {step.description}
                       </p>
                     </div>
@@ -174,7 +214,7 @@ export default function ManufacturingPartnership({
                   alt=""
                   width={330}
                   height={650}
-                  className="h-auto w-full max-w-[330px] object-contain"
+                  className="gsap-animate h-auto w-full max-w-[330px] object-contain"
                 />
               </div>
 
@@ -200,9 +240,9 @@ export default function ManufacturingPartnership({
             {bottomTags.map((item: string, idx: number) => (
               <div
                 key={idx}
-                className="flex min-h-[34px] items-center lg:border-r lg:border-[rgba(229,161,145,0.6)] lg:px-[30px] xl:px-[55px] 2xl:px-[76px]"
+                className="gsap-animate flex min-h-[34px] items-center lg:border-r lg:border-[rgba(229,161,145,0.6)] lg:px-[30px] xl:px-[55px] 2xl:px-[76px]"
               >
-                <p className="text-[10px] font-medium tracking-[1.6px] text-[#f7f1e9] sm:text-[11px] sm:tracking-[1.8px]">
+                <p className="gsap-animate text-[10px] font-medium tracking-[1.6px] text-[#f7f1e9] sm:text-[11px] sm:tracking-[1.8px]">
                   {item}
                 </p>
               </div>
