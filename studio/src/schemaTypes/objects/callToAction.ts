@@ -33,7 +33,7 @@ export const callToAction = defineType({
   ],
   preview: {
     select: {
-      title: 'heading',
+      title: 'buttonText',
     },
     prepare(selection) {
       const {title} = selection

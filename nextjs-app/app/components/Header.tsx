@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -25,6 +25,11 @@ export default function Header({ fragment }: HeaderProps) {
   const rightNav = fragment?.primaryNavigationRight || [];
 
   const ctaButton = fragment?.ctaButton;
+  
+  const ctaSlug = ctaButton?.link?.page?.slug || (typeof ctaButton?.link?.page === 'string' && ctaButton?.link?.page);
+  const ctaHref = ctaButton?.link?.linkType === 'page' && ctaSlug 
+    ? (ctaSlug === 'home' ? '/' : '/' + ctaSlug) 
+    : ctaButton?.link?.path || ctaButton?.link?.href || '/start-project';
 
   const renderNav = (navItems: any[]) => {
     return navItems.map((item: any, i: number) => {
@@ -125,7 +130,7 @@ export default function Header({ fragment }: HeaderProps) {
           {renderNav(rightNav)}
           
           <Button 
-            href={ctaButton?.linkType === 'page' && (ctaButton?.page?.slug || (typeof ctaButton?.page === 'string' && ctaButton?.page)) ? ((ctaButton?.page?.slug || ctaButton?.page) === 'home' ? '/' : '/' + (ctaButton?.page?.slug || ctaButton?.page)) : ctaButton?.path || ctaButton?.href || '/start-project'}
+            href={ctaHref}
             variant="header"
             icon={<Image src="/cta-icon.svg" alt="" width={10} height={10} className="w-[10px] h-[10px] ml-2" />}
           >
