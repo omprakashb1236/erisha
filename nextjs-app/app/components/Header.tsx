@@ -1,6 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import { useRef } from 'react';
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
 import Image from "next/image";
 import { useState } from "react";
 import Button from "./Button";
@@ -12,6 +16,31 @@ type HeaderProps = {
 
 export default function Header({ fragment }: HeaderProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  
+  useGSAP(() => {
+    if (isMobileMenuOpen) {
+      gsap.to(menuRef.current, {
+        height: '100vh',
+        opacity: 1,
+        duration: 0.5,
+        ease: "power3.inOut"
+      });
+      gsap.fromTo(menuRef.current!.querySelectorAll('a'), 
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 0.5, stagger: 0.08, ease: "power3.out", delay: 0.2 }
+      );
+    } else {
+      gsap.to(menuRef.current, {
+        height: 0,
+        opacity: 0,
+        duration: 0.4,
+        ease: "power3.inOut"
+      });
+    }
+  }, { scope: containerRef, dependencies: [isMobileMenuOpen] });
+
   const pathname = usePathname();
 
   const utilityLeft = fragment?.utilityTextLeft || "Intimatewear & Apparel Manufacturing";
@@ -59,7 +88,7 @@ export default function Header({ fragment }: HeaderProps) {
   };
 
   return (
-    <header className="w-full relative md:absolute z-50 md:h-[132px] h-[80px]">
+    <header ref={containerRef} className="w-full relative md:absolute z-50 md:h-[132px] h-[80px]">
       {/* Background Top Band */}
       <div className="absolute top-0 left-0 w-full md:h-[132px] h-[80px] bg-[#f9f4eebd] -z-20" />
 
@@ -84,12 +113,18 @@ export default function Header({ fragment }: HeaderProps) {
         
         {/* Mobile Menu Button */}
         <button 
-          className="lg:hidden text-[#122c52] p-2 pl-0"
+          className="lg:hidden text-[#122c52] p-2 pl-0 z-50 relative"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
-            <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
+          {isMobileMenuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-8 h-8">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+          )}
         </button>
 
         {/* Primary Navigation - Left */}
@@ -147,8 +182,12 @@ export default function Header({ fragment }: HeaderProps) {
       </div>
 
       {/* Mobile Menu Dropdown */}
-      {isMobileMenuOpen && (
-        <div className="absolute top-[132px] left-0 w-full bg-[#f9f4ee] shadow-lg lg:hidden z-40 border-t border-[#daccc2] p-6 flex flex-col gap-4">
+      <div 
+        ref={menuRef}
+        className="absolute top-[82px] left-0 w-full bg-[#f9f4ee] shadow-2xl lg:hidden z-40 border-t  overflow-hidden"
+        style={{ height: 0, opacity: 0 }}
+      >
+        <div className="p-8 pt-10 flex flex-col gap-8 h-screen">
           {[...leftNav, ...rightNav].map((item: any, i: number) => {
             const slug = item.link?.page?.slug || (typeof item.link?.page === 'string' && item.link?.page);
             const href = item.link?.linkType === 'page' && slug ? (slug === 'home' ? '/' : '/' + slug) : item.link?.path || item.link?.href || '#';
@@ -156,13 +195,28 @@ export default function Header({ fragment }: HeaderProps) {
             const isActive = pathname === href;
             
             return (
-              <Link key={i} href={href} className={`${isActive ? 'text-[#be6852]' : 'text-[#122c52]'} text-lg font-medium`}>
+              <Link 
+                key={i} 
+                href={href} 
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`${isActive ? 'text-[#be6852]' : 'text-[#122c52]'} text-3xl font-playfair tracking-wide block`}
+              >
                 {text}
               </Link>
-            )
+            );
           })}
+          
+          <div className="mt-8 border-t border-[#daccc2] pt-8 flex flex-col gap-4">
+            <Link 
+              href={ctaHref} 
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="text-[#122c52] text-lg font-medium underline tracking-wide"
+            >
+              {ctaButton?.buttonText || "Start"}
+            </Link>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
