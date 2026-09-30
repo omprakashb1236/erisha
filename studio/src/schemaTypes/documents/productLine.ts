@@ -1,4 +1,4 @@
-﻿import {ProjectsIcon} from '@sanity/icons'
+import {ProjectsIcon} from '@sanity/icons'
 import {defineField, defineType} from 'sanity'
 
 export const productLine = defineType({
@@ -11,6 +11,7 @@ export const productLine = defineType({
     { name: 'media', title: 'Media' },
     { name: 'relationships', title: 'Relationships' },
     { name: 'filters', title: 'Product Line Filters' },
+    { name: 'bottomSection', title: 'Bottom Section (Development Focus)' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -125,6 +126,12 @@ export const productLine = defineType({
       type: 'array',
       of: [{ type: 'reference', to: [{ type: 'filterOption' }] }],
       group: 'filters',
+    }),
+    defineField({
+      name: 'developmentFocus',
+      title: 'Development Focus (Bottom Block)',
+      type: 'developmentFocus',
+      group: 'bottomSection',
     }),
     defineField({
       name: 'seo',

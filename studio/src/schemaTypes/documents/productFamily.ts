@@ -11,6 +11,7 @@ export const productFamily = defineType({
     { name: 'media', title: 'Media' },
     { name: 'relationships', title: 'Relationships' },
     { name: 'attributes', title: 'Product Family Attributes' },
+    { name: 'bottomSection', title: 'Bottom Section (Development Focus)' },
     { name: 'seo', title: 'SEO' },
   ],
   fields: [
@@ -135,9 +136,15 @@ export const productFamily = defineType({
       group: 'attributes',
     }),
     defineField({
+      name: 'developmentFocus',
+      title: 'Development Focus (Bottom Block)',
+      type: 'developmentFocus',
+      group: 'bottomSection',
+    }),
+    defineField({
       name: 'seo',
       title: 'SEO Settings',
-      type: 'seo',
+      type: 'seoMetaFields',
       group: 'seo',
     }),
   ],

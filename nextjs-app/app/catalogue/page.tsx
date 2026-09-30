@@ -23,8 +23,8 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   });
 
   return {
-    title: page?.seo?.metaTitle,
-    description: page?.heading,
+    title: page?.seo?.metaTitle || "E R I S H A I N T E R N A T I O N A L",
+    description: page?.heading || "Erisha International offers premium lingerie and intimate apparel, blending elegant design, comfort, quality fabrics, and thoughtful craftsmanship.",
   } satisfies Metadata;
 }
 

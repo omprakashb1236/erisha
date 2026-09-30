@@ -8,6 +8,25 @@ import CatalogueFilters from "@/app/components/catalogue/CatalogueFilters";
 import Header from "@/app/components/Header";
 import ProductBanner from "@/app/components/ProductBanner";
 import Footer from "@/app/components/Footer";
+import DevelopmentFocus from "@/app/components/catalogue/DevelopmentFocus";
+import { Metadata } from "next";
+
+type Props = {
+  params: Promise<{ locale: string; slug: string }>;
+};
+
+export async function generateMetadata(props: Props): Promise<Metadata> {
+
+  const page = await sanityFetchCustom({
+    query: productLineBySlugQuery,
+    tags: [`productLine`],
+  });
+
+  return {
+    title: page?.seo?.metaTitle || "E R I S H A I N T E R N A T I O N A L",
+    description: page?.heading || "Erisha International offers premium lingerie and intimate apparel, blending elegant design, comfort, quality fabrics, and thoughtful craftsmanship.",
+  } satisfies Metadata;
+}
 
 export default async function ProductLinePage({
   params,
@@ -143,10 +162,21 @@ export default async function ProductLinePage({
         <section className="w-full bg-[#fefaf6] py-[60px] lg:py-[80px]">
           <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col">
 
-            <p className="text-[#b86e58] text-[9px] lg:text-[10px] font-medium tracking-[2px] lg:tracking-[2.5px] leading-[16px] uppercase mb-[20px] lg:mb-[26px]">
-              EXPLORE PRODUCT FAMILIES
-            </p>
-            <div className="w-full h-px bg-[#d2bfaf]/50 mb-[40px] lg:mb-[50px]" />
+            {/* Replaced Header for Product Families */}
+            <div className="flex flex-col w-full mb-[40px] lg:mb-[50px]">
+              <p className="text-[#b86e58] text-[9px] lg:text-[10px] font-medium tracking-[2px] lg:tracking-[2.5px] leading-[16px] uppercase mb-[20px] lg:mb-[26px]">
+                {productLine.title} / {filteredFamilies?.length || 0} {(filteredFamilies?.length === 1) ? 'MODEL' : 'MODELS'}
+              </p>
+              
+              <div className="flex flex-col lg:flex-row lg:justify-between lg:items-end gap-6 lg:gap-[60px] pb-[30px] border-b border-[#d2bfaf]/50">
+                <h2 className="font-playfair text-[#1b2845] text-3xl lg:text-[40px] leading-[1.1] lg:leading-[46px] max-w-[650px]">
+                  Browse individual styles in the selected category.
+                </h2>
+                <p className="text-[#4a505e] text-[13px] leading-[20px] max-w-[450px]">
+                  Model codes and details are structured for client review and can be replaced with your live catalogue data.
+                </p>
+              </div>
+            </div>
 
             {filteredFamilies && filteredFamilies.length > 0 ? (
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-[30px] gap-y-[40px] lg:gap-y-[60px]">
@@ -166,6 +196,9 @@ export default async function ProductLinePage({
             )}
           </div>
         </section>
+
+        <DevelopmentFocus data={productLine.developmentFocus || {}} />
+
       </main>
       <Footer fragment={footerData?.footer} />
     </>
