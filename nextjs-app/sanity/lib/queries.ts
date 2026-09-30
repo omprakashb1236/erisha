@@ -1,4 +1,4 @@
-import { defineQuery, groq } from "next-sanity";
+﻿import { defineQuery, groq } from "next-sanity";
 
 export const settingsQuery = defineQuery(`*[_type == "settings"][0]`);
 
@@ -934,6 +934,13 @@ export const footerQuery = defineQuery(`*[_type == "fragment" && type == "Footer
         "car": car->slug.current,
       }
   }
+    },
+    contactForm {
+      ...,
+      features[] {
+        ...,
+        "icon": icon.asset->url
+      },
     }
   }
 }`);

@@ -113,6 +113,20 @@ export const structure: StructureResolver = (S: StructureBuilder) =>
       S.divider(),
 
       S.listItem()
+        .title("Contact Submissions")
+        .schemaType('contactSubmission')
+        .icon(DocumentIcon)
+        .child(
+          S.documentList()
+            .id('all-contact-submissions')
+            .title('Contact Submissions')
+            .schemaType('contactSubmission')
+            .filter('_type == "contactSubmission"')
+        ),
+
+      S.divider(),
+
+      S.listItem()
         .title('Site Settings')
         .child(S.document().schemaType('settings').documentId('siteSettings'))
         .icon(CogIcon),

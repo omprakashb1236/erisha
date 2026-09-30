@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React from "react";
 import Image from "next/image";
@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import Select from "react-select";
 import type { ContactForm as ContactFormType } from "@/sanity.types";
 import { urlForImage } from "@/sanity/lib/utils"
+import { submitContactForm } from "@/app/actions/submitContact"
 
 type ContactFormProps = {
   block?: ContactFormType;
@@ -14,19 +15,16 @@ type ContactFormProps = {
 };
 
 export default function ContactForm({ block }: ContactFormProps) {
-  const eyebrow = block?.eyebrow || "LET'S CREATE TOGETHER";
-  const headingLine1 = block?.headingLine1 || "Your next collection";
-  const headingLine2 = block?.headingLine2 || "starts with";
-  const description = block?.description || "Whether you are developing your first collection, expanding an established range or looking for a reliable private-label manufacturing partner, we would love to understand what you are creating.";
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const eyebrow = block?.eyebrow || "";
+  const headingLine1 = block?.headingLine1 || "";
+  const headingLine2 = block?.headingLine2 || "";
+  const description = block?.description || "";
 
-  const defaultFeatures = [
-    { icon: '/contact-discuss.svg', title: 'DISCUSS\nYOUR IDEAS' },
-    { icon: '/contact-explore.svg', title: 'EXPLORE\nPOSSIBILITIES' },
-    { icon: '/contact-build.svg', title: 'BUILD\nTOGETHER' }
-  ];
+  const defaultFeatures = [''];
   const features = block?.features?.length ? block.features : defaultFeatures;
 
-  const bottomMicrocopy = block?.bottomMicrocopy || "BEAUTIFUL PRODUCTS. BRIGHTER POSSIBILITIES.";
+  const bottomMicrocopy = block?.bottomMicrocopy || "";
 
   const namePlaceholder = block?.namePlaceholder || "";
   const companyPlaceholder = block?.companyPlaceholder || "";
@@ -59,10 +57,17 @@ export default function ContactForm({ block }: ContactFormProps) {
       email: Yup.string().email('Invalid email').required('Required'),
       project: Yup.object().nullable().required('Required')
     }),
-    onSubmit: values => {
-      console.log('Form submitted:', values);
-      alert('Thanks for your message! We will get back to you soon.');
-      formik.resetForm();
+    onSubmit: async (values) => {
+      setIsSubmitting(true);
+      const res = await submitContactForm(values);
+      setIsSubmitting(false);
+
+      if (res.success) {
+        alert('Thanks for your message! We will get back to you soon.');
+        formik.resetForm();
+      } else {
+        alert('There was an error submitting your message. Please try again or email us directly.');
+      }
     },
   });
 
@@ -127,7 +132,6 @@ export default function ContactForm({ block }: ContactFormProps) {
       }
     })
   };
-  console.log(block)
 
   return (
     <section className="relative w-full bg-[#f9f6f1]">
@@ -167,8 +171,15 @@ export default function ContactForm({ block }: ContactFormProps) {
           </p>
         </div>
 
-        <div className="flex-1 flex flex-col lg:border-l border-[#b0a69c]/45 lg:pl-[100px] lg:-ml-[50px]">
-          <form onSubmit={formik.handleSubmit} className="flex flex-col gap-10 lg:gap-12 w-full max-w-[460px]">
+        <div className="flex-1 flex flex-col relative lg:pl-[80px]">
+          {/* Right border and text (desktop only) */}
+          <div className="hidden lg:flex flex-col absolute right-0 top-0 h-full border-l border-[#b0a69c]/45 pl-[40px] pt-[20px] w-[140px]">
+            <div className="text-[9.5px] text-[#4d535e] font-medium tracking-[2.5px] leading-[22px] uppercase whitespace-pre-line">
+              IDEAS{"\n"}PEOPLE{"\n"}PRODUCTS{"\n"}A BRIGHTER{"\n"}TOMORROW
+            </div>
+          </div>
+
+          <form onSubmit={formik.handleSubmit} className="flex flex-col gap-10 lg:gap-12 w-full max-w-[460px] lg:pr-[60px]">
             <div className="flex flex-col sm:flex-row gap-10">
               <div className="flex-1 relative border-b border-[#b0a69c]/70 pb-2">
                 <input type="text" name="name" placeholder={namePlaceholder} className="w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e]" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.name} />
@@ -214,13 +225,18 @@ export default function ContactForm({ block }: ContactFormProps) {
 
             <div className="relative flex items-start border-b border-[#b0a69c]/70 pb-2">
               <textarea name="message" placeholder={messagePlaceholder} rows={3} className="w-full bg-transparent text-[#4d535e] text-[11.5px] outline-none placeholder:text-[#4d535e] resize-none pr-8" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.message} />
-              <span className="text-[rgba(77,83,94,0.65)] text-[18px] leading-none absolute right-0 bottom-2 pointer-events-none">?</span>
+              <span className="text-[rgba(77,83,94,0.65)] text-[18px] leading-none absolute right-0 bottom-2 pointer-events-none">⌟</span>
             </div>
 
-            <button type="submit" className="w-full sm:w-[310px] h-[52px] bg-[#b77462] text-[#f9f6f1] rounded-[26px] flex items-center justify-between px-7 hover:bg-[#a2614f] transition-colors lg:mt-4">
-              <span className="text-[12px] font-medium font-sans">{buttonText}</span>
-              <span className="text-[18px]">→</span>
-            </button>
+            <div className="flex flex-col items-start mt-2">
+              <button type="submit" disabled={isSubmitting} className="w-full sm:w-[310px] h-[52px] bg-[#b77462] disabled:opacity-70 disabled:cursor-not-allowed text-[#f9f6f1] rounded-[26px] flex items-center justify-between px-7 hover:bg-[#a2614f] transition-colors">
+                <span className="text-[12px] font-medium font-sans">{isSubmitting ? 'Sending...' : buttonText}</span>
+                <span className="text-[18px]">↗</span>
+              </button>
+              <p className="mt-[40px] text-[10.5px] text-[#4d535e]">
+                Prefer email? <a href="mailto:hello@erishainternational.com" className="text-[#a2614f] hover:underline">hello@erishainternational.com</a>
+              </p>
+            </div>
           </form>
         </div>
       </div>

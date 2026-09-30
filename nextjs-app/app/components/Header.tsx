@@ -140,7 +140,7 @@ export default function Header({ fragment }: HeaderProps) {
 
         {/* Mobile CTA (Visible on mobile) */}
         <div className="lg:hidden">
-           <Link href={ctaButton?.linkType === 'page' && (ctaButton?.page?.slug || (typeof ctaButton?.page === 'string' && ctaButton?.page)) ? ((ctaButton?.page?.slug || ctaButton?.page) === 'home' ? '/' : '/' + (ctaButton?.page?.slug || ctaButton?.page)) : ctaButton?.path || ctaButton?.href || '/start-project'} className="flex items-center justify-center bg-[#122c52] text-[#faf6f0] h-10 px-4 rounded-full font-medium text-sm">
+           <Link href={ctaHref} className="flex items-center justify-center bg-[#122c52] text-[#faf6f0] h-10 px-4 rounded-full font-medium text-sm">
             {ctaButton?.buttonText || "Start"}
           </Link>
         </div>

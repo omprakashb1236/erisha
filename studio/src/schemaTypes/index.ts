@@ -11,6 +11,7 @@ import { page } from './documents/page'
 import { catalogue } from './documents/catalogue'
 import { productLine } from './documents/productLine'
 import { productFamily } from './documents/productFamily'
+import { contactSubmission } from './documents/contactSubmission'
 import { product } from './documents/product'
 import { filterOption } from './documents/filterOption'
 
@@ -69,6 +70,7 @@ export const schemaTypes = [
   catalogue,
   productLine,
   productFamily,
+  contactSubmission,
   product,
   filterOption,
   

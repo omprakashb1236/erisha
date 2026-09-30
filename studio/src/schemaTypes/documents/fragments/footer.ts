@@ -1,4 +1,4 @@
-﻿import { defineField, defineType } from 'sanity'
+import { defineField, defineType } from 'sanity'
 import { InsertAboveIcon } from '@sanity/icons'
 
 export const footer = defineType({
@@ -6,19 +6,31 @@ export const footer = defineType({
   title: 'Footer',
   type: 'object',
   icon: InsertAboveIcon,
+  groups: [
+    { name: 'footerInfo', title: 'Footer Info' },
+    { name: 'contactForm', title: 'Contact Form' },
+  ],
   fields: [
-    defineField({ name: 'title', title: 'Title', type: 'string' }),
-    defineField({ name: 'subtitle', title: 'Subtitle', type: 'string' }),
+    defineField({
+      name: 'contactForm',
+      title: 'Contact Form',
+      type: 'contactForm',
+      group: 'contactForm'
+    }),
+    defineField({ name: 'title', title: 'Title', type: 'string', group: 'footerInfo' }),
+    defineField({ name: 'subtitle', title: 'Subtitle', type: 'string', group: 'footerInfo' }),
     defineField({
       name: 'descriptionLines',
       title: 'Description Lines',
       type: 'array',
-      of: [{ type: 'string' }]
+      of: [{ type: 'string' }],
+      group: 'footerInfo'
     }),
     defineField({
       name: 'linkColumns',
       title: 'Link Columns',
       type: 'array',
+      group: 'footerInfo',
       of: [
         {
           name: 'linkColumn',
@@ -39,9 +51,10 @@ export const footer = defineType({
       name: 'bottomLinks',
       title: 'Bottom Links',
       type: 'array',
-      of: [{ type: 'callToAction' }]
+      of: [{ type: 'callToAction' }],
+      group: 'footerInfo'
     }),
-    defineField({ name: 'copyright', title: 'Copyright Text', type: 'string' })
+    defineField({ name: 'copyright', title: 'Copyright Text', type: 'string', group: 'footerInfo' })
   ]
 })
 

@@ -23,7 +23,7 @@ export default function Hero({ block }: HomeheroProps) {
       ? primaryLinkObj.path
       : primaryLinkObj?.linkType === 'href' && primaryLinkObj?.href
         ? primaryLinkObj.href
-        : "/capabilities";
+        : "#";
 
   const secondaryBtnText = block?.secondaryCta?.buttonText || "Start a Project";
 
@@ -34,7 +34,7 @@ export default function Hero({ block }: HomeheroProps) {
       ? secondaryLinkObj.path
       : secondaryLinkObj?.linkType === 'href' && secondaryLinkObj?.href
         ? secondaryLinkObj.href
-        : "/start-project";
+        : "#";
   const bgImage = (block?.backgroundImage as any) || "/images/heroBanner.png";
   const thumbImage = (block?.thumbnailImage as any) || "/hero-fabric-detail.png";
   const microcopy = block?.bottomMicrocopy || ["BETTER", "PRODUCTS", "A BRIGHTER", "TOMORROW"];
