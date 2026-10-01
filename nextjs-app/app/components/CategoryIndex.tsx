@@ -1,7 +1,34 @@
+"use client";
+
 ﻿import Link from "next/link";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 import type { CategoryIndex as CategoryIndexType } from "@/sanity.types";
 
 export default function CategoryIndex({ block }: { block?: CategoryIndexType & { categories?: any[] } }) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 20,
+        opacity: 0,
+        duration: 0.6,
+        stagger: 0.05,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 80%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const title = block?.title ?? "EXPLORE THE CATEGORIES";
   
   // Fallback if no block data is passed or it's empty
@@ -25,21 +52,21 @@ export default function CategoryIndex({ block }: { block?: CategoryIndexType & {
     : defaultCategories;
 
   return (
-    <section className="w-full bg-[#f9f2ea] overflow-hidden py-[40px] lg:pt-[46px] lg:pb-[80px]">
+    <section ref={containerRef as any} className="w-full bg-[#f9f2ea] overflow-hidden py-[40px] lg:pt-[46px] lg:pb-[80px]">
       <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col">
         
         {/* Eyebrow */}
-        <p className="text-[#b86e58] text-[9px] lg:text-[10px] font-medium tracking-[2px] lg:tracking-[2.5px] leading-[16px] uppercase mb-[20px] lg:mb-[26px]">
+        <p className="gsap-animate text-[#b86e58] text-[9px] lg:text-[10px] font-medium tracking-[2px] lg:tracking-[2.5px] leading-[16px] uppercase mb-[20px] lg:mb-[26px]">
           {title}
         </p>
 
         {/* Divider */}
-        <div className="w-full h-px bg-[#d2bfaf]/50 mb-[24px] lg:mb-[23px]" />
+        <div className="gsap-animate w-full h-px bg-[#d2bfaf]/50 mb-[24px] lg:mb-[23px]" />
 
         {/* Categories Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-y-[30px] lg:gap-y-[55px] gap-x-6 lg:gap-x-0">
           {categories.map((cat, index) => (
-            <div key={cat.id || index} className="flex group">
+            <div key={cat.id || index} className="gsap-animate flex group">
               {cat.slug ? (
                 <Link href={`/catalogue/${cat.slug}`} className="flex items-center w-full">
                   <p className="text-[#1b2845] group-hover:text-[#b86e58] transition-colors duration-300 text-[10px] lg:text-[10.5px] font-medium tracking-[1.2px] leading-[18px] uppercase">

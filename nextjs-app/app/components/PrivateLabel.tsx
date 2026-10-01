@@ -1,6 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import { urlForImage } from "@/sanity/lib/utils";
 import { PrivateLabel } from "@/sanity.types";
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 
 
 type PrivateLabelProps = {
@@ -9,6 +18,24 @@ type PrivateLabelProps = {
 }
 
 export default function PrivateLabelComp({ block }: PrivateLabelProps) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.08,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const defaultCapabilities = [
     { title: "PRODUCT & FIT", description: "Silhouette, sizing, pattern and construction." },
   ];
@@ -17,11 +44,11 @@ export default function PrivateLabelComp({ block }: PrivateLabelProps) {
   const imgSrc = block?.image?.asset ? urlForImage(block.image)?.url() || "" : (typeof block?.image === "string" ? block.image : "/private-label.png");
 
   return (
-    <section className="w-full bg-[#fefaf6] relative overflow-hidden flex flex-col lg:flex-row lg:h-[760px]">
+    <section ref={containerRef as any} className="w-full bg-[#fefaf6] relative overflow-hidden flex flex-col lg:flex-row lg:h-[760px]">
       
       {/* Left Image Bleed */}
       {/* Takes 43vw on desktop to perfectly match the 620px width on a 1440px screen layout */}
-      <div className="relative w-full h-[400px] lg:absolute lg:left-0 lg:top-0 lg:w-[43vw] lg:max-w-[620px] lg:h-[760px] shrink-0">
+      <div className="gsap-animate relative w-full h-[400px] lg:absolute lg:left-0 lg:top-0 lg:w-[43vw] lg:max-w-[620px] lg:h-[760px] shrink-0">
         <Image 
           src={imgSrc} 
           alt={block?.headingLine1 || "Private Label"} 
@@ -37,24 +64,24 @@ export default function PrivateLabelComp({ block }: PrivateLabelProps) {
         <div className="w-full lg:w-[600px] flex flex-col lg:pt-[75px]">
           
           {/* Eyebrow */}
-          <p className="text-[#b86e58] text-[10px] font-medium tracking-[2.7px] leading-[16px] uppercase mb-[15px]">
+          <p className="gsap-animate text-[#b86e58] text-[10px] font-medium tracking-[2.7px] leading-[16px] uppercase mb-[15px]">
             {block?.eyebrow || "PRIVATE LABEL"}
           </p>
           
-          <div className="w-[44px] h-px bg-[#b86e58]/55 mb-[28px]" />
+          <div className="gsap-animate w-[44px] h-px bg-[#b86e58]/55 mb-[28px]" />
           
           {/* Headline */}
-          <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[52px] leading-[1.1] lg:leading-[57px] mb-[29px] max-w-[600px]">
+          <h2 className="gsap-animate font-playfair text-[#1b2845] text-4xl lg:text-[52px] leading-[1.1] lg:leading-[57px] mb-[29px] max-w-[600px]">
             <span className="block">{block?.headingLine1 || "Made for your brand,"}</span>
           </h2>
           
           {/* Pull Quote */}
-          <p className="font-playfair font-extrabold italic text-[#b86e58] text-[22px] lg:text-[27px] leading-[1.3] lg:leading-[34px] mb-[43px] max-w-[560px]">
+          <p className="gsap-animate font-playfair font-extrabold italic text-[#b86e58] text-[22px] lg:text-[27px] leading-[1.3] lg:leading-[34px] mb-[43px] max-w-[560px]">
             {block?.quote || "A product can be developed as deeply as the brief requires."}
           </p>
           
           {/* Description */}
-          <p className="text-[#4a505e] text-[14px] leading-[1.6] lg:leading-[24px] mb-[50px] lg:mb-[73px] max-w-[545px]">
+          <p className="gsap-animate text-[#4a505e] text-[14px] leading-[1.6] lg:leading-[24px] mb-[50px] lg:mb-[73px] max-w-[545px]">
             {block?.description || "From adapting an existing development base to building a new style around your reference, we can support the details that make the product distinctly yours."}
           </p>
           
@@ -62,7 +89,7 @@ export default function PrivateLabelComp({ block }: PrivateLabelProps) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-[45px] gap-y-[40px] lg:gap-y-[52px]">
             
             {capabilities.map((cap, idx) => (
-              <div key={idx} className="flex flex-col">
+              <div key={idx} className="gsap-animate flex flex-col">
                 <p className="text-[#b86e58] text-[9px] font-medium tracking-[1.5px] leading-[15px] uppercase mb-[13px]">
                   {cap.title}
                 </p>

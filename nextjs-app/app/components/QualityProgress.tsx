@@ -1,7 +1,35 @@
+"use client";
+
 ﻿import Image from "next/image";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(useGSAP, ScrollTrigger);
+
 import type { QualityProgress as QualityProgressType } from "@/sanity.types";
 
 export default function QualityProgress({ block }: { block?: QualityProgressType }) {
+  const containerRef = useRef<HTMLElement>(null);
+  useGSAP(() => {
+    const elements = gsap.utils.toArray(containerRef.current!.querySelectorAll('.gsap-animate'));
+    if (elements.length > 0) {
+      gsap.from(elements, {
+        y: 30,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.08,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top 75%",
+        }
+      });
+    }
+  }, { scope: containerRef });
+
   const eyebrow = block?.eyebrow ?? "QUALITY & PROGRESS";
   const headlineLine1 = block?.headlineLine1 ?? "Quality is part of";
   const headlineLine2 = block?.headlineLine2 ?? "responsibility.";
@@ -24,22 +52,22 @@ export default function QualityProgress({ block }: { block?: QualityProgressType
   const photos = block?.photos?.length ? block.photos : defaultPhotos;
 
   return (
-    <section className="w-full bg-[#f9f2ea] overflow-hidden py-[80px] lg:pt-[60px] lg:pb-[100px]">
+    <section ref={containerRef as any} className="w-full bg-[#FEFAF6] overflow-hidden py-[80px] lg:pt-[60px] lg:pb-[100px]">
       <div className="w-full max-w-[1456px] mx-auto px-6 lg:px-[84px] flex flex-col lg:flex-row lg:justify-between items-start gap-16 lg:gap-10">
         
         {/* Left Intro Column */}
         <div className="flex flex-col w-full lg:w-[500px] shrink-0">
-          <p className="text-[#b86e58] text-[10px] lg:text-[10.5px] font-medium tracking-[2px] lg:tracking-[2.9px] leading-[17px] uppercase mb-[14px]">
+          <p className="gsap-animate text-[#b86e58] text-[10px] lg:text-[10.5px] font-medium tracking-[2px] lg:tracking-[2.9px] leading-[17px] uppercase mb-[14px]">
             {eyebrow}
           </p>
-          <div className="w-[44px] h-px bg-[#b86e58]/52 mb-[28px]" />
+          <div className="gsap-animate w-[44px] h-px bg-[#b86e58]/52 mb-[28px]" />
           
-          <h2 className="font-playfair text-[#1b2845] text-4xl lg:text-[55px] leading-[1.1] lg:leading-[58px] mb-[40px] lg:mb-[90px]">
+          <h2 className="gsap-animate font-playfair text-[#1b2845] text-4xl lg:text-[55px] leading-[1.1] lg:leading-[58px] mb-[40px] lg:mb-[90px]">
             {headlineLine1 && <span className="block">{headlineLine1}</span>}
             {headlineLine2 && <span className="block">{headlineLine2}</span>}
           </h2>
           
-          <p className="text-[#4a505e] text-[14px] lg:text-[14.5px] leading-[1.6] lg:leading-[24px]">
+          <p className="gsap-animate text-[#4a505e] text-[14px] lg:text-[14.5px] leading-[1.6] lg:leading-[24px]">
             {paragraph}
           </p>
         </div>
@@ -55,7 +83,7 @@ export default function QualityProgress({ block }: { block?: QualityProgressType
                 : "text-[32px] lg:text-[40px] leading-none lg:leading-[45px]";
                 
               return (
-                <div key={index} className="flex flex-col">
+                <div key={index} className="gsap-animate flex flex-col">
                   <p className={`font-playfair text-[#b86e58] ${valueSizeClass} mb-[15px]`}>
                     {stat.statValue}
                   </p>
@@ -71,12 +99,12 @@ export default function QualityProgress({ block }: { block?: QualityProgressType
           </div>
 
           {/* Divider Rule */}
-          <div className="w-full h-px bg-[#d2bfaf]/50 mb-[35px]" />
+          <div className="gsap-animate w-full h-px bg-[#d2bfaf]/50 mb-[35px]" />
 
           {/* Bottom Photos Grid */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-5 gap-y-8">
             {photos.map((photo, index) => (
-              <div key={index} className="flex flex-col">
+              <div key={index} className="gsap-animate flex flex-col">
                 <div className="w-full aspect-[17/18] lg:h-[180px] relative mb-[12px]">
                   <Image 
                     src={typeof photo.image === 'string' ? photo.image : '/quality-1.png'} 
