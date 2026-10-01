@@ -56,7 +56,7 @@ export default function ProductBanner({
 
   const imageInsideContainer = propImageInsideContainer ?? block?.imageInsideContainer ?? false;
   const imageAlign = propImageAlign ?? block?.imageAlign ?? "right";
-  const backgroundColor = propBackgroundColor ?? block?.backgroundColor ?? "#fefaf6";
+  const backgroundColor = propBackgroundColor ?? block?.backgroundColor ?? "#f9f5f0";
   const ctaButton = block?.ctaButton as any;
 
   return (
