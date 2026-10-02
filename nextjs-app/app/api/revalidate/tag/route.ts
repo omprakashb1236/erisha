@@ -31,8 +31,8 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ message, body }), { status: 400 })
     }
 
-    body.tags.forEach((tag) => {
-      revalidateTag(tag)
+     body.tags.forEach((tag) => {
+      revalidateTag(tag, { expire: 0 });
     })
     console.log("Tags Revalidated : ", body.tags);
     return NextResponse.json({ body })
