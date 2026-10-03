@@ -82,14 +82,14 @@ export default function BetterProducts({ block }: BetterProductsProps) {
   return (
     <section ref={containerRef as any} className="relative w-full bg-[#f9f6f1] overflow-hidden">
       {/* Right side image */}
-      <div className="relative w-full h-[500px] lg:h-auto lg:absolute lg:right-0 lg:top-0 lg:w-[46%] lg:bottom-0">
+      <div className="3xl:hidden block relative w-full h-[500px] lg:h-auto lg:absolute lg:right-0 lg:top-0 lg:w-[46%] lg:bottom-0">
         <Image src={rightImage} alt="" fill className="gsap-animate object-cover" />
         <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-[180px] bg-gradient-to-r from-[#f9f6f1] to-transparent" />
       </div>
       <div className="w-full container mx-auto flex flex-col lg:flex-row relative">
 
         {/* Mobile/Flex Content Area */}
-        <div className="flex flex-col px-0 lg:px-[84px] py-12 lg:py-[100px] z-20 w-full lg:w-1/2 flex-1">
+        <div className="flex flex-col px-0 py-12 lg:py-[100px] z-20 w-full lg:w-1/2 flex-1">
           <div className="flex flex-col max-w-[580px]">
             <p className="gsap-animate text-[#9c5b49] text-[11px] font-medium tracking-[3.3px] leading-[16px] mb-4">{eyebrow}</p>
             <div className="w-[48px] h-px bg-[#9c5b49]/45 mb-[22px]" />
@@ -148,6 +148,11 @@ export default function BetterProducts({ block }: BetterProductsProps) {
           </div>
           <div className="w-[48px] h-px bg-[#1b2845]/40 mt-4" />
         </div>
+
+        <div className="3xl:block hidden relative w-full h-[500px] lg:h-auto lg:absolute lg:right-0 lg:top-0 lg:w-[46%] lg:bottom-0">
+        <Image src={rightImage} alt="" fill className="gsap-animate object-cover" />
+        <div className="hidden lg:block absolute left-0 top-0 bottom-0 w-[180px] bg-gradient-to-r from-[#f9f6f1] to-transparent" />
+      </div>
 
 
 

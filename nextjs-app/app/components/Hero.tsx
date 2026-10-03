@@ -94,7 +94,7 @@ export default function Hero({ block }: HomeheroProps) {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="relative md:pt-[45px] w-full overflow-hidden md:min-h-screen xl:min-h-[1104px]">
+    <section ref={containerRef} className="relative md:pt-[45px] w-full overflow-hidden md:min-h-screen 3xl:min-h-screen xl:min-h-[1104px]">
 
       {/* Mobile/Tablet Responsive View */}
       <div className="xl:hidden relative z-10 w-full flex flex-col bg-[#f9f4eebd] pt-[30px] px-4 pb-8">

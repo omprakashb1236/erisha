@@ -111,7 +111,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
   return (
     <section ref={containerRef as any} className="relative w-full overflow-hidden bg-[#f9f5ef]">
       {/* Main Content Area */}
-      <div className="w-full container flex flex-col pt-12 lg:pt-[40px]">
+      <div className="w-full container 3xl:relative flex flex-col pt-12 lg:pt-[40px]">
 
         {/* Top Split Section */}
         <div className="flex flex-col lg:flex-row justify-between gap-12 lg:gap-8">
@@ -150,7 +150,7 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
         </div>
 
         {/* Desktop floating text detail right top */}
-        <div className="hidden lg:flex flex-col absolute right-[70px] top-[61px] w-[150px] items-end">
+        <div className="hidden lg:flex flex-col absolute right-[70px] 3xl:hidden top-[61px] w-[150px] items-end">
           <div className="text-[#4a505e] text-[9.2px] font-medium tracking-[2.3px] leading-[17px] text-right">
             {rightMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
           </div>
@@ -197,10 +197,28 @@ export default function OurCommitment({ block }: OurCommitmentProps) {
 
         </div>
 
+        {/* for larger screen align inside container */}
+
+        <div className="hidden absolute right-[20px] 3xl:block xl:right-0 top-[160px] w-[206px] h-[562px]">
+        <Image src="/commitment-detail.png" alt="" fill className="gsap-animate object-cover object-left" />
+        <div className="absolute right-[50px] top-[447px] text-[#faf6f2] text-[9.1px] font-medium tracking-[2.6px] leading-[18px]">
+          {rightGraphicText.map((line: string, i: number) => <p key={i}>{line}</p>)}
+        </div>
+        <div className="absolute right-[50px] top-[523px] w-[42px] h-px bg-[#faf6f2]/60" />
+      </div>
+
+      {/* Desktop floating text detail right top */}
+        <div className="hidden flex-col absolute right-[70px] 3xl:block top-[61px] w-[150px] items-end">
+          <div className="text-[#4a505e] text-[9.2px] font-medium tracking-[2.3px] leading-[17px] text-right">
+            {rightMicrocopy.map((line: string, i: number) => <p key={i}>{line}</p>)}
+          </div>
+          <div className="w-[42px] h-px bg-[#965745]/45 mt-4" />
+        </div>
+
       </div>
 
       {/* Decorative Right Graphic Desktop */}
-      <div className="hidden xl:block absolute right-[20px] xl:right-0 top-[160px] w-[206px] h-[562px]">
+      <div className="hidden xl:block absolute right-[20px] 3xl:hidden xl:right-0 top-[160px] w-[206px] h-[562px]">
         <Image src="/commitment-detail.png" alt="" fill className="gsap-animate object-cover object-left" />
         <div className="absolute right-[50px] top-[447px] text-[#faf6f2] text-[9.1px] font-medium tracking-[2.6px] leading-[18px]">
           {rightGraphicText.map((line: string, i: number) => <p key={i}>{line}</p>)}

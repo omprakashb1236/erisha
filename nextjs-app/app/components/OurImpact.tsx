@@ -141,7 +141,7 @@ export default function OurImpact({ block }: { block?: any }) {
         </div>
 
         {/* RIGHT COLUMN (Single Image) */}
-        <div className="w-full lg:w-[48%] relative h-[400px] lg:h-auto min-h-[500px] xl:absolute xl:h-[60%] right-0 top-0 3xl:h-auto 3xl:relative">
+        <div className="w-full lg:w-[48%] relative h-[400px] lg:h-auto min-h-[500px] xl:absolute xl:h-[70%] right-0 top-0 3xl:h-auto 3xl:relative">
           <Image src={rightImage} alt="Impact Reference" fill className="gsap-animate object-cover" />
         </div>
 

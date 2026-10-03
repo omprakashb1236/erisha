@@ -43,11 +43,6 @@ export const productBanner = defineType({
       title: "Caption Item",
       fields: [
         defineField({
-          name: "title",
-          title: "Title",
-          type: "string",
-        }),
-        defineField({
           name: "text",
           title: "Text",
           type: "string",
@@ -55,8 +50,7 @@ export const productBanner = defineType({
       ],
       preview: {
         select: {
-          title: "title",
-          subtitle: "text",
+          title: "text",
         },
       },
     },
